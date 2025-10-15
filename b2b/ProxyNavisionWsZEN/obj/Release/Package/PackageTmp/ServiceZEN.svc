@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ProxyNavisionWsZEN.Service1" CodeBehind="ServiceZEN.svc.cs" %>

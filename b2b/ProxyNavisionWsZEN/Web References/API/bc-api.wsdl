@@ -1,0 +1,2183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/API" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/API" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52004" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52004" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Orders">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Barcode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Quantity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Unit_Price" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="OrderNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Discount" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="motif" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Order" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Orders" type="tns:Orders" />
+        </sequence>
+      </complexType>
+      <element name="Order" type="tns:Order" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52016" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52016" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="TransferLines">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Barcode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Quantity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="LineNo" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="TransferLine" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="TransferLines" type="tns:TransferLines" />
+        </sequence>
+      </complexType>
+      <element name="TransferLine" type="tns:TransferLine" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52018" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52018" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Couponline">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="SKU" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Couponlines" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Couponline" type="tns:Couponline" />
+        </sequence>
+      </complexType>
+      <element name="Couponlines" type="tns:Couponlines" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52010" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52010" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Cards">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="idCard" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="points" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="programName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Status" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="activationDate" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Card" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Cards" type="tns:Cards" />
+        </sequence>
+      </complexType>
+      <element name="Card" type="tns:Card" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52005" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52005" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Categories">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="valeur" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="valeur_parent" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description_parent" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Statut" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Category" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Categories" type="tns:Categories" />
+        </sequence>
+      </complexType>
+      <element name="Category" type="tns:Category" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52008" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52008" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Customers">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Name" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="E-Mail" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Phone" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Address" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Address2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Posting_Group" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Matricule_fiscal" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="City" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Code_postal" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Date_Created" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Last_Date_Modified" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Currency" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="pays" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Customer" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Customers" type="tns:Customers" />
+        </sequence>
+      </complexType>
+      <element name="Customer" type="tns:Customer" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52001" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52001" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Variants">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Barcode" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Couleur" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Taille" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Quantity_in_serie_type" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="stock_disponible" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Stock_en_attente_de_livraison" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Stock_receptionné" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Stock_sur_commande_achat" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesPrice">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="CurrencyCode" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DiscountPrice" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DiscountedPromo" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Price" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="debut" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="fin" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DiscountPercentage" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="ValidRetailPrice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Item">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="created_at" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="updated_at" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Barcode" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="serieType" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DescriptionCategory" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="code_marque" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="sexe" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Variants" type="tns:Variants" />
+          <element minOccurs="1" maxOccurs="unbounded" name="SalesPrice" type="tns:SalesPrice" />
+        </sequence>
+      </complexType>
+      <complexType name="Items" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Item" type="tns:Item" />
+        </sequence>
+      </complexType>
+      <element name="Items" type="tns:Items" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52013" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52013" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Variants">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="codeCouleur" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Barcode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="code_taille" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Couleur" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Taille" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Quantity_in_serie_type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="NGP" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Composition0" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Composition1" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Composition2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Composition3" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesPrice">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="CurrencyCode" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DiscountPrice" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DiscountedPromo" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="PriceHT" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="PriceTTC" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="debut" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="fin" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DiscountPercentage" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="ValidRetailPrice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Itemb2c">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="serieType" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="code_saison" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="saison" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Barcode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Coupe" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="division" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Groupe" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CodeGroupe" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="famille" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="definition" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Poids" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="code_marque" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="sexe" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="created_at" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="updated_at" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Fournisseur" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="GS1" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="numerPiece" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="DivisionCommerciale" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DateReception_PSR" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DateReception_TDS" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Persona" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Variants" type="tns:Variants" />
+          <element minOccurs="1" maxOccurs="unbounded" name="SalesPrice" type="tns:SalesPrice" />
+        </sequence>
+      </complexType>
+      <complexType name="Itemsb2c" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Itemb2c" type="tns:Itemb2c" />
+        </sequence>
+      </complexType>
+      <element name="Itemsb2c" type="tns:Itemsb2c" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52007" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52007" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Parents">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="valeur" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Statut" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Parent" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Parents" type="tns:Parents" />
+        </sequence>
+      </complexType>
+      <element name="Parent" type="tns:Parent" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52006" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52006" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Categoriesparent">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="valeur" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="valeur_parent" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Description_parent" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Statut" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Categoryparent" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Categoriesparent" type="tns:Categoriesparent" />
+        </sequence>
+      </complexType>
+      <element name="Categoryparent" type="tns:Categoryparent" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52012" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52012" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Variants">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="ean13" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Couleur" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Taille" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Sales_Entry">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="date" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="reference" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Variants" type="tns:Variants" />
+        </sequence>
+      </complexType>
+      <complexType name="Sales" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Sales_Entry" type="tns:Sales_Entry" />
+        </sequence>
+      </complexType>
+      <element name="Sales" type="tns:Sales" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52009" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52009" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Inventory">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="stock_disponible" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Stock_en_attente_de_livraison" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Stock_receptionné" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Stock_sur_commande_achat" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Inventories" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Inventory" type="tns:Inventory" />
+        </sequence>
+      </complexType>
+      <element name="Inventories" type="tns:Inventories" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52014" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52014" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Inventoryb2c">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="stock_disponible" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="barcode" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Inventoriesb2c" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Inventoryb2c" type="tns:Inventoryb2c" />
+        </sequence>
+      </complexType>
+      <element name="Inventoriesb2c" type="tns:Inventoriesb2c" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52017" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52017" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Coup">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="BarCode" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Line">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Sku" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Coupons">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="codeCoupon" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="value" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="validity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="isActive" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="isused" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Coup" type="tns:Coup" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Line" type="tns:Line" />
+        </sequence>
+      </complexType>
+      <complexType name="Coupon" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Coupons" type="tns:Coupons" />
+        </sequence>
+      </complexType>
+      <element name="Coupon" type="tns:Coupon" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52000" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52000" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Companies">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Name" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Display_Name" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Company" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Companies" type="tns:Companies" />
+        </sequence>
+      </complexType>
+      <element name="Company" type="tns:Company" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52003" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52003" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Contacts">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="phone" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="username" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="email" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="birthday" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="gender" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="codeErp" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Contact" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Contacts" type="tns:Contacts" />
+        </sequence>
+      </complexType>
+      <element name="Contact" type="tns:Contact" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52002" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52002" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Locations">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Name" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="storef" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Location" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Locations" type="tns:Locations" />
+        </sequence>
+      </complexType>
+      <element name="Location" type="tns:Location" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52015" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52015" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="sline">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="quantity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="unitprice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="sheader">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="status" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="IdStatus" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Amount_TTC" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Colisno" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ref" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="updatedAt" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="StatusB2C" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="StatusB2B" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Motif" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="sline" type="tns:sline" />
+        </sequence>
+      </complexType>
+      <complexType name="sheaders" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="sheader" type="tns:sheader" />
+        </sequence>
+      </complexType>
+      <element name="sheaders" type="tns:sheaders" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52011" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52011" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="transactions">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="date" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="points" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="orderId" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="typeecriture" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="transaction" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="transactions" type="tns:transactions" />
+        </sequence>
+      </complexType>
+      <element name="transaction" type="tns:transaction" />
+    </schema>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/API" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="AddCustomer">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="name" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddCustomer_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddHeader">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="colisno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency_Ratio" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="address" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cardno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="idPaymentMethod" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="city" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="countryId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="ttc" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="deliverutype" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="pickupstore" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="company" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddHeader_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddImage">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="no" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="imageUrl" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddImage_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifyCustomer">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="codeErp" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="username" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="email" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phone" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="birthday" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="gender" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="modify" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifyCustomer_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifyOrder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="colisno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency_Ratios" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="address" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="company" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="modify" type="boolean" />
+            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x52004" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q1:Order" />
+            <element minOccurs="1" maxOccurs="1" name="remise_Coupon" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifyOrder_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x52004" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q2:Order" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifyOrderB2C">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="colisno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerCodeErp" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency_Ratios" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="address" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="modify" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="idPaymentMethod" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="city" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="countryId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNumber" type="string" />
+            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x52004" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q3:Order" />
+            <element minOccurs="1" maxOccurs="1" name="deliverytype" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="pickupstore" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="remise_Coupon" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifyOrderB2C_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q4="urn:microsoft-dynamics-nav/xmlports/x52004" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q4:Order" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifyOrderLine">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="quantity" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="id" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitprice" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="modify" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="lineno" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="discount" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifyOrderLine_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="AddOrModifySalesReturnB2C">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="colisno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerCodeErp" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency_Ratios" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="address" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="modify" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="idPaymentMethod" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="city" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="countryId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="refundType" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="rib" type="string" />
+            <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x52004" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q5:Order" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddOrModifySalesReturnB2C_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q6="urn:microsoft-dynamics-nav/xmlports/x52004" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q6:Order" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddSalesReturnHeader">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="colisno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency_Ratio" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="address" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cardno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="idPaymentMethod" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="city" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="countryId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="ttc" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="refundType" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="rib" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AddSalesReturnHeader_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Addransaction">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="idCard" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="points" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Addransaction_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="CloseDialog">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="CloseDialog_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="GetOrder2">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="companySource" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetOrder2_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetOrderreturn">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetOrderreturn_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetZENQtyOnSalesOrder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="globalDim1FilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="globalDim2FilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="dateFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="uOMFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="dropShipmentFilterTxt" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetZENQtyOnSalesOrder_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyHeader">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="colisno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency_Ratio" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="address" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cardNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="idPaymentMethod" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="city" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="countryId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNumber" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="companysource" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyHeader_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifySalesreturnHeader">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="colisno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="customerNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currency_Ratio" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="address" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cardNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="idPaymentMethod" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="city" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="countryId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="firstName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lastName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phoneNumber" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifySalesreturnHeader_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyreturnrLine">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="quantity" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="id" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="unitprice" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="modify" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="lineno" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="discount" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="motif" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyreturnrLine_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="UpdateCoupon">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="codecoupon" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="activate" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isused" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateCoupon_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="UpdateDialog">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="lineNo" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="noOfRec" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="currNo" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateDialog_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="lineNo" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="noOfRec" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="currNo" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateStatus">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="statut" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateStatus_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="activate_desactiovate_Coupon">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="isActive" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="codeCoupon" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="activate_desactiovate_Coupon_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="activate_generate_barcode_coupon">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="num" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="activate" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="activate_generate_barcode_coupon_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="addordertransfert">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="transfer_from_Code" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="transfer_to_Code" type="string" />
+            <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x52016" minOccurs="1" maxOccurs="1" name="ecom_Transfer_XML" type="q7:TransferLine" />
+            <element minOccurs="1" maxOccurs="1" name="orderno" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="addordertransfert_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q8="urn:microsoft-dynamics-nav/xmlports/x52016" minOccurs="1" maxOccurs="1" name="ecom_Transfer_XML" type="q8:TransferLine" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="applicatetotaldiscount">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="orderno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="discount" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="companysource" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="applicatetotaldiscount_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="create_coupon">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="codecoupon" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="description" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="membre" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="montant" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="type" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="activate" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="validity" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isUsed" type="string" />
+            <element xmlns:q9="urn:microsoft-dynamics-nav/xmlports/x52018" minOccurs="1" maxOccurs="1" name="linexmlport" type="q9:Couponlines" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="create_coupon_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getCard">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="idcard" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="codeErp" type="string" />
+            <element xmlns:q10="urn:microsoft-dynamics-nav/xmlports/x52010" minOccurs="1" maxOccurs="1" name="cardxmlport" type="q10:Card" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getCard_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q11="urn:microsoft-dynamics-nav/xmlports/x52010" minOccurs="1" maxOccurs="1" name="cardxmlport" type="q11:Card" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getCategory">
+        <complexType>
+          <sequence>
+            <element xmlns:q12="urn:microsoft-dynamics-nav/xmlports/x52005" minOccurs="1" maxOccurs="1" name="category" type="q12:Category" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getCategory_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q13="urn:microsoft-dynamics-nav/xmlports/x52005" minOccurs="1" maxOccurs="1" name="category" type="q13:Category" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getCompanyesp">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="getCompanyesp_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getCustomer">
+        <complexType>
+          <sequence>
+            <element xmlns:q14="urn:microsoft-dynamics-nav/xmlports/x52008" minOccurs="1" maxOccurs="1" name="customerxmlport" type="q14:Customer" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getCustomer_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q15="urn:microsoft-dynamics-nav/xmlports/x52008" minOccurs="1" maxOccurs="1" name="customerxmlport" type="q15:Customer" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getCustomeresp">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="getCustomeresp_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getItem">
+        <complexType>
+          <sequence>
+            <element xmlns:q16="urn:microsoft-dynamics-nav/xmlports/x52001" minOccurs="1" maxOccurs="1" name="ecom_Catalog_XML" type="q16:Items" />
+            <element minOccurs="1" maxOccurs="1" name="no" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="magasin" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="division_commerciale" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="created_date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="created_end" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updated_start" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updated_end" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getItem_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q17="urn:microsoft-dynamics-nav/xmlports/x52001" minOccurs="1" maxOccurs="1" name="ecom_Catalog_XML" type="q17:Items" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getItemb2c">
+        <complexType>
+          <sequence>
+            <element xmlns:q18="urn:microsoft-dynamics-nav/xmlports/x52013" minOccurs="1" maxOccurs="1" name="ecom_Catalog_XML" type="q18:Itemsb2c" />
+            <element minOccurs="1" maxOccurs="1" name="no" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="created_date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="created_end" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updated_start" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updated_end" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getItemb2c_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q19="urn:microsoft-dynamics-nav/xmlports/x52013" minOccurs="1" maxOccurs="1" name="ecom_Catalog_XML" type="q19:Itemsb2c" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getLocationesp">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="getLocationesp_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getParent">
+        <complexType>
+          <sequence>
+            <element xmlns:q20="urn:microsoft-dynamics-nav/xmlports/x52007" minOccurs="1" maxOccurs="1" name="category" type="q20:Parent" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getParent_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q21="urn:microsoft-dynamics-nav/xmlports/x52007" minOccurs="1" maxOccurs="1" name="category" type="q21:Parent" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getParentcategory">
+        <complexType>
+          <sequence>
+            <element xmlns:q22="urn:microsoft-dynamics-nav/xmlports/x52006" minOccurs="1" maxOccurs="1" name="category" type="q22:Categoryparent" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getParentcategory_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q23="urn:microsoft-dynamics-nav/xmlports/x52006" minOccurs="1" maxOccurs="1" name="category" type="q23:Categoryparent" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getSales">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="codeErp" type="string" />
+            <element xmlns:q24="urn:microsoft-dynamics-nav/xmlports/x52012" minOccurs="1" maxOccurs="1" name="zEN_Sales_entry" type="q24:Sales" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getSales_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q25="urn:microsoft-dynamics-nav/xmlports/x52012" minOccurs="1" maxOccurs="1" name="zEN_Sales_entry" type="q25:Sales" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getStock">
+        <complexType>
+          <sequence>
+            <element xmlns:q26="urn:microsoft-dynamics-nav/xmlports/x52009" minOccurs="1" maxOccurs="1" name="ecom_stock" type="q26:Inventories" />
+            <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="magasin" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="division_commerciale" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getStock_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q27="urn:microsoft-dynamics-nav/xmlports/x52009" minOccurs="1" maxOccurs="1" name="ecom_stock" type="q27:Inventories" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getStockB2C">
+        <complexType>
+          <sequence>
+            <element xmlns:q28="urn:microsoft-dynamics-nav/xmlports/x52014" minOccurs="1" maxOccurs="1" name="ecom_stock" type="q28:Inventoriesb2c" />
+            <element minOccurs="1" maxOccurs="1" name="updatedstart" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updatedend" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="magasin" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getStockB2C_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q29="urn:microsoft-dynamics-nav/xmlports/x52014" minOccurs="1" maxOccurs="1" name="ecom_stock" type="q29:Inventoriesb2c" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="get_coupon">
+        <complexType>
+          <sequence>
+            <element xmlns:q30="urn:microsoft-dynamics-nav/xmlports/x52017" minOccurs="1" maxOccurs="1" name="cml_coupon" type="q30:Coupon" />
+            <element minOccurs="1" maxOccurs="1" name="customerCodeErp" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="codecoupon" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="get_coupon_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q31="urn:microsoft-dynamics-nav/xmlports/x52017" minOccurs="1" maxOccurs="1" name="cml_coupon" type="q31:Coupon" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getcompany">
+        <complexType>
+          <sequence>
+            <element xmlns:q32="urn:microsoft-dynamics-nav/xmlports/x52000" minOccurs="1" maxOccurs="1" name="companyxmlport" type="q32:Company" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getcompany_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q33="urn:microsoft-dynamics-nav/xmlports/x52000" minOccurs="1" maxOccurs="1" name="companyxmlport" type="q33:Company" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getcontact">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="codeErp" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phone" type="string" />
+            <element xmlns:q34="urn:microsoft-dynamics-nav/xmlports/x52003" minOccurs="1" maxOccurs="1" name="contactxmlport" type="q34:Contact" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getcontact_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q35="urn:microsoft-dynamics-nav/xmlports/x52003" minOccurs="1" maxOccurs="1" name="contactxmlport" type="q35:Contact" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getlocation">
+        <complexType>
+          <sequence>
+            <element xmlns:q36="urn:microsoft-dynamics-nav/xmlports/x52002" minOccurs="1" maxOccurs="1" name="locationxmlport" type="q36:Location" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getlocation_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q37="urn:microsoft-dynamics-nav/xmlports/x52002" minOccurs="1" maxOccurs="1" name="locationxmlport" type="q37:Location" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getorder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="refcmd" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updateStart" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updateEnd" type="string" />
+            <element xmlns:q38="urn:microsoft-dynamics-nav/xmlports/x52015" minOccurs="1" maxOccurs="1" name="orderxml" type="q38:sheaders" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getorder_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q39="urn:microsoft-dynamics-nav/xmlports/x52015" minOccurs="1" maxOccurs="1" name="orderxml" type="q39:sheaders" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getorderreturnb2c">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="refcmd" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updateStart" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updateEnd" type="string" />
+            <element xmlns:q40="urn:microsoft-dynamics-nav/xmlports/x52015" minOccurs="1" maxOccurs="1" name="orderxml" type="q40:sheaders" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getorderreturnb2c_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q41="urn:microsoft-dynamics-nav/xmlports/x52015" minOccurs="1" maxOccurs="1" name="orderxml" type="q41:sheaders" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getransaction">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="idCard" type="string" />
+            <element xmlns:q42="urn:microsoft-dynamics-nav/xmlports/x52011" minOccurs="1" maxOccurs="1" name="zEN_Card_transaction" type="q42:transaction" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getransaction_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q43="urn:microsoft-dynamics-nav/xmlports/x52011" minOccurs="1" maxOccurs="1" name="zEN_Card_transaction" type="q43:transaction" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="isused">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="codeCoupon" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="isused" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="isused_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="updatorder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="refcmd" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="reglement" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="idstatus" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="motif" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="updatorder_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="AddCustomer">
+    <part name="parameters" element="tns:AddCustomer" />
+  </message>
+  <message name="AddCustomer_Result">
+    <part name="parameters" element="tns:AddCustomer_Result" />
+  </message>
+  <message name="AddHeader">
+    <part name="parameters" element="tns:AddHeader" />
+  </message>
+  <message name="AddHeader_Result">
+    <part name="parameters" element="tns:AddHeader_Result" />
+  </message>
+  <message name="AddImage">
+    <part name="parameters" element="tns:AddImage" />
+  </message>
+  <message name="AddImage_Result">
+    <part name="parameters" element="tns:AddImage_Result" />
+  </message>
+  <message name="AddOrModifyCustomer">
+    <part name="parameters" element="tns:AddOrModifyCustomer" />
+  </message>
+  <message name="AddOrModifyCustomer_Result">
+    <part name="parameters" element="tns:AddOrModifyCustomer_Result" />
+  </message>
+  <message name="AddOrModifyOrder">
+    <part name="parameters" element="tns:AddOrModifyOrder" />
+  </message>
+  <message name="AddOrModifyOrder_Result">
+    <part name="parameters" element="tns:AddOrModifyOrder_Result" />
+  </message>
+  <message name="AddOrModifyOrderB2C">
+    <part name="parameters" element="tns:AddOrModifyOrderB2C" />
+  </message>
+  <message name="AddOrModifyOrderB2C_Result">
+    <part name="parameters" element="tns:AddOrModifyOrderB2C_Result" />
+  </message>
+  <message name="AddOrModifyOrderLine">
+    <part name="parameters" element="tns:AddOrModifyOrderLine" />
+  </message>
+  <message name="AddOrModifyOrderLine_Result">
+    <part name="parameters" element="tns:AddOrModifyOrderLine_Result" />
+  </message>
+  <message name="AddOrModifySalesReturnB2C">
+    <part name="parameters" element="tns:AddOrModifySalesReturnB2C" />
+  </message>
+  <message name="AddOrModifySalesReturnB2C_Result">
+    <part name="parameters" element="tns:AddOrModifySalesReturnB2C_Result" />
+  </message>
+  <message name="AddSalesReturnHeader">
+    <part name="parameters" element="tns:AddSalesReturnHeader" />
+  </message>
+  <message name="AddSalesReturnHeader_Result">
+    <part name="parameters" element="tns:AddSalesReturnHeader_Result" />
+  </message>
+  <message name="Addransaction">
+    <part name="parameters" element="tns:Addransaction" />
+  </message>
+  <message name="Addransaction_Result">
+    <part name="parameters" element="tns:Addransaction_Result" />
+  </message>
+  <message name="CloseDialog">
+    <part name="parameters" element="tns:CloseDialog" />
+  </message>
+  <message name="CloseDialog_Result">
+    <part name="parameters" element="tns:CloseDialog_Result" />
+  </message>
+  <message name="GetOrder2">
+    <part name="parameters" element="tns:GetOrder2" />
+  </message>
+  <message name="GetOrder2_Result">
+    <part name="parameters" element="tns:GetOrder2_Result" />
+  </message>
+  <message name="GetOrderreturn">
+    <part name="parameters" element="tns:GetOrderreturn" />
+  </message>
+  <message name="GetOrderreturn_Result">
+    <part name="parameters" element="tns:GetOrderreturn_Result" />
+  </message>
+  <message name="GetZENQtyOnSalesOrder">
+    <part name="parameters" element="tns:GetZENQtyOnSalesOrder" />
+  </message>
+  <message name="GetZENQtyOnSalesOrder_Result">
+    <part name="parameters" element="tns:GetZENQtyOnSalesOrder_Result" />
+  </message>
+  <message name="ModifyHeader">
+    <part name="parameters" element="tns:ModifyHeader" />
+  </message>
+  <message name="ModifyHeader_Result">
+    <part name="parameters" element="tns:ModifyHeader_Result" />
+  </message>
+  <message name="ModifySalesreturnHeader">
+    <part name="parameters" element="tns:ModifySalesreturnHeader" />
+  </message>
+  <message name="ModifySalesreturnHeader_Result">
+    <part name="parameters" element="tns:ModifySalesreturnHeader_Result" />
+  </message>
+  <message name="ModifyreturnrLine">
+    <part name="parameters" element="tns:ModifyreturnrLine" />
+  </message>
+  <message name="ModifyreturnrLine_Result">
+    <part name="parameters" element="tns:ModifyreturnrLine_Result" />
+  </message>
+  <message name="UpdateCoupon">
+    <part name="parameters" element="tns:UpdateCoupon" />
+  </message>
+  <message name="UpdateCoupon_Result">
+    <part name="parameters" element="tns:UpdateCoupon_Result" />
+  </message>
+  <message name="UpdateDialog">
+    <part name="parameters" element="tns:UpdateDialog" />
+  </message>
+  <message name="UpdateDialog_Result">
+    <part name="parameters" element="tns:UpdateDialog_Result" />
+  </message>
+  <message name="UpdateStatus">
+    <part name="parameters" element="tns:UpdateStatus" />
+  </message>
+  <message name="UpdateStatus_Result">
+    <part name="parameters" element="tns:UpdateStatus_Result" />
+  </message>
+  <message name="activate_desactiovate_Coupon">
+    <part name="parameters" element="tns:activate_desactiovate_Coupon" />
+  </message>
+  <message name="activate_desactiovate_Coupon_Result">
+    <part name="parameters" element="tns:activate_desactiovate_Coupon_Result" />
+  </message>
+  <message name="activate_generate_barcode_coupon">
+    <part name="parameters" element="tns:activate_generate_barcode_coupon" />
+  </message>
+  <message name="activate_generate_barcode_coupon_Result">
+    <part name="parameters" element="tns:activate_generate_barcode_coupon_Result" />
+  </message>
+  <message name="addordertransfert">
+    <part name="parameters" element="tns:addordertransfert" />
+  </message>
+  <message name="addordertransfert_Result">
+    <part name="parameters" element="tns:addordertransfert_Result" />
+  </message>
+  <message name="applicatetotaldiscount">
+    <part name="parameters" element="tns:applicatetotaldiscount" />
+  </message>
+  <message name="applicatetotaldiscount_Result">
+    <part name="parameters" element="tns:applicatetotaldiscount_Result" />
+  </message>
+  <message name="create_coupon">
+    <part name="parameters" element="tns:create_coupon" />
+  </message>
+  <message name="create_coupon_Result">
+    <part name="parameters" element="tns:create_coupon_Result" />
+  </message>
+  <message name="getCard">
+    <part name="parameters" element="tns:getCard" />
+  </message>
+  <message name="getCard_Result">
+    <part name="parameters" element="tns:getCard_Result" />
+  </message>
+  <message name="getCategory">
+    <part name="parameters" element="tns:getCategory" />
+  </message>
+  <message name="getCategory_Result">
+    <part name="parameters" element="tns:getCategory_Result" />
+  </message>
+  <message name="getCompanyesp">
+    <part name="parameters" element="tns:getCompanyesp" />
+  </message>
+  <message name="getCompanyesp_Result">
+    <part name="parameters" element="tns:getCompanyesp_Result" />
+  </message>
+  <message name="getCustomer">
+    <part name="parameters" element="tns:getCustomer" />
+  </message>
+  <message name="getCustomer_Result">
+    <part name="parameters" element="tns:getCustomer_Result" />
+  </message>
+  <message name="getCustomeresp">
+    <part name="parameters" element="tns:getCustomeresp" />
+  </message>
+  <message name="getCustomeresp_Result">
+    <part name="parameters" element="tns:getCustomeresp_Result" />
+  </message>
+  <message name="getItem">
+    <part name="parameters" element="tns:getItem" />
+  </message>
+  <message name="getItem_Result">
+    <part name="parameters" element="tns:getItem_Result" />
+  </message>
+  <message name="getItemb2c">
+    <part name="parameters" element="tns:getItemb2c" />
+  </message>
+  <message name="getItemb2c_Result">
+    <part name="parameters" element="tns:getItemb2c_Result" />
+  </message>
+  <message name="getLocationesp">
+    <part name="parameters" element="tns:getLocationesp" />
+  </message>
+  <message name="getLocationesp_Result">
+    <part name="parameters" element="tns:getLocationesp_Result" />
+  </message>
+  <message name="getParent">
+    <part name="parameters" element="tns:getParent" />
+  </message>
+  <message name="getParent_Result">
+    <part name="parameters" element="tns:getParent_Result" />
+  </message>
+  <message name="getParentcategory">
+    <part name="parameters" element="tns:getParentcategory" />
+  </message>
+  <message name="getParentcategory_Result">
+    <part name="parameters" element="tns:getParentcategory_Result" />
+  </message>
+  <message name="getSales">
+    <part name="parameters" element="tns:getSales" />
+  </message>
+  <message name="getSales_Result">
+    <part name="parameters" element="tns:getSales_Result" />
+  </message>
+  <message name="getStock">
+    <part name="parameters" element="tns:getStock" />
+  </message>
+  <message name="getStock_Result">
+    <part name="parameters" element="tns:getStock_Result" />
+  </message>
+  <message name="getStockB2C">
+    <part name="parameters" element="tns:getStockB2C" />
+  </message>
+  <message name="getStockB2C_Result">
+    <part name="parameters" element="tns:getStockB2C_Result" />
+  </message>
+  <message name="get_coupon">
+    <part name="parameters" element="tns:get_coupon" />
+  </message>
+  <message name="get_coupon_Result">
+    <part name="parameters" element="tns:get_coupon_Result" />
+  </message>
+  <message name="getcompany">
+    <part name="parameters" element="tns:getcompany" />
+  </message>
+  <message name="getcompany_Result">
+    <part name="parameters" element="tns:getcompany_Result" />
+  </message>
+  <message name="getcontact">
+    <part name="parameters" element="tns:getcontact" />
+  </message>
+  <message name="getcontact_Result">
+    <part name="parameters" element="tns:getcontact_Result" />
+  </message>
+  <message name="getlocation">
+    <part name="parameters" element="tns:getlocation" />
+  </message>
+  <message name="getlocation_Result">
+    <part name="parameters" element="tns:getlocation_Result" />
+  </message>
+  <message name="getorder">
+    <part name="parameters" element="tns:getorder" />
+  </message>
+  <message name="getorder_Result">
+    <part name="parameters" element="tns:getorder_Result" />
+  </message>
+  <message name="getorderreturnb2c">
+    <part name="parameters" element="tns:getorderreturnb2c" />
+  </message>
+  <message name="getorderreturnb2c_Result">
+    <part name="parameters" element="tns:getorderreturnb2c_Result" />
+  </message>
+  <message name="getransaction">
+    <part name="parameters" element="tns:getransaction" />
+  </message>
+  <message name="getransaction_Result">
+    <part name="parameters" element="tns:getransaction_Result" />
+  </message>
+  <message name="isused">
+    <part name="parameters" element="tns:isused" />
+  </message>
+  <message name="isused_Result">
+    <part name="parameters" element="tns:isused_Result" />
+  </message>
+  <message name="updatorder">
+    <part name="parameters" element="tns:updatorder" />
+  </message>
+  <message name="updatorder_Result">
+    <part name="parameters" element="tns:updatorder_Result" />
+  </message>
+  <portType name="API_Port">
+    <operation name="AddCustomer">
+      <input name="AddCustomer" message="tns:AddCustomer" />
+      <output name="AddCustomer_Result" message="tns:AddCustomer_Result" />
+    </operation>
+    <operation name="AddHeader">
+      <input name="AddHeader" message="tns:AddHeader" />
+      <output name="AddHeader_Result" message="tns:AddHeader_Result" />
+    </operation>
+    <operation name="AddImage">
+      <input name="AddImage" message="tns:AddImage" />
+      <output name="AddImage_Result" message="tns:AddImage_Result" />
+    </operation>
+    <operation name="AddOrModifyCustomer">
+      <input name="AddOrModifyCustomer" message="tns:AddOrModifyCustomer" />
+      <output name="AddOrModifyCustomer_Result" message="tns:AddOrModifyCustomer_Result" />
+    </operation>
+    <operation name="AddOrModifyOrder">
+      <input name="AddOrModifyOrder" message="tns:AddOrModifyOrder" />
+      <output name="AddOrModifyOrder_Result" message="tns:AddOrModifyOrder_Result" />
+    </operation>
+    <operation name="AddOrModifyOrderB2C">
+      <input name="AddOrModifyOrderB2C" message="tns:AddOrModifyOrderB2C" />
+      <output name="AddOrModifyOrderB2C_Result" message="tns:AddOrModifyOrderB2C_Result" />
+    </operation>
+    <operation name="AddOrModifyOrderLine">
+      <input name="AddOrModifyOrderLine" message="tns:AddOrModifyOrderLine" />
+      <output name="AddOrModifyOrderLine_Result" message="tns:AddOrModifyOrderLine_Result" />
+    </operation>
+    <operation name="AddOrModifySalesReturnB2C">
+      <input name="AddOrModifySalesReturnB2C" message="tns:AddOrModifySalesReturnB2C" />
+      <output name="AddOrModifySalesReturnB2C_Result" message="tns:AddOrModifySalesReturnB2C_Result" />
+    </operation>
+    <operation name="AddSalesReturnHeader">
+      <input name="AddSalesReturnHeader" message="tns:AddSalesReturnHeader" />
+      <output name="AddSalesReturnHeader_Result" message="tns:AddSalesReturnHeader_Result" />
+    </operation>
+    <operation name="Addransaction">
+      <input name="Addransaction" message="tns:Addransaction" />
+      <output name="Addransaction_Result" message="tns:Addransaction_Result" />
+    </operation>
+    <operation name="CloseDialog">
+      <input name="CloseDialog" message="tns:CloseDialog" />
+      <output name="CloseDialog_Result" message="tns:CloseDialog_Result" />
+    </operation>
+    <operation name="GetOrder2">
+      <input name="GetOrder2" message="tns:GetOrder2" />
+      <output name="GetOrder2_Result" message="tns:GetOrder2_Result" />
+    </operation>
+    <operation name="GetOrderreturn">
+      <input name="GetOrderreturn" message="tns:GetOrderreturn" />
+      <output name="GetOrderreturn_Result" message="tns:GetOrderreturn_Result" />
+    </operation>
+    <operation name="GetZENQtyOnSalesOrder">
+      <input name="GetZENQtyOnSalesOrder" message="tns:GetZENQtyOnSalesOrder" />
+      <output name="GetZENQtyOnSalesOrder_Result" message="tns:GetZENQtyOnSalesOrder_Result" />
+    </operation>
+    <operation name="ModifyHeader">
+      <input name="ModifyHeader" message="tns:ModifyHeader" />
+      <output name="ModifyHeader_Result" message="tns:ModifyHeader_Result" />
+    </operation>
+    <operation name="ModifySalesreturnHeader">
+      <input name="ModifySalesreturnHeader" message="tns:ModifySalesreturnHeader" />
+      <output name="ModifySalesreturnHeader_Result" message="tns:ModifySalesreturnHeader_Result" />
+    </operation>
+    <operation name="ModifyreturnrLine">
+      <input name="ModifyreturnrLine" message="tns:ModifyreturnrLine" />
+      <output name="ModifyreturnrLine_Result" message="tns:ModifyreturnrLine_Result" />
+    </operation>
+    <operation name="UpdateCoupon">
+      <input name="UpdateCoupon" message="tns:UpdateCoupon" />
+      <output name="UpdateCoupon_Result" message="tns:UpdateCoupon_Result" />
+    </operation>
+    <operation name="UpdateDialog">
+      <input name="UpdateDialog" message="tns:UpdateDialog" />
+      <output name="UpdateDialog_Result" message="tns:UpdateDialog_Result" />
+    </operation>
+    <operation name="UpdateStatus">
+      <input name="UpdateStatus" message="tns:UpdateStatus" />
+      <output name="UpdateStatus_Result" message="tns:UpdateStatus_Result" />
+    </operation>
+    <operation name="activate_desactiovate_Coupon">
+      <input name="activate_desactiovate_Coupon" message="tns:activate_desactiovate_Coupon" />
+      <output name="activate_desactiovate_Coupon_Result" message="tns:activate_desactiovate_Coupon_Result" />
+    </operation>
+    <operation name="activate_generate_barcode_coupon">
+      <input name="activate_generate_barcode_coupon" message="tns:activate_generate_barcode_coupon" />
+      <output name="activate_generate_barcode_coupon_Result" message="tns:activate_generate_barcode_coupon_Result" />
+    </operation>
+    <operation name="addordertransfert">
+      <input name="addordertransfert" message="tns:addordertransfert" />
+      <output name="addordertransfert_Result" message="tns:addordertransfert_Result" />
+    </operation>
+    <operation name="applicatetotaldiscount">
+      <input name="applicatetotaldiscount" message="tns:applicatetotaldiscount" />
+      <output name="applicatetotaldiscount_Result" message="tns:applicatetotaldiscount_Result" />
+    </operation>
+    <operation name="create_coupon">
+      <input name="create_coupon" message="tns:create_coupon" />
+      <output name="create_coupon_Result" message="tns:create_coupon_Result" />
+    </operation>
+    <operation name="getCard">
+      <input name="getCard" message="tns:getCard" />
+      <output name="getCard_Result" message="tns:getCard_Result" />
+    </operation>
+    <operation name="getCategory">
+      <input name="getCategory" message="tns:getCategory" />
+      <output name="getCategory_Result" message="tns:getCategory_Result" />
+    </operation>
+    <operation name="getCompanyesp">
+      <input name="getCompanyesp" message="tns:getCompanyesp" />
+      <output name="getCompanyesp_Result" message="tns:getCompanyesp_Result" />
+    </operation>
+    <operation name="getCustomer">
+      <input name="getCustomer" message="tns:getCustomer" />
+      <output name="getCustomer_Result" message="tns:getCustomer_Result" />
+    </operation>
+    <operation name="getCustomeresp">
+      <input name="getCustomeresp" message="tns:getCustomeresp" />
+      <output name="getCustomeresp_Result" message="tns:getCustomeresp_Result" />
+    </operation>
+    <operation name="getItem">
+      <input name="getItem" message="tns:getItem" />
+      <output name="getItem_Result" message="tns:getItem_Result" />
+    </operation>
+    <operation name="getItemb2c">
+      <input name="getItemb2c" message="tns:getItemb2c" />
+      <output name="getItemb2c_Result" message="tns:getItemb2c_Result" />
+    </operation>
+    <operation name="getLocationesp">
+      <input name="getLocationesp" message="tns:getLocationesp" />
+      <output name="getLocationesp_Result" message="tns:getLocationesp_Result" />
+    </operation>
+    <operation name="getParent">
+      <input name="getParent" message="tns:getParent" />
+      <output name="getParent_Result" message="tns:getParent_Result" />
+    </operation>
+    <operation name="getParentcategory">
+      <input name="getParentcategory" message="tns:getParentcategory" />
+      <output name="getParentcategory_Result" message="tns:getParentcategory_Result" />
+    </operation>
+    <operation name="getSales">
+      <input name="getSales" message="tns:getSales" />
+      <output name="getSales_Result" message="tns:getSales_Result" />
+    </operation>
+    <operation name="getStock">
+      <input name="getStock" message="tns:getStock" />
+      <output name="getStock_Result" message="tns:getStock_Result" />
+    </operation>
+    <operation name="getStockB2C">
+      <input name="getStockB2C" message="tns:getStockB2C" />
+      <output name="getStockB2C_Result" message="tns:getStockB2C_Result" />
+    </operation>
+    <operation name="get_coupon">
+      <input name="get_coupon" message="tns:get_coupon" />
+      <output name="get_coupon_Result" message="tns:get_coupon_Result" />
+    </operation>
+    <operation name="getcompany">
+      <input name="getcompany" message="tns:getcompany" />
+      <output name="getcompany_Result" message="tns:getcompany_Result" />
+    </operation>
+    <operation name="getcontact">
+      <input name="getcontact" message="tns:getcontact" />
+      <output name="getcontact_Result" message="tns:getcontact_Result" />
+    </operation>
+    <operation name="getlocation">
+      <input name="getlocation" message="tns:getlocation" />
+      <output name="getlocation_Result" message="tns:getlocation_Result" />
+    </operation>
+    <operation name="getorder">
+      <input name="getorder" message="tns:getorder" />
+      <output name="getorder_Result" message="tns:getorder_Result" />
+    </operation>
+    <operation name="getorderreturnb2c">
+      <input name="getorderreturnb2c" message="tns:getorderreturnb2c" />
+      <output name="getorderreturnb2c_Result" message="tns:getorderreturnb2c_Result" />
+    </operation>
+    <operation name="getransaction">
+      <input name="getransaction" message="tns:getransaction" />
+      <output name="getransaction_Result" message="tns:getransaction_Result" />
+    </operation>
+    <operation name="isused">
+      <input name="isused" message="tns:isused" />
+      <output name="isused_Result" message="tns:isused_Result" />
+    </operation>
+    <operation name="updatorder">
+      <input name="updatorder" message="tns:updatorder" />
+      <output name="updatorder_Result" message="tns:updatorder_Result" />
+    </operation>
+  </portType>
+  <binding name="API_Binding" type="tns:API_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="AddCustomer">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddCustomer" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddCustomer">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddCustomer_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AddHeader">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddHeader">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddHeader_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AddImage">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddImage" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddImage">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddImage_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AddOrModifyCustomer">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddOrModifyCustomer" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddOrModifyCustomer">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddOrModifyCustomer_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AddOrModifyOrder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddOrModifyOrder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddOrModifyOrder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddOrModifyOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AddOrModifyOrderB2C">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddOrModifyOrderB2C" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddOrModifyOrderB2C">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddOrModifyOrderB2C_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AddOrModifyOrderLine">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddOrModifyOrderLine" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddOrModifyOrderLine">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddOrModifyOrderLine_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AddOrModifySalesReturnB2C">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddOrModifySalesReturnB2C" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddOrModifySalesReturnB2C">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddOrModifySalesReturnB2C_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AddSalesReturnHeader">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:AddSalesReturnHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AddSalesReturnHeader">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AddSalesReturnHeader_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Addransaction">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:Addransaction" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Addransaction">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Addransaction_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CloseDialog">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:CloseDialog" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CloseDialog">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CloseDialog_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetOrder2">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:GetOrder2" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetOrder2">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetOrder2_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetOrderreturn">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:GetOrderreturn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetOrderreturn">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetOrderreturn_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetZENQtyOnSalesOrder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:GetZENQtyOnSalesOrder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetZENQtyOnSalesOrder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetZENQtyOnSalesOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ModifyHeader">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:ModifyHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ModifyHeader">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ModifyHeader_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ModifySalesreturnHeader">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:ModifySalesreturnHeader" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ModifySalesreturnHeader">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ModifySalesreturnHeader_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ModifyreturnrLine">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:ModifyreturnrLine" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ModifyreturnrLine">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ModifyreturnrLine_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateCoupon">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:UpdateCoupon" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateCoupon">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateCoupon_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateDialog">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:UpdateDialog" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateDialog">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateDialog_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateStatus">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:UpdateStatus" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateStatus">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateStatus_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="activate_desactiovate_Coupon">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:activate_desactiovate_Coupon" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="activate_desactiovate_Coupon">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="activate_desactiovate_Coupon_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="activate_generate_barcode_coupon">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:activate_generate_barcode_coupon" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="activate_generate_barcode_coupon">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="activate_generate_barcode_coupon_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="addordertransfert">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:addordertransfert" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="addordertransfert">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="addordertransfert_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="applicatetotaldiscount">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:applicatetotaldiscount" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="applicatetotaldiscount">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="applicatetotaldiscount_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="create_coupon">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:create_coupon" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="create_coupon">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="create_coupon_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getCard">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getCard" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getCard">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getCard_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getCategory">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getCategory" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getCategory">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getCategory_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getCompanyesp">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getCompanyesp" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getCompanyesp">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getCompanyesp_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getCustomer">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getCustomer" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getCustomer">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getCustomer_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getCustomeresp">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getCustomeresp" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getCustomeresp">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getCustomeresp_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getItem">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getItem" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getItem">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getItem_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getItemb2c">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getItemb2c" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getItemb2c">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getItemb2c_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getLocationesp">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getLocationesp" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getLocationesp">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getLocationesp_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getParent">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getParent" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getParent">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getParent_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getParentcategory">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getParentcategory" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getParentcategory">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getParentcategory_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getSales">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getSales" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getSales">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getSales_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getStock">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getStock" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getStock">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getStock_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getStockB2C">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getStockB2C" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getStockB2C">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getStockB2C_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="get_coupon">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:get_coupon" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="get_coupon">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="get_coupon_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getcompany">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getcompany" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getcompany">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getcompany_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getcontact">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getcontact" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getcontact">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getcontact_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getlocation">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getlocation" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getlocation">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getlocation_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getorder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getorder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getorder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getorder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getorderreturnb2c">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getorderreturnb2c" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getorderreturnb2c">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getorderreturnb2c_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="getransaction">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getransaction" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getransaction">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getransaction_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="isused">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:isused" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="isused">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="isused_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="updatorder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:updatorder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="updatorder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="updatorder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="API">
+    <port name="API_Port" binding="tns:API_Binding">
+      <address location="https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/ZEDD/Codeunit/API?=wsdl&amp;tenant=msweua5825t71792570&amp;aid=FIN" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

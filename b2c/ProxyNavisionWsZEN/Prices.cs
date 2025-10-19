@@ -10,6 +10,8 @@ namespace ProxyNavisionWsZEN
         [DataMember(Order = 3, EmitDefaultValue = true)] public string PriceTTC { get; set; }
         [DataMember(Order = 4, EmitDefaultValue = true)] public string DiscountPrice { get; set; }
         [DataMember(Order = 5, EmitDefaultValue = true)] public string DiscountPercentage { get; set; }
+                [DataMember(Order = 6, EmitDefaultValue = true)] public string prix_negoce { get; set; }
+
         
         
 

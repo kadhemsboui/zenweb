@@ -358,6 +358,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Web References\API\Attribute.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\API\bc-api.wsdl" />
     <Content Include="Web References\API\Company.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -415,6 +418,12 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\API\TransferLine.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\API\Season.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\API\Vendor.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

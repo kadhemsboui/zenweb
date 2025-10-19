@@ -17,6 +17,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel;
 using System.Data;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace ProxyNavisionWsZEN
 {
@@ -68,13 +69,16 @@ namespace ProxyNavisionWsZEN
             }
         }
 
-        public WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon)
+        public WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon,string phoneNumber)
         {
             try
             {
-          
+                if (string.IsNullOrEmpty(phoneNumber))
+                {
+                    phoneNumber = "";
+                }
 
-                    if (string.IsNullOrEmpty(CustomerCodeErp))
+                if (string.IsNullOrEmpty(CustomerCodeErp))
                 {
                     CustomerCodeErp = "";
                 }
@@ -99,45 +103,74 @@ namespace ProxyNavisionWsZEN
                     ProxyNavisionWsZEN.API.Coupon navCoupon = new ProxyNavisionWsZEN.API.Coupon();
                     mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/"
                                               + idCompany + "/Codeunit/API";
-                    mobile_Web_Services.get_coupon(ref navCoupon, CustomerCodeErp, CodeCoupon);
-
-                    foreach (var c in navCoupon.Coupons)
+                    mobile_Web_Services.get_coupon(ref navCoupon, CustomerCodeErp, CodeCoupon, phoneNumber);
+                    if (navCoupon.Coupons != null)
                     {
-
-                        var wsCoupon = new WS_Coupon
+                        foreach (var c in navCoupon.Coupons)
                         {
-                            CodeCoupon = c.codeCoupon,
-                            CustomerCodeErp = CustomerCodeErp,
-                            IdCompany = idCompany,
-                            Type = c.type.ToString(),
-                            Value = c.value,
-                            Validity = c.validity,
-                            Description = c.Description,
-                            IsActive = c.isActive.FirstOrDefault() ,
-                            IsUsed = c.isused.FirstOrDefault(),
-                            BarCode = c.Coup.FirstOrDefault()?.BarCode
-                        };
-                        var acceptedFormats = new[] { "MM/dd/yy", "MM/dd/yyyy" };
+                            if (!string.IsNullOrEmpty(c.codeCoupon))
+                            {
+                                var wsCoupon = new WS_Coupon();
 
-                        if (DateTime.TryParseExact(wsCoupon.Validity, acceptedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
-                        {
-                            wsCoupon.Validity = parsedDate.ToString("yyyy-MM-dd");
+                                if (c.Coup!=null)
+                                {
+
+                                     wsCoupon = new WS_Coupon
+                                    {
+                                        CodeCoupon = c.codeCoupon,
+                                        CustomerCodeErp = c.CustomerCodeErp,
+                                        IdCompany = idCompany,
+                                        Type = c.type.ToString(),
+                                        Value = c.value,
+                                        Validity = c.validity,
+                                        Description = c.Description,
+                                        IsActive = c.isActive.FirstOrDefault(),
+                                        IsUsed = c.isused.FirstOrDefault(),
+                                        BarCode = c.Coup.FirstOrDefault()?.BarCode
+                                    };
+                                }
+                                else
+                                {
+                                     wsCoupon = new WS_Coupon
+                                    {
+                                        CodeCoupon = c.codeCoupon,
+                                        CustomerCodeErp = c.CustomerCodeErp,
+                                        IdCompany = idCompany,
+                                        Type = c.type.ToString(),
+                                        Value = c.value,
+                                        Validity = c.validity,
+                                        Description = c.Description,
+                                        IsActive = c.isActive.FirstOrDefault(),
+                                        IsUsed = c.isused.FirstOrDefault(),
+                                        BarCode = ""
+                                    };
+                                }
+                                var acceptedFormats = new[] { "MM/dd/yy", "MM/dd/yyyy" };
+
+                                if (DateTime.TryParseExact(wsCoupon.Validity, acceptedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
+                                {
+                                    wsCoupon.Validity = parsedDate.ToString("yyyy-MM-dd");
+                                }
+                                else
+                                {
+                                    wsCoupon.Validity = wsCoupon.Validity;
+                                }
+                                if (c.Line != null)
+                                {
+                                    // Products
+                                    foreach (var line in c.Line)
+                                    {
+                                        if (line.Sku != "")
+                                        { wsCoupon.ApplicableProducts.Add(new WS_Product { sku = line.Sku }); }
+                                    }
+                                }
+                                if (wsCoupon.CodeCoupon != "")
+
+                                { CouponResult.CouponList.Add(wsCoupon); }
+                            }
                         }
-                        else
-                        {
-                            wsCoupon.Validity = wsCoupon.Validity;
-                        }
-
-                        // Products
-                        foreach (var line in c.Line)
-                        {
-                            if (line.Sku != "")
-                            { wsCoupon.ApplicableProducts.Add(new WS_Product { sku = line.Sku }); }
-                        }
-                        if (wsCoupon.CodeCoupon!="")
-
-                        { CouponResult.CouponList.Add(wsCoupon); }
                     }
+                   
                 }
 
                 CouponResult.Message = "Success";
@@ -489,13 +522,16 @@ namespace ProxyNavisionWsZEN
                         }
 
                         items.orderlines = new List<ProxyNavisionWsZEN.orderline>();
-                        for (int j = 0; j < ItemsXML.sheader.ElementAt(i).sline.Count(); j++)
+                        if (ItemsXML.sheader.ElementAt(i)?.sline != null)
                         {
-                            ProxyNavisionWsZEN.orderline orderline = new ProxyNavisionWsZEN.orderline();
-                            orderline.barcode = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).barcode;
-                            orderline.quantityC = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).quantity;
-                            orderline.unitPrice = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).unitprice;
-                            items.orderlines.Add(orderline);
+                            for (int j = 0; j < ItemsXML.sheader.ElementAt(i).sline.Count(); j++)
+                            {
+                                ProxyNavisionWsZEN.orderline orderline = new ProxyNavisionWsZEN.orderline();
+                                orderline.barcode = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).barcode;
+                                orderline.quantityC = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).quantity;
+                                orderline.unitPrice = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).unitprice;
+                                items.orderlines.Add(orderline);
+                            }
                         }
 
                         ItemResult.Add(items);
@@ -615,15 +651,17 @@ namespace ProxyNavisionWsZEN
                         }
 
                         items.orderlines = new List<ProxyNavisionWsZEN.orderline>();
-                        for (int j = 0; j < ItemsXML.sheader.ElementAt(i).sline.Count(); j++)
+                        if (ItemsXML.sheader.ElementAt(i)?.sline != null)
                         {
-                            ProxyNavisionWsZEN.orderline orderline = new ProxyNavisionWsZEN.orderline();
-                            orderline.barcode = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).barcode;
-                            orderline.quantityC = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).quantity;
-                            orderline.unitPrice = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).unitprice;
-                            items.orderlines.Add(orderline);
+                            for (int j = 0; j < ItemsXML.sheader.ElementAt(i).sline.Count(); j++)
+                            {
+                                ProxyNavisionWsZEN.orderline orderline = new ProxyNavisionWsZEN.orderline();
+                                orderline.barcode = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).barcode;
+                                orderline.quantityC = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).quantity;
+                                orderline.unitPrice = ItemsXML.sheader.ElementAt(i).sline.ElementAt(j).unitprice;
+                                items.orderlines.Add(orderline);
+                            }
                         }
-
                         ItemResult.Add(items);
                     }
                 }
@@ -1086,6 +1124,9 @@ namespace ProxyNavisionWsZEN
 
                         items.DateReception_PSR= ItemsXML.Itemb2c.ElementAt(i).DateReception_PSR;
                         items.DateReception_TDS= ItemsXML.Itemb2c.ElementAt(i).DateReception_TDS;
+                        items.date_injection = ItemsXML.Itemb2c.ElementAt(i).date_injection;
+
+
                         var acceptedDateTimeFormats0 = new[] { "MM/dd/yy hh:mm tt", "MM/dd/yyyy hh:mm tt" };
                         var acceptedDateTimeFormats1 = new[] { "MM/dd/yy hh:mm tt", "MM/dd/yyyy hh:mm tt" };
 
@@ -1108,7 +1149,19 @@ namespace ProxyNavisionWsZEN
                         {
                             items.DateReception_TDS = items.DateReception_TDS; // fallback to original if parsing fails
                         }
+                        var acceptedFormats5 = new[] { "MM/dd/yy", "MM/dd/yyyy" };
+
+
+                        if (DateTime.TryParseExact(items.date_injection, acceptedFormats5, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate100))
+                        {
+                            items.date_injection = parsedDate100.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            items.date_injection = items.date_injection;
+                        }
                         var acceptedFormats = new[] { "MM/dd/yy", "MM/dd/yyyy" };
+
 
                         if (DateTime.TryParseExact(items.created_at, acceptedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
                         {
@@ -1147,73 +1200,95 @@ namespace ProxyNavisionWsZEN
 
 
                         var variantsDict = new Dictionary<string, ProxyNavisionWsZEN.Variants>();
-
-                        for (int j = 0; j < ItemsXML.Itemb2c.ElementAt(i).Variants.Count(); j++)
+                        if (ItemsXML.Itemb2c.ElementAt(i)?.Variants != null)
                         {
-                            var rawVariant = ItemsXML.Itemb2c.ElementAt(i).Variants.ElementAt(j);
 
-                            // if this color group doesn't exist yet, create it
-                            if (!variantsDict.TryGetValue(rawVariant.codeCouleur, out var variantsGroup))
+                            for (int j = 0; j < ItemsXML.Itemb2c.ElementAt(i).Variants.Count(); j++)
                             {
-                                variantsGroup = new ProxyNavisionWsZEN.Variants
+                                var rawVariant = ItemsXML.Itemb2c.ElementAt(i).Variants.ElementAt(j);
+
+                                // if this color group doesn't exist yet, create it
+                                if (!variantsDict.TryGetValue(rawVariant.codeCouleur, out var variantsGroup))
                                 {
-                                    codeCouleur = rawVariant.codeCouleur,
-                                    Couleur = rawVariant.Couleur.FirstOrDefault()
+                                    variantsGroup = new ProxyNavisionWsZEN.Variants
+                                    {
+                                        codeCouleur = rawVariant.codeCouleur,
+                                        Couleur = rawVariant.Couleur.FirstOrDefault()
+                                    };
+                                    variantsDict[rawVariant.codeCouleur] = variantsGroup;
+                                }
+
+                                // create a detail entry
+                                var detail = new ProxyNavisionWsZEN.VariantDetail
+                                {
+                                    code = rawVariant.code,
+                                    name = rawVariant.Description,
+                                    Taille = rawVariant.Taille.FirstOrDefault(),
+                                    code_taille = rawVariant.code_taille,
+                                    ean13 = rawVariant.Barcode,
+                                    Quantity_in_serie_type = rawVariant.Quantity_in_serie_type.FirstOrDefault(),
+                                    Composition0 = rawVariant.Composition0,
+                                    Composition1 = rawVariant.Composition1,
+                                    Composition2 = rawVariant.Composition2,
+                                    Composition3 = rawVariant.Composition3,
+                                    NGP = rawVariant.NGP
                                 };
-                                variantsDict[rawVariant.codeCouleur] = variantsGroup;
+
+                                // add detail under the correct color group
+                                variantsGroup.variants.Add(detail);
                             }
-
-                            // create a detail entry
-                            var detail = new ProxyNavisionWsZEN.VariantDetail
-                            {
-                                code = rawVariant.code,
-                                name = rawVariant.Description,
-                                Taille = rawVariant.Taille.FirstOrDefault(),
-                                code_taille = rawVariant.code_taille,
-                                ean13 = rawVariant.Barcode,
-                                Quantity_in_serie_type = rawVariant.Quantity_in_serie_type.FirstOrDefault(),
-                                Composition0 = rawVariant.Composition0,
-                                Composition1 = rawVariant.Composition1,
-                                Composition2 = rawVariant.Composition2,
-                                Composition3 = rawVariant.Composition3,
-                                NGP = rawVariant.NGP
-                            };
-
-                            // add detail under the correct color group
-                            variantsGroup.variants.Add(detail);
                         }
-
                         // finally add all grouped variants
                         items.declinaisons = variantsDict.Values.ToList();
 
-                        for (int k = 0; k < ItemsXML.Itemb2c.ElementAt(i).SalesPrice.Count(); k++)
+                        if (ItemsXML.Itemb2c.ElementAt(i)?.SalesPrice != null)
+                        {
+                            for (int k = 0; k < ItemsXML.Itemb2c.ElementAt(i).SalesPrice.Count(); k++)
+                            {
+                                ProxyNavisionWsZEN.Prices prices = new ProxyNavisionWsZEN.Prices();
+                                if (ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceTTC.FirstOrDefault() != "")
+                                {
+                                    prices.CurrencyCode = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).CurrencyCode.FirstOrDefault();
+                                    prices.DiscountPrice = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).DiscountPrice.FirstOrDefault();
+                                    prices.DiscountPercentage = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).DiscountPercentage.FirstOrDefault();
+                                    prices.PriceTTC = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceTTC.FirstOrDefault();
+                                    prices.PriceHT = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceHT.FirstOrDefault();
+                                    prices.prix_negoce = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).prix_negoce.FirstOrDefault();
+
+                                    items.SalesPrice.Add(prices);
+                                }
+                                else
+                                {
+                                    prices.CurrencyCode = "TND";
+                                    prices.DiscountPrice = "0";
+                                    prices.DiscountPercentage = "0";
+                                    prices.PriceTTC = "0";
+                                    prices.PriceHT = "0";
+
+
+                                    items.SalesPrice.Add(prices);
+                                }
+
+
+                            }
+                        }
+                        else
+
                         {
                             ProxyNavisionWsZEN.Prices prices = new ProxyNavisionWsZEN.Prices();
-                            if (ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceTTC.FirstOrDefault() != "")
-                            {
-                                prices.CurrencyCode = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).CurrencyCode.FirstOrDefault();
-                                prices.DiscountPrice = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).DiscountPrice.FirstOrDefault();
-                                prices.DiscountPercentage = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).DiscountPercentage.FirstOrDefault();
-                                prices.PriceTTC = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceTTC.FirstOrDefault();
-                                prices.PriceHT = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceHT.FirstOrDefault();
 
-                                items.SalesPrice.Add(prices);
-                            }
-                            else
-                            {
-                                prices.CurrencyCode = "TND";
-                                prices.DiscountPrice = "0";
-                                prices.DiscountPercentage = "0";
-                                prices.PriceTTC = "0";
-                                prices.PriceHT = "0";
+                            prices.CurrencyCode = "TND";
+                            prices.DiscountPrice = "0";
+                            prices.DiscountPercentage = "0";
+                            prices.PriceTTC = "0";
+                            prices.PriceHT = "0";
 
 
-                                items.SalesPrice.Add(prices);
-                            }
-                            ItemResult.Add(items);
-
+                            items.SalesPrice.Add(prices);
 
                         }
+                        ItemResult.Add(items);
+
 
 
                     }

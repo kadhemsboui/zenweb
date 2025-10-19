@@ -185,42 +185,50 @@ namespace ProxyNavisionWsZEN
                             {
                                 items.updated_at = items.updated_at; // fallback to original if parsing fails
                             }
-                            for (int j = 0; j < ItemsXML.Item.ElementAt(i).Variants.Count(); j++)
+                            if (ItemsXML.Item.ElementAt(i)?.Variants != null)
                             {
-                                ProxyNavisionWsZEN.variants Variants = new ProxyNavisionWsZEN.variants();
 
-                                Variants.Barcode= ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Barcode;
-                                Variants.Couleur = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Couleur.FirstOrDefault();
-                                Variants.Taille = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Taille.FirstOrDefault();
-                                Variants.Quantity_in_serie_type = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Quantity_in_serie_type.FirstOrDefault();
-                                Variants.Stock_disponible = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).stock_disponible.FirstOrDefault();
-                                Variants.Stock_en_attente_de_livraison = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_en_attente_de_livraison.FirstOrDefault();
-
-                                Variants.Stock_receptionné = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_receptionné.FirstOrDefault();
-
-                                Variants.Stock_sur_commande_achat = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_sur_commande_achat.FirstOrDefault();
-
-                                items.Variants.Add(Variants);
-                            }
-                            for (int k = 0; k < ItemsXML.Item.ElementAt(i).SalesPrice.Count(); k++)
-                            {
-                                ProxyNavisionWsZEN.Prices prices = new ProxyNavisionWsZEN.Prices();
-                                if (ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).Price.FirstOrDefault() != "") { 
-                                    prices.CurrencyCode = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).CurrencyCode.FirstOrDefault();
-                                    prices.DiscountPrice = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).DiscountPrice.FirstOrDefault();
-                                    prices.DiscountPercentage = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).DiscountPercentage.FirstOrDefault();
-                                    prices.Price = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).Price.FirstOrDefault();
-
-                                    items.SalesPrice.Add(prices);
-                                }
-                                else
+                                for (int j = 0; j < ItemsXML.Item.ElementAt(i).Variants.Count(); j++)
                                 {
-                                    prices.CurrencyCode = "TND";
-                                    prices.DiscountPrice = "0";
-                                    prices.DiscountPercentage = "0";
-                                    prices.Price = "0";
+                                    ProxyNavisionWsZEN.variants Variants = new ProxyNavisionWsZEN.variants();
 
-                                    items.SalesPrice.Add(prices);
+                                    Variants.Barcode = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Barcode;
+                                    Variants.Couleur = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Couleur.FirstOrDefault();
+                                    Variants.Taille = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Taille.FirstOrDefault();
+                                    Variants.Quantity_in_serie_type = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Quantity_in_serie_type.FirstOrDefault();
+                                    Variants.Stock_disponible = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).stock_disponible.FirstOrDefault();
+                                    Variants.Stock_en_attente_de_livraison = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_en_attente_de_livraison.FirstOrDefault();
+
+                                    Variants.Stock_receptionné = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_receptionné.FirstOrDefault();
+
+                                    Variants.Stock_sur_commande_achat = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_sur_commande_achat.FirstOrDefault();
+
+                                    items.Variants.Add(Variants);
+                                }
+                            }
+                            if (ItemsXML.Item.ElementAt(i)?.SalesPrice != null)
+                            {
+                                for (int k = 0; k < ItemsXML.Item.ElementAt(i).SalesPrice.Count(); k++)
+                                {
+                                    ProxyNavisionWsZEN.Prices prices = new ProxyNavisionWsZEN.Prices();
+                                    if (ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).Price.FirstOrDefault() != "")
+                                    {
+                                        prices.CurrencyCode = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).CurrencyCode.FirstOrDefault();
+                                        prices.DiscountPrice = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).DiscountPrice.FirstOrDefault();
+                                        prices.DiscountPercentage = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).DiscountPercentage.FirstOrDefault();
+                                        prices.Price = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).Price.FirstOrDefault();
+
+                                        items.SalesPrice.Add(prices);
+                                    }
+                                    else
+                                    {
+                                        prices.CurrencyCode = "TND";
+                                        prices.DiscountPrice = "0";
+                                        prices.DiscountPercentage = "0";
+                                        prices.Price = "0";
+
+                                        items.SalesPrice.Add(prices);
+                                    }
                                 }
                             }
 
@@ -308,6 +316,7 @@ namespace ProxyNavisionWsZEN
                         items.Stock_sur_commande_achat = ItemsXML.Inventory.ElementAt(i).Stock_sur_commande_achat.FirstOrDefault();
 
 
+                        items.Stock_sur_commande_vente= ItemsXML.Inventory.ElementAt(i).Stock_sur_commande_vente.FirstOrDefault();
 
 
                         InventoryResult.Stock.Add(items);

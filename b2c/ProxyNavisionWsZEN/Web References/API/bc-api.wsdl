@@ -146,8 +146,8 @@
           <element minOccurs="1" maxOccurs="unbounded" name="DescriptionCategory" type="string" />
           <element minOccurs="1" maxOccurs="1" name="code_marque" type="string" />
           <element minOccurs="1" maxOccurs="1" name="sexe" type="string" />
-          <element minOccurs="1" maxOccurs="unbounded" name="Variants" type="tns:Variants" />
-          <element minOccurs="1" maxOccurs="unbounded" name="SalesPrice" type="tns:SalesPrice" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Variants" type="tns:Variants" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesPrice" type="tns:SalesPrice" />
         </sequence>
       </complexType>
       <complexType name="Items" mixed="true">
@@ -186,6 +186,7 @@
           <element minOccurs="1" maxOccurs="unbounded" name="fin" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="DiscountPercentage" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="ValidRetailPrice" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="prix_negoce" type="string" />
         </sequence>
       </complexType>
       <complexType name="Itemb2c">
@@ -194,6 +195,7 @@
           <element minOccurs="1" maxOccurs="1" name="No" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="code_saison" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="date_injection" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="saison" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Barcode" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Coupe" type="string" />
@@ -214,8 +216,8 @@
           <element minOccurs="1" maxOccurs="1" name="DateReception_PSR" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DateReception_TDS" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Persona" type="string" />
-          <element minOccurs="1" maxOccurs="unbounded" name="Variants" type="tns:Variants" />
-          <element minOccurs="1" maxOccurs="unbounded" name="SalesPrice" type="tns:SalesPrice" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Variants" type="tns:Variants" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesPrice" type="tns:SalesPrice" />
         </sequence>
       </complexType>
       <complexType name="Itemsb2c" mixed="true">
@@ -284,6 +286,7 @@
         <sequence>
           <element minOccurs="1" maxOccurs="unbounded" name="stock_disponible" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_en_attente_de_livraison" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Stock_sur_commande_vente" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_receptionné" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_sur_commande_achat" type="string" />
         </sequence>
@@ -328,15 +331,16 @@
           <element minOccurs="1" maxOccurs="1" name="type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="validity" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CustomerCodeErp" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="isActive" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="isused" type="string" />
-          <element minOccurs="1" maxOccurs="unbounded" name="Coup" type="tns:Coup" />
-          <element minOccurs="1" maxOccurs="unbounded" name="Line" type="tns:Line" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Coup" type="tns:Coup" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Line" type="tns:Line" />
         </sequence>
       </complexType>
       <complexType name="Coupon" mixed="true">
         <sequence>
-          <element minOccurs="1" maxOccurs="unbounded" name="Coupons" type="tns:Coupons" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Coupons" type="tns:Coupons" />
         </sequence>
       </complexType>
       <element name="Coupon" type="tns:Coupon" />
@@ -409,7 +413,7 @@
           <element minOccurs="1" maxOccurs="1" name="StatusB2C" type="string" />
           <element minOccurs="1" maxOccurs="1" name="StatusB2B" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Motif" type="string" />
-          <element minOccurs="1" maxOccurs="unbounded" name="sline" type="tns:sline" />
+          <element minOccurs="0" maxOccurs="unbounded" name="sline" type="tns:sline" />
         </sequence>
       </complexType>
       <complexType name="sheaders" mixed="true">
@@ -434,6 +438,54 @@
         </sequence>
       </complexType>
       <element name="transaction" type="tns:transaction" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52022" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52022" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Seasons">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="created_at" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="updated_at" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Season" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Seasons" type="tns:Seasons" />
+        </sequence>
+      </complexType>
+      <element name="Season" type="tns:Season" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52021" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52021" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Vendors">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="created_at" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="updated_at" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Vendor" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Vendors" type="tns:Vendors" />
+        </sequence>
+      </complexType>
+      <element name="Vendor" type="tns:Vendor" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52020" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52020" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Attributes">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="Code" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="created_at" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="updated_at" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Attribute" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Attributes" type="tns:Attributes" />
+        </sequence>
+      </complexType>
+      <element name="Attribute" type="tns:Attribute" />
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/API" xmlns="http://www.w3.org/2001/XMLSchema">
       <element name="AddCustomer">
@@ -1144,6 +1196,7 @@
             <element xmlns:q30="urn:microsoft-dynamics-nav/xmlports/x52017" minOccurs="1" maxOccurs="1" name="cml_coupon" type="q30:Coupon" />
             <element minOccurs="1" maxOccurs="1" name="customerCodeErp" type="string" />
             <element minOccurs="1" maxOccurs="1" name="codecoupon" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="phone" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -1244,6 +1297,29 @@
         <complexType>
           <sequence>
             <element xmlns:q43="urn:microsoft-dynamics-nav/xmlports/x52011" minOccurs="1" maxOccurs="1" name="zEN_Card_transaction" type="q43:transaction" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="gettierstable">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="type" type="string" />
+            <element xmlns:q44="urn:microsoft-dynamics-nav/xmlports/x52022" minOccurs="1" maxOccurs="1" name="season" type="q44:Season" />
+            <element xmlns:q45="urn:microsoft-dynamics-nav/xmlports/x52021" minOccurs="1" maxOccurs="1" name="vendor" type="q45:Vendor" />
+            <element xmlns:q46="urn:microsoft-dynamics-nav/xmlports/x52020" minOccurs="1" maxOccurs="1" name="attribute" type="q46:Attribute" />
+            <element minOccurs="1" maxOccurs="1" name="created_date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="created_end" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updated_start" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updated_end" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="gettierstable_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q47="urn:microsoft-dynamics-nav/xmlports/x52022" minOccurs="1" maxOccurs="1" name="season" type="q47:Season" />
+            <element xmlns:q48="urn:microsoft-dynamics-nav/xmlports/x52021" minOccurs="1" maxOccurs="1" name="vendor" type="q48:Vendor" />
+            <element xmlns:q49="urn:microsoft-dynamics-nav/xmlports/x52020" minOccurs="1" maxOccurs="1" name="attribute" type="q49:Attribute" />
           </sequence>
         </complexType>
       </element>
@@ -1547,6 +1623,12 @@
   <message name="getransaction_Result">
     <part name="parameters" element="tns:getransaction_Result" />
   </message>
+  <message name="gettierstable">
+    <part name="parameters" element="tns:gettierstable" />
+  </message>
+  <message name="gettierstable_Result">
+    <part name="parameters" element="tns:gettierstable_Result" />
+  </message>
   <message name="isused">
     <part name="parameters" element="tns:isused" />
   </message>
@@ -1739,6 +1821,10 @@
     <operation name="getransaction">
       <input name="getransaction" message="tns:getransaction" />
       <output name="getransaction_Result" message="tns:getransaction_Result" />
+    </operation>
+    <operation name="gettierstable">
+      <input name="gettierstable" message="tns:gettierstable" />
+      <output name="gettierstable_Result" message="tns:gettierstable_Result" />
     </operation>
     <operation name="isused">
       <input name="isused" message="tns:isused" />
@@ -2153,6 +2239,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="getransaction_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="gettierstable">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:gettierstable" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="gettierstable">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="gettierstable_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

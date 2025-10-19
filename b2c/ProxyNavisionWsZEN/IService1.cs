@@ -64,8 +64,8 @@ namespace ProxyNavisionWsZEN
                    ResponseFormat = WebMessageFormat.Json,
                    BodyStyle = WebMessageBodyStyle.Bare)]
         CouponResult CreateCoupon(CouponRequest request);
-        [WebGet(UriTemplate = "GetCoupon?CustomerCodeErp={CustomerCodeErp}&CodeCoupon={CodeCoupon}", ResponseFormat = WebMessageFormat.Json)]
-        WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon);
+        [WebGet(UriTemplate = "GetCoupon?CustomerCodeErp={CustomerCodeErp}&CodeCoupon={CodeCoupon}&phoneNumber={phoneNumber}", ResponseFormat = WebMessageFormat.Json)]
+        WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon, string phoneNumber);
         [WebInvoke(
     Method = "PATCH",
     UriTemplate = "UpdateCoupon",

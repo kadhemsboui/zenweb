@@ -305,7 +305,7 @@ namespace ProxyNavisionWsZEN
                     request.CodeCoupon,
                     request.Description,
                     request.CustomerCodeErp,
-                    Convert.ToDecimal(request.Value.Replace(",", ".")),
+                    Convert.ToDecimal(request.Value.Replace(".", ",")),
                     request.Type,
                     request.IsActive,
                     request.Validity,
@@ -2142,10 +2142,10 @@ namespace ProxyNavisionWsZEN
                         {
                             order.Location = "NULL";
                         }
-                        //if (order.Discount == null)
-                        //{
-                        //    order.Discount = "0";
-                        //}
+                        if (order.Discount == null)
+                        {
+                            order.Discount = "0";
+                        }
                         if (order.Motif == null)
                         {
                             order.Motif = "";
@@ -2169,8 +2169,7 @@ namespace ProxyNavisionWsZEN
                             ID = order.Id,
                             location = CmdHead.Location,
                             OrderNo = CmdHead.orderNo,
-                            //Discount = order.Discount,
-                            Discount = "0",
+                            Discount = order.Discount,
                             motif = order.Motif
 
 
@@ -2218,16 +2217,16 @@ namespace ProxyNavisionWsZEN
                 {
                     CmdHead.DeliveryType = "";
                 }
-                //if (CmdHead.Remise_Coupon == null)
-                //{
-                //    CmdHead.Remise_Coupon = "";
-                //}
+                if (CmdHead.Remise_Coupon == null)
+                {
+                    CmdHead.Remise_Coupon = "0";
+                }
 
                 if (CmdHead.commandType== "order")
                 {
 
                     //mobile_Web_Services.AddOrModifyOrderB2C(CmdHead.TiersColisNo, CmdHead.CustomerCodeErp, CmdHead.OrderNo, CmdHead.Currency, CmdHead.Currency_Ratio, DeliveryAddress.Address, false, CmdHead.IdPaymentMethod, CmdHead.Date, DeliveryAddress.City, DeliveryAddress.CountryId, DeliveryAddress.FirstName, DeliveryAddress.LastName, DeliveryAddress.PhoneNumber, ref OrderXmlPort, CmdHead.DeliveryType, CmdHead.idStore, CmdHead.Remise_Coupon);
-                    WS_orderResult.Message = mobile_Web_Services.AddOrModifyOrderB2C(CmdHead.TiersColisNo, CmdHead.CustomerCodeErp, CmdHead.OrderNo, CmdHead.Currency, CmdHead.Currency_Ratio, DeliveryAddress.Address, false, CmdHead.IdPaymentMethod, CmdHead.Date, DeliveryAddress.City, DeliveryAddress.CountryId, DeliveryAddress.FirstName, DeliveryAddress.LastName, DeliveryAddress.PhoneNumber, ref OrderXmlPort, CmdHead.DeliveryType, CmdHead.idStore, "0");
+                    WS_orderResult.Message = mobile_Web_Services.AddOrModifyOrderB2C(CmdHead.TiersColisNo, CmdHead.CustomerCodeErp, CmdHead.OrderNo, CmdHead.Currency, CmdHead.Currency_Ratio, DeliveryAddress.Address, false, CmdHead.IdPaymentMethod, CmdHead.Date, DeliveryAddress.City, DeliveryAddress.CountryId, DeliveryAddress.FirstName, DeliveryAddress.LastName, DeliveryAddress.PhoneNumber, ref OrderXmlPort, CmdHead.DeliveryType, CmdHead.idStore, CmdHead.Remise_Coupon);
 
                     string company = mobile_Web_Services.getCompanyesp();
                     string location = mobile_Web_Services.getLocationesp();

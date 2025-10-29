@@ -37,7 +37,7 @@ namespace ProxyNavisionWsZEN.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e568" +
-            "1/ZEDD_DEV/WS/ZEDD/Codeunit/API?=wsdl&tenant=msweua5825t71792570&aid=FIN")]
+            "1/ZEDD_DEV/WS/ZEDD/Codeunit/API?=wsdl&tenant=msweua5825t85658057&aid=FIN")]
         public string ProxyNavisionWsZEN_API_API {
             get {
                 return ((string)(this["ProxyNavisionWsZEN_API_API"]));

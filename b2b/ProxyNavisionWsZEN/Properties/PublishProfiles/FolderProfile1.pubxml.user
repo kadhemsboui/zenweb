@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\KSBOUI\Desktop\APIZEN</_PublishTargetUrl>
+    <History>True|2025-10-29T11:42:34.2052263Z;True|2025-10-28T19:13:44.3422317+01:00;True|2025-10-17T17:14:43.0958211+01:00;False|2025-10-17T17:13:54.3560715+01:00;True|2025-10-15T16:09:40.3202709+01:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="ApplicationInsights.config">
+      <publishTime>05/09/2025 15:56:21</publishTime>
+    </File>
+    <File Include="bin/ApplicationInsights.config">
+      <publishTime>05/09/2025 15:56:21</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
+      <publishTime>07/12/2015 20:04:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.DependencyCollector.dll">
+      <publishTime>10/03/2016 15:26:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
+      <publishTime>10/03/2016 15:26:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
+      <publishTime>09/03/2016 13:00:14</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Web.dll">
+      <publishTime>10/03/2016 15:26:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.WindowsServer.dll">
+      <publishTime>10/03/2016 15:26:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ApplicationInsights.dll">
+      <publishTime>09/03/2016 12:57:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Authentication.Abstractions.dll">
+      <publishTime>01/14/2025 23:00:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Authentication.Core.dll">
+      <publishTime>01/14/2025 23:01:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Authentication.dll">
+      <publishTime>01/14/2025 23:01:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Authentication.OAuth.dll">
+      <publishTime>01/14/2025 23:01:28</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Cryptography.Internal.dll">
+      <publishTime>10/01/2025 01:26:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.DataProtection.Abstractions.dll">
+      <publishTime>01/14/2025 23:00:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.DataProtection.dll">
+      <publishTime>01/14/2025 23:00:56</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Hosting.Abstractions.dll">
+      <publishTime>01/14/2025 23:00:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll">
+      <publishTime>01/14/2025 23:00:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Http.Abstractions.dll">
+      <publishTime>01/14/2025 23:00:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Http.dll">
+      <publishTime>01/14/2025 23:01:02</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Http.Extensions.dll">
+      <publishTime>01/14/2025 23:00:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.Http.Features.dll">
+      <publishTime>01/14/2025 23:00:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNetCore.WebUtilities.dll">
+      <publishTime>01/14/2025 23:00:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>10/31/2023 16:00:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Configuration.Abstractions.dll">
+      <publishTime>10/31/2023 16:04:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>09/17/2024 00:14:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Diagnostics.Abstractions.dll">
+      <publishTime>09/17/2024 00:16:02</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.FileProviders.Abstractions.dll">
+      <publishTime>10/31/2023 16:01:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Hosting.Abstractions.dll">
+      <publishTime>09/17/2024 00:16:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>09/17/2024 00:15:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.ObjectPool.dll">
+      <publishTime>10/22/2024 00:57:04</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Options.dll">
+      <publishTime>01/18/2024 04:08:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Primitives.dll">
+      <publishTime>10/31/2023 16:00:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.WebEncoders.dll">
+      <publishTime>10/22/2024 00:57:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Net.Http.Headers.dll">
+      <publishTime>01/14/2025 23:00:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>11/05/2022 00:31:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>11/05/2022 00:31:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
+      <publishTime>11/05/2022 00:31:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Win32.Registry.dll">
+      <publishTime>05/15/2018 14:29:36</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>08/03/2023 08:09:56</publishTime>
+    </File>
+    <File Include="bin/OAuth.dll">
+      <publishTime>03/12/2011 19:40:24</publishTime>
+    </File>
+    <File Include="bin/OAuth.pdb">
+      <publishTime>03/12/2011 19:40:24</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>11/13/2012 13:19:34</publishTime>
+    </File>
+    <File Include="bin/ProxyNavisionWsZEN.dll">
+      <publishTime>10/29/2025 12:42:21</publishTime>
+    </File>
+    <File Include="bin/ProxyNavisionWsZEN.pdb">
+      <publishTime>10/29/2025 12:42:21</publishTime>
+    </File>
+    <File Include="bin/ProxyNavisionWsZEN.XmlSerializers.dll">
+      <publishTime>10/29/2025 12:42:31</publishTime>
+    </File>
+    <File Include="bin/RestSharp.dll">
+      <publishTime>04/10/2024 12:49:34</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>12/11/2024 22:47:04</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>03/19/2024 20:38:18</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>08/05/2022 04:31:02</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 14:29:44</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>10/23/2021 00:40:18</publishTime>
+    </File>
+    <File Include="bin/System.Security.AccessControl.dll">
+      <publishTime>05/15/2018 14:29:42</publishTime>
+    </File>
+    <File Include="bin/System.Security.Cryptography.Xml.dll">
+      <publishTime>09/17/2024 00:14:38</publishTime>
+    </File>
+    <File Include="bin/System.Security.Principal.Windows.dll">
+      <publishTime>10/19/2020 19:46:28</publishTime>
+    </File>
+    <File Include="bin/System.Text.Encodings.Web.dll">
+      <publishTime>10/31/2023 16:00:28</publishTime>
+    </File>
+    <File Include="bin/System.Text.Json.dll">
+      <publishTime>06/13/2024 20:41:40</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>02/19/2020 11:05:18</publishTime>
+    </File>
+    <File Include="bin/System.ValueTuple.dll">
+      <publishTime>05/15/2018 14:29:52</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>05/09/2025 10:44:23</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>06/11/2025 11:12:19</publishTime>
+    </File>
+    <File Include="scripts/ai.0.22.9-build00167.js">
+      <publishTime>07/15/2020 10:11:04</publishTime>
+    </File>
+    <File Include="scripts/ai.0.22.9-build00167.min.js">
+      <publishTime>07/15/2020 10:11:04</publishTime>
+    </File>
+    <File Include="ServiceZEN.svc">
+      <publishTime>05/09/2025 10:44:23</publishTime>
+    </File>
+    <File Include="Web References/API/Attribute.datasource">
+      <publishTime>10/17/2025 17:07:33</publishTime>
+    </File>
+    <File Include="Web References/API/Card.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Category.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Categoryparent.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Company.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Contact.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Coupon.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Customer.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Inventories.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Inventoriesb2c.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Items.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Itemsb2c.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Location.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Order.datasource">
+      <publishTime>10/17/2025 17:07:33</publishTime>
+    </File>
+    <File Include="Web References/API/Parent.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Sales.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Season.datasource">
+      <publishTime>10/17/2025 17:07:33</publishTime>
+    </File>
+    <File Include="Web References/API/sheaders.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/transaction.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/TransferLine.datasource">
+      <publishTime>10/17/2025 17:07:34</publishTime>
+    </File>
+    <File Include="Web References/API/Vendor.datasource">
+      <publishTime>10/17/2025 17:07:33</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/15/2025 16:09:39</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

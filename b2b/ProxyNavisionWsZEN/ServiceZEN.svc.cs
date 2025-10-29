@@ -50,14 +50,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -185,42 +185,50 @@ namespace ProxyNavisionWsZEN
                             {
                                 items.updated_at = items.updated_at; // fallback to original if parsing fails
                             }
-                            for (int j = 0; j < ItemsXML.Item.ElementAt(i).Variants.Count(); j++)
+                            if (ItemsXML.Item.ElementAt(i)?.Variants != null)
                             {
-                                ProxyNavisionWsZEN.variants Variants = new ProxyNavisionWsZEN.variants();
 
-                                Variants.Barcode= ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Barcode;
-                                Variants.Couleur = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Couleur.FirstOrDefault();
-                                Variants.Taille = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Taille.FirstOrDefault();
-                                Variants.Quantity_in_serie_type = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Quantity_in_serie_type.FirstOrDefault();
-                                Variants.Stock_disponible = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).stock_disponible.FirstOrDefault();
-                                Variants.Stock_en_attente_de_livraison = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_en_attente_de_livraison.FirstOrDefault();
-
-                                Variants.Stock_receptionné = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_receptionné.FirstOrDefault();
-
-                                Variants.Stock_sur_commande_achat = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_sur_commande_achat.FirstOrDefault();
-
-                                items.Variants.Add(Variants);
-                            }
-                            for (int k = 0; k < ItemsXML.Item.ElementAt(i).SalesPrice.Count(); k++)
-                            {
-                                ProxyNavisionWsZEN.Prices prices = new ProxyNavisionWsZEN.Prices();
-                                if (ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).Price.FirstOrDefault() != "") { 
-                                    prices.CurrencyCode = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).CurrencyCode.FirstOrDefault();
-                                    prices.DiscountPrice = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).DiscountPrice.FirstOrDefault();
-                                    prices.DiscountPercentage = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).DiscountPercentage.FirstOrDefault();
-                                    prices.Price = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).Price.FirstOrDefault();
-
-                                    items.SalesPrice.Add(prices);
-                                }
-                                else
+                                for (int j = 0; j < ItemsXML.Item.ElementAt(i).Variants.Count(); j++)
                                 {
-                                    prices.CurrencyCode = "TND";
-                                    prices.DiscountPrice = "0";
-                                    prices.DiscountPercentage = "0";
-                                    prices.Price = "0";
+                                    ProxyNavisionWsZEN.variants Variants = new ProxyNavisionWsZEN.variants();
 
-                                    items.SalesPrice.Add(prices);
+                                    Variants.Barcode = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Barcode;
+                                    Variants.Couleur = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Couleur.FirstOrDefault();
+                                    Variants.Taille = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Taille.FirstOrDefault();
+                                    Variants.Quantity_in_serie_type = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Quantity_in_serie_type.FirstOrDefault();
+                                    Variants.Stock_disponible = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).stock_disponible.FirstOrDefault();
+                                    Variants.Stock_en_attente_de_livraison = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_en_attente_de_livraison.FirstOrDefault();
+
+                                    Variants.Stock_receptionné = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_receptionné.FirstOrDefault();
+
+                                    Variants.Stock_sur_commande_achat = ItemsXML.Item.ElementAt(i).Variants.ElementAt(j).Stock_sur_commande_achat.FirstOrDefault();
+
+                                    items.Variants.Add(Variants);
+                                }
+                            }
+                            if (ItemsXML.Item.ElementAt(i)?.SalesPrice != null)
+                            {
+                                for (int k = 0; k < ItemsXML.Item.ElementAt(i).SalesPrice.Count(); k++)
+                                {
+                                    ProxyNavisionWsZEN.Prices prices = new ProxyNavisionWsZEN.Prices();
+                                    if (ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).Price.FirstOrDefault() != "")
+                                    {
+                                        prices.CurrencyCode = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).CurrencyCode.FirstOrDefault();
+                                        prices.DiscountPrice = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).DiscountPrice.FirstOrDefault();
+                                        prices.DiscountPercentage = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).DiscountPercentage.FirstOrDefault();
+                                        prices.Price = ItemsXML.Item.ElementAt(i).SalesPrice.ElementAt(k).Price.FirstOrDefault();
+
+                                        items.SalesPrice.Add(prices);
+                                    }
+                                    else
+                                    {
+                                        prices.CurrencyCode = "TND";
+                                        prices.DiscountPrice = "0";
+                                        prices.DiscountPercentage = "0";
+                                        prices.Price = "0";
+
+                                        items.SalesPrice.Add(prices);
+                                    }
                                 }
                             }
 
@@ -241,13 +249,13 @@ namespace ProxyNavisionWsZEN
                 if (error is ArgumentException argumentException)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "500";
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "500";
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -308,6 +316,7 @@ namespace ProxyNavisionWsZEN
                         items.Stock_sur_commande_achat = ItemsXML.Inventory.ElementAt(i).Stock_sur_commande_achat.FirstOrDefault();
 
 
+                        items.Stock_sur_commande_vente= ItemsXML.Inventory.ElementAt(i).Stock_sur_commande_vente.FirstOrDefault();
 
 
                         InventoryResult.Stock.Add(items);
@@ -327,13 +336,13 @@ namespace ProxyNavisionWsZEN
                 if (error is ArgumentException argumentException)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "500";
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "500";
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -378,12 +387,24 @@ namespace ProxyNavisionWsZEN
                     Customer.Posting_Group = navCustomer.Customers.ElementAt(i).Posting_Group;
                     Customer.City = navCustomer.Customers.ElementAt(i).City;
                     Customer.Code_postal = navCustomer.Customers.ElementAt(i).Code_postal;
-                    DateTime parsedDate = DateTime.ParseExact(navCustomer.Customers.ElementAt(i).Date_Created, "dd/MM/yy", CultureInfo.InvariantCulture);
+                    var acceptedDateTimeFormats = new[] { "MM/dd/yy", "MM/dd/yyyy" };
 
-                    Customer.Date_Created = parsedDate.ToString();
-                    DateTime parsedDate2 = DateTime.ParseExact(navCustomer.Customers.ElementAt(i).Last_Date_Modified, "dd/MM/yy", CultureInfo.InvariantCulture);
+                    Customer.Date_Created = navCustomer.Customers.ElementAt(i).Date_Created;
 
-                    Customer.Last_Date_Modified = parsedDate2.ToString();
+                    if (DateTime.TryParseExact(Customer.Date_Created, acceptedDateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime))
+                    {
+                        Customer.Date_Created = parsedDateTime.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    }
+                    
+                    var acceptedDateTimeFormats2 = new[] { "MM/dd/yy", "MM/dd/yyyy" };
+
+                    Customer.Last_Date_Modified = navCustomer.Customers.ElementAt(i).Last_Date_Modified;
+
+                    if (DateTime.TryParseExact(Customer.Last_Date_Modified, acceptedDateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime2))
+                    {
+                        Customer.Last_Date_Modified = parsedDateTime2.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    }
+
                     Customer.pays = navCustomer.Customers.ElementAt(i).pays.FirstOrDefault();
                     Customers.Add(Customer);
                 }
@@ -397,14 +418,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -460,14 +481,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -537,14 +558,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -661,14 +682,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -805,14 +826,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -852,14 +873,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -899,14 +920,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else

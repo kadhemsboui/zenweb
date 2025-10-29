@@ -119,6 +119,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private System.Threading.SendOrPostCallback getransactionOperationCompleted;
         
+        private System.Threading.SendOrPostCallback gettierstableOperationCompleted;
+        
         private System.Threading.SendOrPostCallback isusedOperationCompleted;
         
         private System.Threading.SendOrPostCallback updatorderOperationCompleted;
@@ -295,6 +297,9 @@ namespace ProxyNavisionWsZEN.API {
         
         /// <remarks/>
         public event getransactionCompletedEventHandler getransactionCompleted;
+        
+        /// <remarks/>
+        public event gettierstableCompletedEventHandler gettierstableCompleted;
         
         /// <remarks/>
         public event isusedCompletedEventHandler isusedCompleted;
@@ -2076,28 +2081,30 @@ namespace ProxyNavisionWsZEN.API {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:get_coupon", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="get_coupon_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void get_coupon(ref Coupon cml_coupon, string customerCodeErp, string codecoupon) {
+        public void get_coupon(ref Coupon cml_coupon, string customerCodeErp, string codecoupon, string phone) {
             object[] results = this.Invoke("get_coupon", new object[] {
                         cml_coupon,
                         customerCodeErp,
-                        codecoupon});
+                        codecoupon,
+                        phone});
             cml_coupon = ((Coupon)(results[0]));
         }
         
         /// <remarks/>
-        public void get_couponAsync(Coupon cml_coupon, string customerCodeErp, string codecoupon) {
-            this.get_couponAsync(cml_coupon, customerCodeErp, codecoupon, null);
+        public void get_couponAsync(Coupon cml_coupon, string customerCodeErp, string codecoupon, string phone) {
+            this.get_couponAsync(cml_coupon, customerCodeErp, codecoupon, phone, null);
         }
         
         /// <remarks/>
-        public void get_couponAsync(Coupon cml_coupon, string customerCodeErp, string codecoupon, object userState) {
+        public void get_couponAsync(Coupon cml_coupon, string customerCodeErp, string codecoupon, string phone, object userState) {
             if ((this.get_couponOperationCompleted == null)) {
                 this.get_couponOperationCompleted = new System.Threading.SendOrPostCallback(this.Onget_couponOperationCompleted);
             }
             this.InvokeAsync("get_coupon", new object[] {
                         cml_coupon,
                         customerCodeErp,
-                        codecoupon}, this.get_couponOperationCompleted, userState);
+                        codecoupon,
+                        phone}, this.get_couponOperationCompleted, userState);
         }
         
         private void Onget_couponOperationCompleted(object arg) {
@@ -2296,6 +2303,51 @@ namespace ProxyNavisionWsZEN.API {
             if ((this.getransactionCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getransactionCompleted(this, new getransactionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:gettierstable", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="gettierstable_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void gettierstable(string type, ref Season season, ref Vendor vendor, ref Attribute attribute, string created_date, string created_end, string updated_start, string updated_end) {
+            object[] results = this.Invoke("gettierstable", new object[] {
+                        type,
+                        season,
+                        vendor,
+                        attribute,
+                        created_date,
+                        created_end,
+                        updated_start,
+                        updated_end});
+            season = ((Season)(results[0]));
+            vendor = ((Vendor)(results[1]));
+            attribute = ((Attribute)(results[2]));
+        }
+        
+        /// <remarks/>
+        public void gettierstableAsync(string type, Season season, Vendor vendor, Attribute attribute, string created_date, string created_end, string updated_start, string updated_end) {
+            this.gettierstableAsync(type, season, vendor, attribute, created_date, created_end, updated_start, updated_end, null);
+        }
+        
+        /// <remarks/>
+        public void gettierstableAsync(string type, Season season, Vendor vendor, Attribute attribute, string created_date, string created_end, string updated_start, string updated_end, object userState) {
+            if ((this.gettierstableOperationCompleted == null)) {
+                this.gettierstableOperationCompleted = new System.Threading.SendOrPostCallback(this.OngettierstableOperationCompleted);
+            }
+            this.InvokeAsync("gettierstable", new object[] {
+                        type,
+                        season,
+                        vendor,
+                        attribute,
+                        created_date,
+                        created_end,
+                        updated_start,
+                        updated_end}, this.gettierstableOperationCompleted, userState);
+        }
+        
+        private void OngettierstableOperationCompleted(object arg) {
+            if ((this.gettierstableCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.gettierstableCompleted(this, new gettierstableCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2518,6 +2570,282 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.motifField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52020")]
+    public partial class Attributes {
+        
+        private string codeField;
+        
+        private string descriptionField;
+        
+        private string created_atField;
+        
+        private string updated_atField;
+        
+        /// <remarks/>
+        public string Code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string created_at {
+            get {
+                return this.created_atField;
+            }
+            set {
+                this.created_atField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string updated_at {
+            get {
+                return this.updated_atField;
+            }
+            set {
+                this.updated_atField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52020")]
+    public partial class Attribute {
+        
+        private Attributes[] attributesField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Attributes")]
+        public Attributes[] Attributes {
+            get {
+                return this.attributesField;
+            }
+            set {
+                this.attributesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52021")]
+    public partial class Vendors {
+        
+        private string codeField;
+        
+        private string descriptionField;
+        
+        private string created_atField;
+        
+        private string updated_atField;
+        
+        /// <remarks/>
+        public string Code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string created_at {
+            get {
+                return this.created_atField;
+            }
+            set {
+                this.created_atField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string updated_at {
+            get {
+                return this.updated_atField;
+            }
+            set {
+                this.updated_atField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52021")]
+    public partial class Vendor {
+        
+        private Vendors[] vendorsField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Vendors")]
+        public Vendors[] Vendors {
+            get {
+                return this.vendorsField;
+            }
+            set {
+                this.vendorsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52022")]
+    public partial class Seasons {
+        
+        private string codeField;
+        
+        private string descriptionField;
+        
+        private string created_atField;
+        
+        private string updated_atField;
+        
+        /// <remarks/>
+        public string Code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string created_at {
+            get {
+                return this.created_atField;
+            }
+            set {
+                this.created_atField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string updated_at {
+            get {
+                return this.updated_atField;
+            }
+            set {
+                this.updated_atField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52022")]
+    public partial class Season {
+        
+        private Seasons[] seasonsField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Seasons")]
+        public Seasons[] Seasons {
+            get {
+                return this.seasonsField;
+            }
+            set {
+                this.seasonsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
             }
         }
     }
@@ -3406,6 +3734,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private string[] stock_en_attente_de_livraisonField;
         
+        private string[] stock_sur_commande_venteField;
+        
         private string[] stock_receptionnéField;
         
         private string[] stock_sur_commande_achatField;
@@ -3429,6 +3759,17 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.stock_en_attente_de_livraisonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Stock_sur_commande_vente")]
+        public string[] Stock_sur_commande_vente {
+            get {
+                return this.stock_sur_commande_venteField;
+            }
+            set {
+                this.stock_sur_commande_venteField = value;
             }
         }
         
@@ -3831,6 +4172,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private string[] validRetailPriceField;
         
+        private string[] prix_negoceField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("CurrencyCode")]
         public string[] CurrencyCode {
@@ -3927,6 +4270,17 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.validRetailPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("prix_negoce")]
+        public string[] prix_negoce {
+            get {
+                return this.prix_negoceField;
+            }
+            set {
+                this.prix_negoceField = value;
             }
         }
     }
@@ -4115,6 +4469,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private string code_saisonField;
         
+        private string date_injectionField;
+        
         private string[] saisonField;
         
         private string[] barcodeField;
@@ -4201,6 +4557,16 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.code_saisonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string date_injection {
+            get {
+                return this.date_injectionField;
+            }
+            set {
+                this.date_injectionField = value;
             }
         }
         
@@ -6482,6 +6848,48 @@ namespace ProxyNavisionWsZEN.API {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((transaction)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void gettierstableCompletedEventHandler(object sender, gettierstableCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class gettierstableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal gettierstableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Season season {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Season)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public Vendor vendor {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Vendor)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
+        public Attribute attribute {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Attribute)(this.results[2]));
             }
         }
     }

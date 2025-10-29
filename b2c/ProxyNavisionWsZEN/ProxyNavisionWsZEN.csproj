@@ -280,6 +280,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cart.cs" />
+    <Compile Include="Cart_list.cs" />
     <Compile Include="CmdHead.cs" />
     <Compile Include="Companies.cs" />
     <Compile Include="CouponRequest.cs" />
@@ -311,6 +313,7 @@
     <Compile Include="variants.cs" />
     <Compile Include="WS_AddCustomerResult.cs" />
     <Compile Include="WS_CardRequest.cs" />
+    <Compile Include="WS_CartResult.cs" />
     <Compile Include="WS_categoryResult.cs" />
     <Compile Include="WS_CouponResult.cs" />
     <Compile Include="WS_Customer.cs" />
@@ -335,11 +338,13 @@
     <Compile Include="WS_OrderRequest2.cs" />
     <Compile Include="WS_OrderResult.cs" />
     <Compile Include="WS_orderResult1.cs" />
+    <Compile Include="WS_PostedorderResult1.cs" />
     <Compile Include="WS_PurchRequest.cs" />
     <Compile Include="ws_result.cs" />
     <Compile Include="WS_Status.cs" />
     <Compile Include="WS_stockResult.cs" />
     <Compile Include="WS_StockrRequest.cs" />
+    <Compile Include="WS_Tiers.cs" />
     <Compile Include="WS_TransRequest.cs" />
     <Compile Include="WS_UpdateCouponRequest.cs" />
   </ItemGroup>
@@ -358,6 +363,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Web References\API\Attribute.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\API\bc-api.wsdl" />
     <Content Include="Web References\API\Company.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -401,6 +409,12 @@
     <Content Include="Web References\API\Coupon.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\API\Psheaders.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\API\Ordertemp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\API\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -415,6 +429,12 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\API\TransferLine.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\API\Season.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\API\Vendor.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

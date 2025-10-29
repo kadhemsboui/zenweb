@@ -28,7 +28,9 @@ namespace ProxyNavisionWsZEN
         [DataMember(EmitDefaultValue = false, Order = 19)] public string DateReception_PSR { get; set; }
         [DataMember(EmitDefaultValue = false, Order = 20)] public string DateReception_TDS { get; set; }
         [DataMember(EmitDefaultValue = false, Order = 21)] public string Message { get; set; }
-        [DataMember(EmitDefaultValue = false, Order = 22)] public List<ProxyNavisionWsZEN.Variants> declinaisons { get; set; }
-        [DataMember(EmitDefaultValue = false, Order = 23)] public List<Prices> SalesPrice { get; set; }
+        [DataMember(EmitDefaultValue = false, Order = 22)] public string date_injection { get; set; }
+
+        [DataMember(EmitDefaultValue = false, Order = 23)] public List<ProxyNavisionWsZEN.Variants> declinaisons { get; set; }
+        [DataMember(EmitDefaultValue = false, Order = 24)] public List<Prices> SalesPrice { get; set; }
     }
 }

@@ -17,14 +17,12 @@ namespace ProxyNavisionWsZEN
     [ServiceContract]
     public interface IService1
     {
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "order/GetPostedOrderReturn/")]
+        List<WS_PostedorderResult1> GetPostedOrderreturn(WS_OrderRequest1 request);
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "order/GetOrderReturn/")]
         List<WS_orderResult1> GetOrderreturn(WS_OrderRequest1 request);
-
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "order/GetOrder/")]
         List<WS_orderResult1> GetOrder(WS_OrderRequest1 request);
-
-
-
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "AddCustomer/")]
         WS_CustomerResult AddCustomer(WS_CustomerRequest request);
         [WebInvoke(Method = "PATCH", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "ModifyCustomer/")]
@@ -58,21 +56,17 @@ namespace ProxyNavisionWsZEN
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "AddTransfertOrder/")]
         string AddTransfertOrder(string IdCompany,string Transfer_from_Code ,string Transfer_to_Code,string OrderNo, List<Transfert_list> Transfert_list);
         [OperationContract]
-        [WebInvoke(Method = "POST",
-                   UriTemplate = "CreateCoupon",
-                   RequestFormat = WebMessageFormat.Json,
-                   ResponseFormat = WebMessageFormat.Json,
-                   BodyStyle = WebMessageBodyStyle.Bare)]
+        [WebInvoke(Method = "POST",UriTemplate = "CreateCoupon",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,BodyStyle = WebMessageBodyStyle.Bare)]
         CouponResult CreateCoupon(CouponRequest request);
-        [WebGet(UriTemplate = "GetCoupon?CustomerCodeErp={CustomerCodeErp}&CodeCoupon={CodeCoupon}", ResponseFormat = WebMessageFormat.Json)]
-        WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon);
-        [WebInvoke(
-    Method = "PATCH",
-    UriTemplate = "UpdateCoupon",
-    RequestFormat = WebMessageFormat.Json,
-    ResponseFormat = WebMessageFormat.Json,
-    BodyStyle = WebMessageBodyStyle.Bare)]
-         ws_result UpdateCoupon(WS_UpdateCouponRequest request);
+        [WebGet(UriTemplate = "GetCoupon?CustomerCodeErp={CustomerCodeErp}&CodeCoupon={CodeCoupon}&phoneNumber={phoneNumber}", ResponseFormat = WebMessageFormat.Json)]
+        WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon, string phoneNumber);
+        [WebInvoke(Method = "PATCH",UriTemplate = "UpdateCoupon",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,BodyStyle = WebMessageBodyStyle.Bare)]
+        ws_result UpdateCoupon(WS_UpdateCouponRequest request);
+        [WebGet(UriTemplate = "gettierstable?type={type}&IdCompany={IdCompany}&created_date={created_date}&created_end={created_end}&updated_start={updated_start}&updated_end={updated_end}",ResponseFormat = WebMessageFormat.Json)]
+        List<WS_Tiers> gettierstable(string type,string IdCompany,string created_date,string created_end,string updated_start,string updated_end);
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "SimulateCart/")]
+        WS_CartResult SimuateCart(Cart cart,  List<Cart_list> cart_list);
+
 
     }
 }

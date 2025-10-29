@@ -50,14 +50,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -249,13 +249,13 @@ namespace ProxyNavisionWsZEN
                 if (error is ArgumentException argumentException)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "500";
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "500";
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -336,13 +336,13 @@ namespace ProxyNavisionWsZEN
                 if (error is ArgumentException argumentException)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "500";
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "500";
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -387,12 +387,24 @@ namespace ProxyNavisionWsZEN
                     Customer.Posting_Group = navCustomer.Customers.ElementAt(i).Posting_Group;
                     Customer.City = navCustomer.Customers.ElementAt(i).City;
                     Customer.Code_postal = navCustomer.Customers.ElementAt(i).Code_postal;
-                    DateTime parsedDate = DateTime.ParseExact(navCustomer.Customers.ElementAt(i).Date_Created, "dd/MM/yy", CultureInfo.InvariantCulture);
+                    var acceptedDateTimeFormats = new[] { "MM/dd/yy", "MM/dd/yyyy" };
 
-                    Customer.Date_Created = parsedDate.ToString();
-                    DateTime parsedDate2 = DateTime.ParseExact(navCustomer.Customers.ElementAt(i).Last_Date_Modified, "dd/MM/yy", CultureInfo.InvariantCulture);
+                    Customer.Date_Created = navCustomer.Customers.ElementAt(i).Date_Created;
 
-                    Customer.Last_Date_Modified = parsedDate2.ToString();
+                    if (DateTime.TryParseExact(Customer.Date_Created, acceptedDateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime))
+                    {
+                        Customer.Date_Created = parsedDateTime.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    }
+                    
+                    var acceptedDateTimeFormats2 = new[] { "MM/dd/yy", "MM/dd/yyyy" };
+
+                    Customer.Last_Date_Modified = navCustomer.Customers.ElementAt(i).Last_Date_Modified;
+
+                    if (DateTime.TryParseExact(Customer.Last_Date_Modified, acceptedDateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime2))
+                    {
+                        Customer.Last_Date_Modified = parsedDateTime2.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    }
+
                     Customer.pays = navCustomer.Customers.ElementAt(i).pays.FirstOrDefault();
                     Customers.Add(Customer);
                 }
@@ -406,14 +418,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -469,14 +481,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -546,14 +558,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -670,14 +682,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -814,14 +826,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -861,14 +873,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else
@@ -908,14 +920,14 @@ namespace ProxyNavisionWsZEN
                 JObject jsonResponse = new JObject();
                 if (error is ArgumentException argumentException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = argumentException.Message;
                 }
                 else if (error is SoapException soapException)
                 {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
                     jsonResponse["Message"] = soapException.Message;
                 }
                 else

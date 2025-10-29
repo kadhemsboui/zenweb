@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\KSBOUI\Desktop\APIZENB2C</_PublishTargetUrl>
-    <History>True|2025-10-21T18:40:06.6489852Z;True|2025-10-21T17:15:16.4106049+01:00;True|2025-10-19T21:16:38.7194987+01:00;True|2025-10-17T17:49:18.0865022+01:00;True|2025-09-19T18:03:36.5036394+01:00;True|2025-09-19T17:08:26.3647703+01:00;True|2025-09-19T17:07:06.2171997+01:00;True|2025-09-19T16:30:48.4163407+01:00;True|2025-09-19T16:28:24.6762245+01:00;True|2025-09-11T17:44:33.1965277+01:00;True|2025-09-10T17:43:22.5769758+01:00;True|2025-09-10T17:43:09.7306120+01:00;True|2025-09-08T15:20:27.2129564+01:00;True|2025-09-08T15:19:27.1400140+01:00;True|2025-09-08T11:57:32.8966249+01:00;True|2025-09-08T11:04:58.4484395+01:00;</History>
+    <History>True|2025-10-29T11:33:44.0545260Z;True|2025-10-24T12:35:46.2997696+01:00;True|2025-10-21T19:40:06.6489852+01:00;True|2025-10-21T17:15:16.4106049+01:00;True|2025-10-19T21:16:38.7194987+01:00;True|2025-10-17T17:49:18.0865022+01:00;True|2025-09-19T18:03:36.5036394+01:00;True|2025-09-19T17:08:26.3647703+01:00;True|2025-09-19T17:07:06.2171997+01:00;True|2025-09-19T16:30:48.4163407+01:00;True|2025-09-19T16:28:24.6762245+01:00;True|2025-09-11T17:44:33.1965277+01:00;True|2025-09-10T17:43:22.5769758+01:00;True|2025-09-10T17:43:09.7306120+01:00;True|2025-09-08T15:20:27.2129564+01:00;True|2025-09-08T15:19:27.1400140+01:00;True|2025-09-08T11:57:32.8966249+01:00;True|2025-09-08T11:04:58.4484395+01:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -139,10 +139,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/13/2012 13:19:34</publishTime>
     </File>
     <File Include="bin/ProxyNavisionWsZEN.dll">
-      <publishTime>10/21/2025 19:40:06</publishTime>
+      <publishTime>10/29/2025 12:32:14</publishTime>
     </File>
     <File Include="bin/ProxyNavisionWsZEN.pdb">
-      <publishTime>10/21/2025 19:40:06</publishTime>
+      <publishTime>10/29/2025 12:32:14</publishTime>
     </File>
     <File Include="bin/ProxyNavisionWsZEN.XmlSerializers.dll">
       <publishTime>09/08/2025 11:04:56</publishTime>
@@ -202,73 +202,79 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/09/2025 10:44:23</publishTime>
     </File>
     <File Include="Web References/API/Attribute.datasource">
-      <publishTime>10/19/2025 20:57:51</publishTime>
+      <publishTime>10/29/2025 12:06:29</publishTime>
     </File>
     <File Include="Web References/API/Card.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Category.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Categoryparent.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Company.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Contact.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Coupon.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Coupons.datasource">
       <publishTime>09/10/2025 17:43:19</publishTime>
     </File>
     <File Include="Web References/API/Customer.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Inventories.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Inventoriesb2c.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Items.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Itemsb2c.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Location.datasource">
-      <publishTime>10/19/2025 20:57:51</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Order.datasource">
-      <publishTime>10/19/2025 20:57:51</publishTime>
+      <publishTime>10/29/2025 12:06:29</publishTime>
+    </File>
+    <File Include="Web References/API/Ordertemp.datasource">
+      <publishTime>10/29/2025 12:06:29</publishTime>
     </File>
     <File Include="Web References/API/Parent.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
+    </File>
+    <File Include="Web References/API/Psheaders.datasource">
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Sales.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Season.datasource">
-      <publishTime>10/19/2025 20:57:51</publishTime>
+      <publishTime>10/29/2025 12:06:29</publishTime>
     </File>
     <File Include="Web References/API/sheaders.datasource">
-      <publishTime>10/19/2025 20:57:51</publishTime>
+      <publishTime>10/29/2025 12:06:29</publishTime>
     </File>
     <File Include="Web References/API/transaction.datasource">
-      <publishTime>10/19/2025 20:57:51</publishTime>
+      <publishTime>10/29/2025 12:06:29</publishTime>
     </File>
     <File Include="Web References/API/TransferLine.datasource">
-      <publishTime>10/19/2025 20:57:52</publishTime>
+      <publishTime>10/29/2025 12:06:30</publishTime>
     </File>
     <File Include="Web References/API/Vendor.datasource">
-      <publishTime>10/19/2025 20:57:51</publishTime>
+      <publishTime>10/29/2025 12:06:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/17/2025 17:49:17</publishTime>
+      <publishTime>10/29/2025 12:33:38</publishTime>
     </File>
   </ItemGroup>
 </Project>

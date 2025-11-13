@@ -14,12 +14,12 @@
 #pragma warning disable 1591
 
 namespace ProxyNavisionWsZEN.API {
-    using System.Diagnostics;
     using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    using System.Web.Services.Protocols;
-    using System.Web.Services;
     
     
     /// <remarks/>
@@ -2466,26 +2466,29 @@ namespace ProxyNavisionWsZEN.API {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:simulatecart", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="simulatecart_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string simulatecart(ref Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
+        public string simulatecart(ref scart ecom_Cart, ref Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
             object[] results = this.Invoke("simulatecart", new object[] {
+                        ecom_Cart,
                         ecom_Order_XML,
                         customerCodeErp,
                         location});
-            ecom_Order_XML = ((Ordertemp)(results[1]));
+            ecom_Cart = ((scart)(results[1]));
+            ecom_Order_XML = ((Ordertemp)(results[2]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void simulatecartAsync(Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
-            this.simulatecartAsync(ecom_Order_XML, customerCodeErp, location, null);
+        public void simulatecartAsync(scart ecom_Cart, Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
+            this.simulatecartAsync(ecom_Cart, ecom_Order_XML, customerCodeErp, location, null);
         }
         
         /// <remarks/>
-        public void simulatecartAsync(Ordertemp ecom_Order_XML, string customerCodeErp, string location, object userState) {
+        public void simulatecartAsync(scart ecom_Cart, Ordertemp ecom_Order_XML, string customerCodeErp, string location, object userState) {
             if ((this.simulatecartOperationCompleted == null)) {
                 this.simulatecartOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsimulatecartOperationCompleted);
             }
             this.InvokeAsync("simulatecart", new object[] {
+                        ecom_Cart,
                         ecom_Order_XML,
                         customerCodeErp,
                         location}, this.simulatecartOperationCompleted, userState);
@@ -2744,6 +2747,74 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.ordersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52025")]
+    public partial class cart {
+        
+        private string barcodeField;
+        
+        private string amountField;
+        
+        /// <remarks/>
+        public string barcode {
+            get {
+                return this.barcodeField;
+            }
+            set {
+                this.barcodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52025")]
+    public partial class scart {
+        
+        private cart[] cartField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cart")]
+        public cart[] cart {
+            get {
+                return this.cartField;
+            }
+            set {
+                this.cartField = value;
             }
         }
         
@@ -4511,10 +4582,6 @@ namespace ProxyNavisionWsZEN.API {
         
         private string[] priceTTCField;
         
-        private string[] debutField;
-        
-        private string[] finField;
-        
         private string[] discountPercentageField;
         
         private string[] validRetailPriceField;
@@ -4573,28 +4640,6 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.priceTTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("debut")]
-        public string[] debut {
-            get {
-                return this.debutField;
-            }
-            set {
-                this.debutField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("fin")]
-        public string[] fin {
-            get {
-                return this.finField;
-            }
-            set {
-                this.finField = value;
             }
         }
         
@@ -4808,9 +4853,9 @@ namespace ProxyNavisionWsZEN.API {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52013")]
     public partial class Itemb2c {
         
-        private string[] serieTypeField;
-        
         private string noField;
+        
+        private int numerPieceField;
         
         private string descriptionField;
         
@@ -4824,8 +4869,6 @@ namespace ProxyNavisionWsZEN.API {
         
         private string coupeField;
         
-        private string divisionField;
-        
         private string groupeField;
         
         private string codeGroupeField;
@@ -4834,12 +4877,6 @@ namespace ProxyNavisionWsZEN.API {
         
         private string definitionField;
         
-        private string poidsField;
-        
-        private string code_marqueField;
-        
-        private string sexeField;
-        
         private string created_atField;
         
         private string updated_atField;
@@ -4847,8 +4884,6 @@ namespace ProxyNavisionWsZEN.API {
         private string[] fournisseurField;
         
         private string gS1Field;
-        
-        private int numerPieceField;
         
         private string divisionCommercialeField;
         
@@ -4867,23 +4902,22 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("serieType")]
-        public string[] serieType {
-            get {
-                return this.serieTypeField;
-            }
-            set {
-                this.serieTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
         public string No {
             get {
                 return this.noField;
             }
             set {
                 this.noField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int numerPiece {
+            get {
+                return this.numerPieceField;
+            }
+            set {
+                this.numerPieceField = value;
             }
         }
         
@@ -4950,16 +4984,6 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
-        public string division {
-            get {
-                return this.divisionField;
-            }
-            set {
-                this.divisionField = value;
-            }
-        }
-        
-        /// <remarks/>
         public string Groupe {
             get {
                 return this.groupeField;
@@ -4996,36 +5020,6 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.definitionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Poids {
-            get {
-                return this.poidsField;
-            }
-            set {
-                this.poidsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string code_marque {
-            get {
-                return this.code_marqueField;
-            }
-            set {
-                this.code_marqueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string sexe {
-            get {
-                return this.sexeField;
-            }
-            set {
-                this.sexeField = value;
             }
         }
         
@@ -5067,16 +5061,6 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.gS1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int numerPiece {
-            get {
-                return this.numerPieceField;
-            }
-            set {
-                this.numerPieceField = value;
             }
         }
         
@@ -7323,10 +7307,18 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        public scart ecom_Cart {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((scart)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
         public Ordertemp ecom_Order_XML {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Ordertemp)(this.results[1]));
+                return ((Ordertemp)(this.results[2]));
             }
         }
     }

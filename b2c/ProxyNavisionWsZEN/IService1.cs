@@ -58,8 +58,8 @@ namespace ProxyNavisionWsZEN
         [OperationContract]
         [WebInvoke(Method = "POST",UriTemplate = "CreateCoupon",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,BodyStyle = WebMessageBodyStyle.Bare)]
         CouponResult CreateCoupon(CouponRequest request);
-        [WebGet(UriTemplate = "GetCoupon?CustomerCodeErp={CustomerCodeErp}&CodeCoupon={CodeCoupon}&phoneNumber={phoneNumber}", ResponseFormat = WebMessageFormat.Json)]
-        WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon, string phoneNumber);
+        [WebGet(UriTemplate = "GetCoupon?CustomerCodeErp={CustomerCodeErp}&CodeCoupon={CodeCoupon}&phoneNumber={phoneNumber}&IdCompany={IdCompany}", ResponseFormat = WebMessageFormat.Json)]
+        WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon, string phoneNumber,string  IdCompany);
         [WebInvoke(Method = "PATCH",UriTemplate = "UpdateCoupon",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,BodyStyle = WebMessageBodyStyle.Bare)]
         ws_result UpdateCoupon(WS_UpdateCouponRequest request);
         [WebGet(UriTemplate = "gettierstable?type={type}&IdCompany={IdCompany}&created_date={created_date}&created_end={created_end}&updated_start={updated_start}&updated_end={updated_end}",ResponseFormat = WebMessageFormat.Json)]

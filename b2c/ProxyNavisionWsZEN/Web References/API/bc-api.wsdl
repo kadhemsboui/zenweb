@@ -182,8 +182,6 @@
           <element minOccurs="1" maxOccurs="unbounded" name="DiscountedPromo" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="PriceHT" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="PriceTTC" type="string" />
-          <element minOccurs="1" maxOccurs="unbounded" name="debut" type="string" />
-          <element minOccurs="1" maxOccurs="unbounded" name="fin" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="DiscountPercentage" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="ValidRetailPrice" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="prix_negoce" type="string" />
@@ -191,27 +189,22 @@
       </complexType>
       <complexType name="Itemb2c">
         <sequence>
-          <element minOccurs="1" maxOccurs="unbounded" name="serieType" type="string" />
           <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="numerPiece" type="int" />
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="code_saison" type="string" />
           <element minOccurs="1" maxOccurs="1" name="date_injection" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="saison" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Barcode" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Coupe" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="division" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Groupe" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CodeGroupe" type="string" />
           <element minOccurs="1" maxOccurs="1" name="famille" type="string" />
           <element minOccurs="1" maxOccurs="1" name="definition" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="Poids" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="code_marque" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="sexe" type="string" />
           <element minOccurs="1" maxOccurs="1" name="created_at" type="string" />
           <element minOccurs="1" maxOccurs="1" name="updated_at" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Fournisseur" type="string" />
           <element minOccurs="1" maxOccurs="1" name="GS1" type="string" />
-          <element minOccurs="1" maxOccurs="1" default="0" name="numerPiece" type="int" />
           <element minOccurs="1" maxOccurs="1" name="DivisionCommerciale" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DateReception_PSR" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DateReception_TDS" type="string" />
@@ -510,6 +503,20 @@
         </sequence>
       </complexType>
       <element name="Attribute" type="tns:Attribute" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52025" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52025" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="cart">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="amount" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="scart" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="cart" type="tns:cart" />
+        </sequence>
+      </complexType>
+      <element name="scart" type="tns:scart" />
     </schema>
     <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x52024" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x52024" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Orders">
@@ -1409,7 +1416,8 @@
       <element name="simulatecart">
         <complexType>
           <sequence>
-            <element xmlns:q52="urn:microsoft-dynamics-nav/xmlports/x52024" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q52:Ordertemp" />
+            <element xmlns:q52="urn:microsoft-dynamics-nav/xmlports/x52025" minOccurs="1" maxOccurs="1" name="ecom_Cart" type="q52:scart" />
+            <element xmlns:q53="urn:microsoft-dynamics-nav/xmlports/x52024" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q53:Ordertemp" />
             <element minOccurs="1" maxOccurs="1" name="customerCodeErp" type="string" />
             <element minOccurs="1" maxOccurs="1" name="location" type="string" />
           </sequence>
@@ -1419,7 +1427,8 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q53="urn:microsoft-dynamics-nav/xmlports/x52024" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q53:Ordertemp" />
+            <element xmlns:q54="urn:microsoft-dynamics-nav/xmlports/x52025" minOccurs="1" maxOccurs="1" name="ecom_Cart" type="q54:scart" />
+            <element xmlns:q55="urn:microsoft-dynamics-nav/xmlports/x52024" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q55:Ordertemp" />
           </sequence>
         </complexType>
       </element>
@@ -2416,7 +2425,7 @@
   </binding>
   <service name="API">
     <port name="API_Port" binding="tns:API_Binding">
-      <address location="https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/ZEDD/Codeunit/API?=wsdl&amp;tenant=msweua5825t85658057&amp;aid=FIN" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_uat/WS/ZEDD/Codeunit/API?=wsdl&amp;tenant=msweua5825t40930674&amp;aid=FIN" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

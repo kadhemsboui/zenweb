@@ -33,8 +33,9 @@ namespace ProxyNavisionWsZEN
 
         [DataMember(Order = 9)]
         public string IsUsed { get; set; }
-
         [DataMember(Order = 10)]
+        public string Price_Group { get; set; }
+        [DataMember(Order = 11)]
         public List<CouponProduct> ApplicableProducts { get; set; }
     }
 

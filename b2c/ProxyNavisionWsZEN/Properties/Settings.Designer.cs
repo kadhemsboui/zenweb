@@ -12,7 +12,7 @@ namespace ProxyNavisionWsZEN.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -37,7 +37,7 @@ namespace ProxyNavisionWsZEN.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e568" +
-            "1/ZEDD_uat/WS/ZEDD/Codeunit/API?=wsdl&tenant=msweua5825t40930674&aid=FIN")]
+            "1/GROUPZEN/WS/ZEDD/Codeunit/API?=wsdl&tenant=msweua5825t63263470&aid=FIN")]
         public string ProxyNavisionWsZEN_API_API {
             get {
                 return ((string)(this["ProxyNavisionWsZEN_API_API"]));

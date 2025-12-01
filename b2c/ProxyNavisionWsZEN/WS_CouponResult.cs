@@ -44,8 +44,9 @@ public class WS_Coupon
 
     [DataMember(Order = 10)]
     public string BarCode { get; set; }  // first barcode if exists
-
     [DataMember(Order = 11)]
+    public string Price_Group { get; set; }
+    [DataMember(Order = 12)]
     public List<WS_Product> ApplicableProducts { get; set; } = new List<WS_Product>();
 }
 

@@ -14,12 +14,12 @@
 #pragma warning disable 1591
 
 namespace ProxyNavisionWsZEN.API {
-    using System;
-    using System.Web.Services;
     using System.Diagnostics;
-    using System.Web.Services.Protocols;
+    using System;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Web.Services.Protocols;
+    using System.Web.Services;
     
     
     /// <remarks/>
@@ -721,8 +721,8 @@ namespace ProxyNavisionWsZEN.API {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:AddOrModifyOrderLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="AddOrModifyOrderLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void AddOrModifyOrderLine(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, int lineno, decimal discount, string company) {
-            this.Invoke("AddOrModifyOrderLine", new object[] {
+        public void AddOrModifyOrderLine(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, ref int lineno, decimal discount, string company) {
+            object[] results = this.Invoke("AddOrModifyOrderLine", new object[] {
                         itemNo,
                         barcode,
                         variantNo,
@@ -735,6 +735,7 @@ namespace ProxyNavisionWsZEN.API {
                         lineno,
                         discount,
                         company});
+            lineno = ((int)(results[0]));
         }
         
         /// <remarks/>
@@ -765,7 +766,7 @@ namespace ProxyNavisionWsZEN.API {
         private void OnAddOrModifyOrderLineOperationCompleted(object arg) {
             if ((this.AddOrModifyOrderLineCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AddOrModifyOrderLineCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.AddOrModifyOrderLineCompleted(this, new AddOrModifyOrderLineCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1665,7 +1666,7 @@ namespace ProxyNavisionWsZEN.API {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:create_coupon", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="create_coupon_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string create_coupon(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport) {
+        public string create_coupon(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport, string price_Group) {
             object[] results = this.Invoke("create_coupon", new object[] {
                         codecoupon,
                         description,
@@ -1675,17 +1676,18 @@ namespace ProxyNavisionWsZEN.API {
                         activate,
                         validity,
                         isUsed,
-                        linexmlport});
+                        linexmlport,
+                        price_Group});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void create_couponAsync(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport) {
-            this.create_couponAsync(codecoupon, description, membre, montant, type, activate, validity, isUsed, linexmlport, null);
+        public void create_couponAsync(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport, string price_Group) {
+            this.create_couponAsync(codecoupon, description, membre, montant, type, activate, validity, isUsed, linexmlport, price_Group, null);
         }
         
         /// <remarks/>
-        public void create_couponAsync(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport, object userState) {
+        public void create_couponAsync(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport, string price_Group, object userState) {
             if ((this.create_couponOperationCompleted == null)) {
                 this.create_couponOperationCompleted = new System.Threading.SendOrPostCallback(this.Oncreate_couponOperationCompleted);
             }
@@ -1698,7 +1700,8 @@ namespace ProxyNavisionWsZEN.API {
                         activate,
                         validity,
                         isUsed,
-                        linexmlport}, this.create_couponOperationCompleted, userState);
+                        linexmlport,
+                        price_Group}, this.create_couponOperationCompleted, userState);
         }
         
         private void Oncreate_couponOperationCompleted(object arg) {
@@ -2466,14 +2469,13 @@ namespace ProxyNavisionWsZEN.API {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:simulatecart", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="simulatecart_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string simulatecart(ref scart ecom_Cart, ref Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
+        public string simulatecart(ref scart ecom_Cart, Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
             object[] results = this.Invoke("simulatecart", new object[] {
                         ecom_Cart,
                         ecom_Order_XML,
                         customerCodeErp,
                         location});
             ecom_Cart = ((scart)(results[1]));
-            ecom_Order_XML = ((Ordertemp)(results[2]));
             return ((string)(results[0]));
         }
         
@@ -2772,7 +2774,13 @@ namespace ProxyNavisionWsZEN.API {
         
         private string barcodeField;
         
+        private string prediscountField;
+        
         private string amountField;
+        
+        private string amountPField;
+        
+        private string discountamountField;
         
         /// <remarks/>
         public string barcode {
@@ -2785,12 +2793,42 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        public string prediscount {
+            get {
+                return this.prediscountField;
+            }
+            set {
+                this.prediscountField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string amount {
             get {
                 return this.amountField;
             }
             set {
                 this.amountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string AmountP {
+            get {
+                return this.amountPField;
+            }
+            set {
+                this.amountPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string discountamount {
+            get {
+                return this.discountamountField;
+            }
+            set {
+                this.discountamountField = value;
             }
         }
     }
@@ -3760,6 +3798,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private string customerCodeErpField;
         
+        private string price_GroupField;
+        
         private string[] isActiveField;
         
         private string[] isusedField;
@@ -3825,6 +3865,16 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.customerCodeErpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Price_Group {
+            get {
+                return this.price_GroupField;
+            }
+            set {
+                this.price_GroupField = value;
             }
         }
         
@@ -6315,7 +6365,29 @@ namespace ProxyNavisionWsZEN.API {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
-    public delegate void AddOrModifyOrderLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void AddOrModifyOrderLineCompletedEventHandler(object sender, AddOrModifyOrderLineCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AddOrModifyOrderLineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AddOrModifyOrderLineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int lineno {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
@@ -7311,14 +7383,6 @@ namespace ProxyNavisionWsZEN.API {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((scart)(this.results[1]));
-            }
-        }
-        
-        /// <remarks/>
-        public Ordertemp ecom_Order_XML {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Ordertemp)(this.results[2]));
             }
         }
     }

@@ -349,6 +349,7 @@
           <element minOccurs="1" maxOccurs="1" name="validity" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CustomerCodeErp" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Price_Group" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="isActive" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="isused" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Coup" type="tns:Coup" />
@@ -508,7 +509,10 @@
       <complexType name="cart">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="prediscount" type="string" />
           <element minOccurs="1" maxOccurs="1" name="amount" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="AmountP" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="discountamount" type="string" />
         </sequence>
       </complexType>
       <complexType name="scart" mixed="true">
@@ -690,7 +694,9 @@
       </element>
       <element name="AddOrModifyOrderLine_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="lineno" type="int" />
+          </sequence>
         </complexType>
       </element>
       <element name="AddOrModifySalesReturnB2C">
@@ -1042,6 +1048,7 @@
             <element minOccurs="1" maxOccurs="1" name="validity" type="string" />
             <element minOccurs="1" maxOccurs="1" name="isUsed" type="string" />
             <element xmlns:q9="urn:microsoft-dynamics-nav/xmlports/x52018" minOccurs="1" maxOccurs="1" name="linexmlport" type="q9:Couponlines" />
+            <element minOccurs="1" maxOccurs="1" name="price_Group" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -1428,7 +1435,6 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
             <element xmlns:q54="urn:microsoft-dynamics-nav/xmlports/x52025" minOccurs="1" maxOccurs="1" name="ecom_Cart" type="q54:scart" />
-            <element xmlns:q55="urn:microsoft-dynamics-nav/xmlports/x52024" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q55:Ordertemp" />
           </sequence>
         </complexType>
       </element>
@@ -2425,7 +2431,7 @@
   </binding>
   <service name="API">
     <port name="API_Port" binding="tns:API_Binding">
-      <address location="https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_uat/WS/ZEDD/Codeunit/API?=wsdl&amp;tenant=msweua5825t40930674&amp;aid=FIN" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/ZEDD/Codeunit/API?=wsdl&amp;tenant=msweua5825t63263470&amp;aid=FIN" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

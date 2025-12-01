@@ -14,12 +14,12 @@
 #pragma warning disable 1591
 
 namespace ProxyNavisionWsZEN.API {
-    using System.Diagnostics;
     using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    using System.Web.Services.Protocols;
-    using System.Web.Services;
     
     
     /// <remarks/>
@@ -77,6 +77,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private System.Threading.SendOrPostCallback applicatetotaldiscountOperationCompleted;
         
+        private System.Threading.SendOrPostCallback calculateamountOperationCompleted;
+        
         private System.Threading.SendOrPostCallback create_couponOperationCompleted;
         
         private System.Threading.SendOrPostCallback getCardOperationCompleted;
@@ -98,6 +100,8 @@ namespace ProxyNavisionWsZEN.API {
         private System.Threading.SendOrPostCallback getParentOperationCompleted;
         
         private System.Threading.SendOrPostCallback getParentcategoryOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getPostedorderreturnb2cOperationCompleted;
         
         private System.Threading.SendOrPostCallback getSalesOperationCompleted;
         
@@ -122,6 +126,8 @@ namespace ProxyNavisionWsZEN.API {
         private System.Threading.SendOrPostCallback gettierstableOperationCompleted;
         
         private System.Threading.SendOrPostCallback isusedOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback simulatecartOperationCompleted;
         
         private System.Threading.SendOrPostCallback updatorderOperationCompleted;
         
@@ -236,6 +242,9 @@ namespace ProxyNavisionWsZEN.API {
         public event applicatetotaldiscountCompletedEventHandler applicatetotaldiscountCompleted;
         
         /// <remarks/>
+        public event calculateamountCompletedEventHandler calculateamountCompleted;
+        
+        /// <remarks/>
         public event create_couponCompletedEventHandler create_couponCompleted;
         
         /// <remarks/>
@@ -267,6 +276,9 @@ namespace ProxyNavisionWsZEN.API {
         
         /// <remarks/>
         public event getParentcategoryCompletedEventHandler getParentcategoryCompleted;
+        
+        /// <remarks/>
+        public event getPostedorderreturnb2cCompletedEventHandler getPostedorderreturnb2cCompleted;
         
         /// <remarks/>
         public event getSalesCompletedEventHandler getSalesCompleted;
@@ -303,6 +315,9 @@ namespace ProxyNavisionWsZEN.API {
         
         /// <remarks/>
         public event isusedCompletedEventHandler isusedCompleted;
+        
+        /// <remarks/>
+        public event simulatecartCompletedEventHandler simulatecartCompleted;
         
         /// <remarks/>
         public event updatorderCompletedEventHandler updatorderCompleted;
@@ -706,7 +721,7 @@ namespace ProxyNavisionWsZEN.API {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:AddOrModifyOrderLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="AddOrModifyOrderLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void AddOrModifyOrderLine(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, int lineno, decimal discount) {
+        public void AddOrModifyOrderLine(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, int lineno, decimal discount, string company) {
             this.Invoke("AddOrModifyOrderLine", new object[] {
                         itemNo,
                         barcode,
@@ -718,16 +733,17 @@ namespace ProxyNavisionWsZEN.API {
                         location,
                         modify,
                         lineno,
-                        discount});
+                        discount,
+                        company});
         }
         
         /// <remarks/>
-        public void AddOrModifyOrderLineAsync(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, int lineno, decimal discount) {
-            this.AddOrModifyOrderLineAsync(itemNo, barcode, variantNo, quantity, orderNo, id, unitprice, location, modify, lineno, discount, null);
+        public void AddOrModifyOrderLineAsync(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, int lineno, decimal discount, string company) {
+            this.AddOrModifyOrderLineAsync(itemNo, barcode, variantNo, quantity, orderNo, id, unitprice, location, modify, lineno, discount, company, null);
         }
         
         /// <remarks/>
-        public void AddOrModifyOrderLineAsync(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, int lineno, decimal discount, object userState) {
+        public void AddOrModifyOrderLineAsync(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, int lineno, decimal discount, string company, object userState) {
             if ((this.AddOrModifyOrderLineOperationCompleted == null)) {
                 this.AddOrModifyOrderLineOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddOrModifyOrderLineOperationCompleted);
             }
@@ -742,7 +758,8 @@ namespace ProxyNavisionWsZEN.API {
                         location,
                         modify,
                         lineno,
-                        discount}, this.AddOrModifyOrderLineOperationCompleted, userState);
+                        discount,
+                        company}, this.AddOrModifyOrderLineOperationCompleted, userState);
         }
         
         private void OnAddOrModifyOrderLineOperationCompleted(object arg) {
@@ -1616,6 +1633,36 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:calculateamount", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="calculateamount_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public decimal calculateamount(string documentno) {
+            object[] results = this.Invoke("calculateamount", new object[] {
+                        documentno});
+            return ((decimal)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void calculateamountAsync(string documentno) {
+            this.calculateamountAsync(documentno, null);
+        }
+        
+        /// <remarks/>
+        public void calculateamountAsync(string documentno, object userState) {
+            if ((this.calculateamountOperationCompleted == null)) {
+                this.calculateamountOperationCompleted = new System.Threading.SendOrPostCallback(this.OncalculateamountOperationCompleted);
+            }
+            this.InvokeAsync("calculateamount", new object[] {
+                        documentno}, this.calculateamountOperationCompleted, userState);
+        }
+        
+        private void OncalculateamountOperationCompleted(object arg) {
+            if ((this.calculateamountCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.calculateamountCompleted(this, new calculateamountCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:create_coupon", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="create_coupon_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string create_coupon(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport) {
@@ -1973,6 +2020,41 @@ namespace ProxyNavisionWsZEN.API {
             if ((this.getParentcategoryCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getParentcategoryCompleted(this, new getParentcategoryCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:getPostedorderreturnb2c", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="getPostedorderreturnb2c_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void getPostedorderreturnb2c(string refcmd, string updateStart, string updateEnd, ref Psheaders orderxml) {
+            object[] results = this.Invoke("getPostedorderreturnb2c", new object[] {
+                        refcmd,
+                        updateStart,
+                        updateEnd,
+                        orderxml});
+            orderxml = ((Psheaders)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPostedorderreturnb2cAsync(string refcmd, string updateStart, string updateEnd, Psheaders orderxml) {
+            this.getPostedorderreturnb2cAsync(refcmd, updateStart, updateEnd, orderxml, null);
+        }
+        
+        /// <remarks/>
+        public void getPostedorderreturnb2cAsync(string refcmd, string updateStart, string updateEnd, Psheaders orderxml, object userState) {
+            if ((this.getPostedorderreturnb2cOperationCompleted == null)) {
+                this.getPostedorderreturnb2cOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPostedorderreturnb2cOperationCompleted);
+            }
+            this.InvokeAsync("getPostedorderreturnb2c", new object[] {
+                        refcmd,
+                        updateStart,
+                        updateEnd,
+                        orderxml}, this.getPostedorderreturnb2cOperationCompleted, userState);
+        }
+        
+        private void OngetPostedorderreturnb2cOperationCompleted(object arg) {
+            if ((this.getPostedorderreturnb2cCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPostedorderreturnb2cCompleted(this, new getPostedorderreturnb2cCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2382,6 +2464,44 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:simulatecart", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="simulatecart_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string simulatecart(ref scart ecom_Cart, ref Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
+            object[] results = this.Invoke("simulatecart", new object[] {
+                        ecom_Cart,
+                        ecom_Order_XML,
+                        customerCodeErp,
+                        location});
+            ecom_Cart = ((scart)(results[1]));
+            ecom_Order_XML = ((Ordertemp)(results[2]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void simulatecartAsync(scart ecom_Cart, Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
+            this.simulatecartAsync(ecom_Cart, ecom_Order_XML, customerCodeErp, location, null);
+        }
+        
+        /// <remarks/>
+        public void simulatecartAsync(scart ecom_Cart, Ordertemp ecom_Order_XML, string customerCodeErp, string location, object userState) {
+            if ((this.simulatecartOperationCompleted == null)) {
+                this.simulatecartOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsimulatecartOperationCompleted);
+            }
+            this.InvokeAsync("simulatecart", new object[] {
+                        ecom_Cart,
+                        ecom_Order_XML,
+                        customerCodeErp,
+                        location}, this.simulatecartOperationCompleted, userState);
+        }
+        
+        private void OnsimulatecartOperationCompleted(object arg) {
+            if ((this.simulatecartCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.simulatecartCompleted(this, new simulatecartCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:updatorder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="updatorder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void updatorder(string refcmd, string reglement, string idstatus, string motif) {
             this.Invoke("updatorder", new object[] {
@@ -2570,6 +2690,154 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.motifField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Orders", Namespace="urn:microsoft-dynamics-nav/xmlports/x52024")]
+    public partial class Orders1 {
+        
+        private string barcodeField;
+        
+        private string quantityField;
+        
+        /// <remarks/>
+        public string Barcode {
+            get {
+                return this.barcodeField;
+            }
+            set {
+                this.barcodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52024")]
+    public partial class Ordertemp {
+        
+        private Orders1[] ordersField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Orders")]
+        public Orders1[] Orders {
+            get {
+                return this.ordersField;
+            }
+            set {
+                this.ordersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52025")]
+    public partial class cart {
+        
+        private string barcodeField;
+        
+        private string prediscountField;
+        
+        private string amountField;
+        
+        /// <remarks/>
+        public string barcode {
+            get {
+                return this.barcodeField;
+            }
+            set {
+                this.barcodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string prediscount {
+            get {
+                return this.prediscountField;
+            }
+            set {
+                this.prediscountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52025")]
+    public partial class scart {
+        
+        private cart[] cartField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cart")]
+        public cart[] cart {
+            get {
+                return this.cartField;
+            }
+            set {
+                this.cartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
             }
         }
     }
@@ -3502,6 +3770,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private string descriptionField;
         
+        private string customerCodeErpField;
+        
         private string[] isActiveField;
         
         private string[] isusedField;
@@ -3557,6 +3827,16 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CustomerCodeErp {
+            get {
+                return this.customerCodeErpField;
+            }
+            set {
+                this.customerCodeErpField = value;
             }
         }
         
@@ -3964,6 +4244,156 @@ namespace ProxyNavisionWsZEN.API {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52023")]
+    public partial class psline {
+        
+        private string barcodeField;
+        
+        private string quantityField;
+        
+        private string unitpriceField;
+        
+        /// <remarks/>
+        public string barcode {
+            get {
+                return this.barcodeField;
+            }
+            set {
+                this.barcodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string unitprice {
+            get {
+                return this.unitpriceField;
+            }
+            set {
+                this.unitpriceField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52023")]
+    public partial class Psheader {
+        
+        private string amount_TTCField;
+        
+        private string refField;
+        
+        private string updatedAtField;
+        
+        private string motifField;
+        
+        private psline[] pslineField;
+        
+        /// <remarks/>
+        public string Amount_TTC {
+            get {
+                return this.amount_TTCField;
+            }
+            set {
+                this.amount_TTCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string @ref {
+            get {
+                return this.refField;
+            }
+            set {
+                this.refField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string updatedAt {
+            get {
+                return this.updatedAtField;
+            }
+            set {
+                this.updatedAtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Motif {
+            get {
+                return this.motifField;
+            }
+            set {
+                this.motifField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("psline")]
+        public psline[] psline {
+            get {
+                return this.pslineField;
+            }
+            set {
+                this.pslineField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52023")]
+    public partial class Psheaders {
+        
+        private Psheader[] psheaderField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Psheader")]
+        public Psheader[] Psheader {
+            get {
+                return this.psheaderField;
+            }
+            set {
+                this.psheaderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52006")]
     public partial class Categoriesparent {
         
@@ -4164,10 +4594,6 @@ namespace ProxyNavisionWsZEN.API {
         
         private string[] priceTTCField;
         
-        private string[] debutField;
-        
-        private string[] finField;
-        
         private string[] discountPercentageField;
         
         private string[] validRetailPriceField;
@@ -4226,28 +4652,6 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.priceTTCField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("debut")]
-        public string[] debut {
-            get {
-                return this.debutField;
-            }
-            set {
-                this.debutField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("fin")]
-        public string[] fin {
-            get {
-                return this.finField;
-            }
-            set {
-                this.finField = value;
             }
         }
         
@@ -4461,9 +4865,9 @@ namespace ProxyNavisionWsZEN.API {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x52013")]
     public partial class Itemb2c {
         
-        private string[] serieTypeField;
-        
         private string noField;
+        
+        private int numerPieceField;
         
         private string descriptionField;
         
@@ -4477,8 +4881,6 @@ namespace ProxyNavisionWsZEN.API {
         
         private string coupeField;
         
-        private string divisionField;
-        
         private string groupeField;
         
         private string codeGroupeField;
@@ -4487,12 +4889,6 @@ namespace ProxyNavisionWsZEN.API {
         
         private string definitionField;
         
-        private string poidsField;
-        
-        private string code_marqueField;
-        
-        private string sexeField;
-        
         private string created_atField;
         
         private string updated_atField;
@@ -4500,8 +4896,6 @@ namespace ProxyNavisionWsZEN.API {
         private string[] fournisseurField;
         
         private string gS1Field;
-        
-        private int numerPieceField;
         
         private string divisionCommercialeField;
         
@@ -4520,23 +4914,22 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("serieType")]
-        public string[] serieType {
-            get {
-                return this.serieTypeField;
-            }
-            set {
-                this.serieTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
         public string No {
             get {
                 return this.noField;
             }
             set {
                 this.noField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int numerPiece {
+            get {
+                return this.numerPieceField;
+            }
+            set {
+                this.numerPieceField = value;
             }
         }
         
@@ -4603,16 +4996,6 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
-        public string division {
-            get {
-                return this.divisionField;
-            }
-            set {
-                this.divisionField = value;
-            }
-        }
-        
-        /// <remarks/>
         public string Groupe {
             get {
                 return this.groupeField;
@@ -4649,36 +5032,6 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.definitionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Poids {
-            get {
-                return this.poidsField;
-            }
-            set {
-                this.poidsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string code_marque {
-            get {
-                return this.code_marqueField;
-            }
-            set {
-                this.code_marqueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string sexe {
-            get {
-                return this.sexeField;
-            }
-            set {
-                this.sexeField = value;
             }
         }
         
@@ -4720,16 +5073,6 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.gS1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int numerPiece {
-            get {
-                return this.numerPieceField;
-            }
-            set {
-                this.numerPieceField = value;
             }
         }
         
@@ -6308,6 +6651,32 @@ namespace ProxyNavisionWsZEN.API {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void calculateamountCompletedEventHandler(object sender, calculateamountCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class calculateamountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal calculateamountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void create_couponCompletedEventHandler(object sender, create_couponCompletedEventArgs e);
     
     /// <remarks/>
@@ -6588,6 +6957,32 @@ namespace ProxyNavisionWsZEN.API {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Categoryparent)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void getPostedorderreturnb2cCompletedEventHandler(object sender, getPostedorderreturnb2cCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPostedorderreturnb2cCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPostedorderreturnb2cCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Psheaders orderxml {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Psheaders)(this.results[0]));
             }
         }
     }
@@ -6897,6 +7292,48 @@ namespace ProxyNavisionWsZEN.API {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void isusedCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void simulatecartCompletedEventHandler(object sender, simulatecartCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class simulatecartCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal simulatecartCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public scart ecom_Cart {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((scart)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
+        public Ordertemp ecom_Order_XML {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Ordertemp)(this.results[2]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]

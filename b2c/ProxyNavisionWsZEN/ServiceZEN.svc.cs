@@ -36,6 +36,8 @@ namespace ProxyNavisionWsZEN
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
                 WS_CartResult WS_orderResult = new WS_CartResult();
                 API.Ordertemp OrderXmlPort = new API.Ordertemp();
+                API.scart scart = new API.scart();
+
                 List<API.Orders1> lines = new List<API.Orders1>();
                 int id = 0;
                 if (cart_list != null)
@@ -60,10 +62,24 @@ namespace ProxyNavisionWsZEN
               
                 OrderXmlPort.Orders = lines.ToArray();
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + cart.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + cart.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
-                WS_orderResult.Message = mobile_Web_Services.simulatecart(ref OrderXmlPort, cart.CustomerCodeErp, cart.Location);
-
+                WS_orderResult.Message = mobile_Web_Services.simulatecart(ref scart, OrderXmlPort, cart.CustomerCodeErp, cart.Location);
+                Decimal discountt = 0;
+                if (scart != null && scart.cart != null)
+                {
+                    foreach (var c in scart.cart)
+                    {
+                        discountt = discountt + decimal.Parse(c.discountamount.Replace(".",","));
+                        WS_orderResult.CartLines.Add(new CartResultLine
+                        {
+                            Barcode = c.barcode,
+                            Amount = c.amount,
+                            DiscountPercentage=c.AmountP
+                        });
+                    }
+                }
+                WS_orderResult.DiscountAmount = discountt.ToString().Replace(",", ".");
                 return WS_orderResult;
             }
             catch (Exception error)
@@ -132,7 +148,7 @@ namespace ProxyNavisionWsZEN
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
                 ProxyNavisionWsZEN.API.Psheaders ItemsXML = new ProxyNavisionWsZEN.API.Psheaders();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string references = "";
@@ -294,7 +310,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Season season = new Season();
@@ -445,7 +461,7 @@ namespace ProxyNavisionWsZEN
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/"
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"
                                           + request.IdCompany + "/Codeunit/API";
 
                 mobile_Web_Services.UpdateCoupon(request.codeCoupon, request.isActive, request.isUsed);
@@ -482,7 +498,7 @@ namespace ProxyNavisionWsZEN
             }
         }
 
-        public WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon,string phoneNumber)
+        public WS_CouponResult GetCoupon(string CustomerCodeErp, string CodeCoupon,string phoneNumber ,string IdCompany)
         {
             try
             {
@@ -507,15 +523,11 @@ namespace ProxyNavisionWsZEN
 
                 // Step 1: Get all companies
                 ProxyNavisionWsZEN.API.Company navCompany = new ProxyNavisionWsZEN.API.Company();
-                mobile_Web_Services.getcompany(ref navCompany);
-
-                foreach (var company in navCompany.Companies)
-                {
-                    string idCompany = company.Name;
+               
 
                     ProxyNavisionWsZEN.API.Coupon navCoupon = new ProxyNavisionWsZEN.API.Coupon();
-                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/"
-                                              + idCompany + "/Codeunit/API";
+                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"
+                                              + IdCompany + "/Codeunit/API";
                     mobile_Web_Services.get_coupon(ref navCoupon, CustomerCodeErp, CodeCoupon, phoneNumber);
                     if (navCoupon.Coupons != null)
                     {
@@ -532,8 +544,9 @@ namespace ProxyNavisionWsZEN
                                     {
                                         CodeCoupon = c.codeCoupon,
                                         CustomerCodeErp = c.CustomerCodeErp,
-                                        IdCompany = idCompany,
+                                        IdCompany = IdCompany,
                                         Type = c.type.ToString(),
+                                         Price_Group= c.Price_Group,
                                         Value = c.value,
                                         Validity = c.validity,
                                         Description = c.Description,
@@ -548,10 +561,11 @@ namespace ProxyNavisionWsZEN
                                     {
                                         CodeCoupon = c.codeCoupon,
                                         CustomerCodeErp = c.CustomerCodeErp,
-                                        IdCompany = idCompany,
+                                        IdCompany = IdCompany,
                                         Type = c.type.ToString(),
                                         Value = c.value,
-                                        Validity = c.validity,
+                                         Price_Group = c.Price_Group,
+                                         Validity = c.validity,
                                         Description = c.Description,
                                         IsActive = c.isActive.FirstOrDefault(),
                                         IsUsed = c.isused.FirstOrDefault(),
@@ -584,7 +598,7 @@ namespace ProxyNavisionWsZEN
                         }
                     }
                    
-                }
+                
 
                 CouponResult.Message = "Success";
                 return CouponResult;
@@ -612,7 +626,10 @@ namespace ProxyNavisionWsZEN
                     result.Success = false;
                     return result;
                 }
-
+                if (string.IsNullOrEmpty(request.Price_Group))
+                {
+                    request.Price_Group = "";
+                }
                 if (string.IsNullOrWhiteSpace(request.CustomerCodeErp))
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
@@ -710,7 +727,7 @@ namespace ProxyNavisionWsZEN
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
-                mobile_Web_Services.Url = $"https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/{request.IdCompany}/Codeunit/API";
+                mobile_Web_Services.Url = $"https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/{request.IdCompany}/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 // === 6. Call create_coupon SOAP Method ===
@@ -723,7 +740,8 @@ namespace ProxyNavisionWsZEN
                     request.IsActive,
                     request.Validity,
                     request.IsUsed,
-                    couponXmlPort
+                    couponXmlPort,
+                    request.Price_Group
                 );
 
                 result.Message = soapResponse ?? "Success";
@@ -823,7 +841,7 @@ namespace ProxyNavisionWsZEN
 
 
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string stores = "";
@@ -895,7 +913,7 @@ namespace ProxyNavisionWsZEN
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
                 ProxyNavisionWsZEN.API.sheaders ItemsXML = new ProxyNavisionWsZEN.API.sheaders();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string references = "";
@@ -1020,7 +1038,7 @@ namespace ProxyNavisionWsZEN
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
                 ProxyNavisionWsZEN.API.sheaders ItemsXML = new ProxyNavisionWsZEN.API.sheaders();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string references = "";
@@ -1141,7 +1159,7 @@ namespace ProxyNavisionWsZEN
                     Orderrequest.Motif = "";
                 }
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string stores = "";
@@ -1149,7 +1167,7 @@ namespace ProxyNavisionWsZEN
                 mobile_Web_Services.updatorder(Orderrequest.refCmd, Orderrequest.reglement, Orderrequest.idStatus, Orderrequest.Motif);
                 //string company = mobile_Web_Services.getCompanyesp();
                 
-                //mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + company + "/Codeunit/API";
+                //mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + company + "/Codeunit/API";
                 //mobile_Web_Services.updatorder(Orderrequest.refCmd, Orderrequest.reglement, Orderrequest.idStatus, Orderrequest.Motif);
 
                 return "Success";
@@ -1232,7 +1250,7 @@ namespace ProxyNavisionWsZEN
                 ProxyNavisionWsZEN.API.Inventoriesb2c ItemsXML = new ProxyNavisionWsZEN.API.Inventoriesb2c();
              
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string stores = "";
@@ -1313,7 +1331,7 @@ namespace ProxyNavisionWsZEN
                 ProxyNavisionWsZEN.API.Inventoriesb2c ItemsXML = new ProxyNavisionWsZEN.API.Inventoriesb2c();
 
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + Stockrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Stockrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 foreach (var store in Stockrequest.Stores)
@@ -1496,7 +1514,7 @@ namespace ProxyNavisionWsZEN
                 ProxyNavisionWsZEN.API.Itemsb2c ItemsXML = new ProxyNavisionWsZEN.API.Itemsb2c();
               
 
-                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + IdCompany + "/Codeunit/API";
+                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 mobile_Web_Services.getItemb2c(ref ItemsXML, reference, created_start, created_end, updated_start, updated_end);
@@ -1515,8 +1533,8 @@ namespace ProxyNavisionWsZEN
                         //items.division = ItemsXML.Itemb2c.ElementAt(i).division;
 
                         items.Groupe = ItemsXML.Itemb2c.ElementAt(i).famille;
-                        items.Style = ItemsXML.Itemb2c.ElementAt(i).sexe;
-                        items.Famille = ItemsXML.Itemb2c.ElementAt(i).sexe;
+                        //items.Style = ItemsXML.Itemb2c.ElementAt(i).sexe;
+                        //items.Famille = ItemsXML.Itemb2c.ElementAt(i).sexe;
                         items.coupe = ItemsXML.Itemb2c.ElementAt(i).Coupe;
                         items.Persona = ItemsXML.Itemb2c.ElementAt(i).Persona;
                         items.DivisionCommerciale = ItemsXML.Itemb2c.ElementAt(i).DivisionCommerciale;
@@ -1747,7 +1765,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/ZEDD/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/ZEDD/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Company navCompany = new Company();
@@ -1802,7 +1820,7 @@ namespace ProxyNavisionWsZEN
                 WS_CustomerResult Customer =new WS_CustomerResult();
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/"+ request.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"+ request.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Customer.codeErp = mobile_Web_Services.AddOrModifyCustomer("", request.firstName+" "+request.lastName, request.email, request.phone, request.birthday, request.gender,false);
@@ -1916,7 +1934,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/"+IdCompany+"/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"+IdCompany+"/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Contact navContact = new Contact();
@@ -2058,7 +2076,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Card navCard = new Card();
@@ -2189,7 +2207,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 transaction navCard = new transaction();
@@ -2323,7 +2341,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Sales navCard = new Sales();
@@ -2402,7 +2420,7 @@ namespace ProxyNavisionWsZEN
                 WS_CustomerResult Customer = new WS_CustomerResult();
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + request.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + request.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Customer.codeErp = mobile_Web_Services.AddOrModifyCustomer(request.codeErp,request.firstName+" "+request.lastName, request.email, request.phone, request.birthday, request.gender, true);
@@ -2603,7 +2621,7 @@ namespace ProxyNavisionWsZEN
                     lines.Add(lineXmlPort);
                 }
                 OrderXmlPort.Orders = lines.ToArray();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/"+ CmdHead.IdCompany+"/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"+ CmdHead.IdCompany+"/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 if ((CmdHead.commandType != "order")&&(CmdHead.commandType != "orderReturn"))
@@ -2642,7 +2660,7 @@ namespace ProxyNavisionWsZEN
                         order.location = location;
                         order.Unit_Price = "0";
                     }
-                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + company + "/Codeunit/API";
+                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + company + "/Codeunit/API";
                     mobile_Web_Services.AddOrModifyOrder(CmdHead.TiersColisNo, customer, CmdHead.OrderNo, CmdHead.Currency, CmdHead.Currency_Ratio, DeliveryAddress.Address, CmdHead.IdCompany, false, ref OrderXmlPort, "");
 
                 }
@@ -2692,7 +2710,7 @@ namespace ProxyNavisionWsZEN
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
                 WS_ImageResult WS_imageResult = new WS_ImageResult();
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/ESP/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/ESP/Codeunit/API";
 
                 mobile_Web_Services.Timeout = 1000000000;
 
@@ -2742,7 +2760,7 @@ namespace ProxyNavisionWsZEN
                 WS_LocationResult LocationResult = new WS_LocationResult();
                 List<WS_Location> Locations = new List<WS_Location>();
               
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 mobile_Web_Services.getlocation(ref navLocation);
@@ -2801,7 +2819,7 @@ namespace ProxyNavisionWsZEN
                 WS_categoryResult WS_categoryResult = new WS_categoryResult();
 
                 Category navCategory = new Category();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_DEV/WS/"+ IdCompany+"/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"+ IdCompany+"/Codeunit/API";
 
                 mobile_Web_Services.getCategory(ref navCategory);
                 List<getListCategorie> items = new List<getListCategorie>();

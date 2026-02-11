@@ -385,9 +385,6 @@
     <Content Include="Web References\API\Coupon.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\API\Ordertemp.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
     <Content Include="Web References\API\Psheaders.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>

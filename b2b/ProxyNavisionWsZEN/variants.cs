@@ -69,5 +69,9 @@ namespace ProxyNavisionWsZEN
             get { return stock_sur_commande_achat; }
             set { stock_sur_commande_achat = value; }
         }
+        [DataMember(EmitDefaultValue = false, Order = 9)] public string all_stock_on_purchase_order { get; set; }
+        [DataMember(EmitDefaultValue = false, Order = 10)] public string all_received_stock { get; set; }
+        [DataMember(EmitDefaultValue = false, Order = 11)] public string all_stock_on_sales_order { get; set; }
+
     }
 }

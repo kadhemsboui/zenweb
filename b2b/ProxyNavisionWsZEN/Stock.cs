@@ -16,7 +16,7 @@ namespace ProxyNavisionWsZEN
         public string stock_receptionné = "";
         public string stock_sur_commande_achat = "";
         public string stock_sur_commande_vente = "";
-
+        public string location = "";
         [DataMember(Order = 1)]
         public string Stock_disponible
         {
@@ -47,6 +47,15 @@ namespace ProxyNavisionWsZEN
             get { return stock_sur_commande_vente; }
             set { stock_sur_commande_vente = value; }
         }
+        [DataMember(Order = 6)]
+        public string Location
+        {
+            get { return location; }
+            set { location = value; }
+        }
+        [DataMember(EmitDefaultValue = false, Order = 7)] public string all_stock_on_purchase_order { get; set; }
+        [DataMember(EmitDefaultValue = false, Order = 8)] public string all_received_stock { get; set; }
+        [DataMember(EmitDefaultValue = false, Order = 9)] public string all_stock_on_sales_order { get; set; }
     }
 
 }

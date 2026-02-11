@@ -121,6 +121,9 @@
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_en_attente_de_livraison" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_receptionné" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_sur_commande_achat" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="all_stock_on_purchase_order" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="all_received_stock" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="all_stock_on_sales_order" type="string" />
         </sequence>
       </complexType>
       <complexType name="SalesPrice">
@@ -133,6 +136,8 @@
           <element minOccurs="1" maxOccurs="unbounded" name="fin" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="DiscountPercentage" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="ValidRetailPrice" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Pdebut" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PFin" type="string" />
         </sequence>
       </complexType>
       <complexType name="Item">
@@ -185,6 +190,8 @@
           <element minOccurs="1" maxOccurs="unbounded" name="DiscountPercentage" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="ValidRetailPrice" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="prix_negoce" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Pdebut" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PFin" type="string" />
         </sequence>
       </complexType>
       <complexType name="Itemb2c">
@@ -200,6 +207,7 @@
           <element minOccurs="1" maxOccurs="1" name="Groupe" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CodeGroupe" type="string" />
           <element minOccurs="1" maxOccurs="1" name="famille" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="section" type="string" />
           <element minOccurs="1" maxOccurs="1" name="definition" type="string" />
           <element minOccurs="1" maxOccurs="1" name="created_at" type="string" />
           <element minOccurs="1" maxOccurs="1" name="updated_at" type="string" />
@@ -209,6 +217,8 @@
           <element minOccurs="1" maxOccurs="1" name="DateReception_PSR" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DateReception_TDS" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Persona" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="prixdstock" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="prixpublic" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Variants" type="tns:Variants" />
           <element minOccurs="0" maxOccurs="unbounded" name="SalesPrice" type="tns:SalesPrice" />
         </sequence>
@@ -306,6 +316,9 @@
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_sur_commande_vente" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_receptionné" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="Stock_sur_commande_achat" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="all_stock_on_purchase_order" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="all_received_stock" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="all_stock_on_sales_order" type="string" />
         </sequence>
       </complexType>
       <complexType name="Inventories" mixed="true">
@@ -349,6 +362,7 @@
           <element minOccurs="1" maxOccurs="1" name="validity" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CustomerCodeErp" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Price_Group" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="isActive" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="isused" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Coup" type="tns:Coup" />
@@ -510,6 +524,8 @@
           <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
           <element minOccurs="1" maxOccurs="1" name="prediscount" type="string" />
           <element minOccurs="1" maxOccurs="1" name="amount" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="AmountP" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="discountamount" type="string" />
         </sequence>
       </complexType>
       <complexType name="scart" mixed="true">
@@ -691,7 +707,9 @@
       </element>
       <element name="AddOrModifyOrderLine_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="lineno" type="int" />
+          </sequence>
         </complexType>
       </element>
       <element name="AddOrModifySalesReturnB2C">
@@ -796,6 +814,22 @@
           </sequence>
         </complexType>
       </element>
+      <element name="GetOrder3">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="location" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="companySource" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetOrder3_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="GetOrderreturn">
         <complexType>
           <sequence>
@@ -830,6 +864,58 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
           </sequence>
+        </complexType>
+      </element>
+      <element name="GetZENQtyOnSalesOrderall">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="globalDim1FilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="globalDim2FilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="dateFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="uOMFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="dropShipmentFilterTxt" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetZENQtyOnSalesOrderall_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetZENQtyOnTransferOrder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNoTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="locationFilterTxt" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantFilterTxt" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetZENQtyOnTransferOrder_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ImportVariantPictureFromURL">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="barcode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="pPictureURL" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="pItemno" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="variantcode" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ImportVariantPictureFromURL_Result">
+        <complexType>
+          <sequence />
         </complexType>
       </element>
       <element name="ModifyHeader">
@@ -1043,6 +1129,7 @@
             <element minOccurs="1" maxOccurs="1" name="validity" type="string" />
             <element minOccurs="1" maxOccurs="1" name="isUsed" type="string" />
             <element xmlns:q9="urn:microsoft-dynamics-nav/xmlports/x52018" minOccurs="1" maxOccurs="1" name="linexmlport" type="q9:Couponlines" />
+            <element minOccurs="1" maxOccurs="1" name="price_Group" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -1142,7 +1229,7 @@
           </sequence>
         </complexType>
       </element>
-      <element name="getItemb2c">
+      <element name="getItemb2c2">
         <complexType>
           <sequence>
             <element xmlns:q18="urn:microsoft-dynamics-nav/xmlports/x52013" minOccurs="1" maxOccurs="1" name="ecom_Catalog_XML" type="q18:Itemsb2c" />
@@ -1151,10 +1238,12 @@
             <element minOccurs="1" maxOccurs="1" name="created_end" type="string" />
             <element minOccurs="1" maxOccurs="1" name="updated_start" type="string" />
             <element minOccurs="1" maxOccurs="1" name="updated_end" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="fromIndex" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="toIndex" type="int" />
           </sequence>
         </complexType>
       </element>
-      <element name="getItemb2c_Result">
+      <element name="getItemb2c2_Result">
         <complexType>
           <sequence>
             <element xmlns:q19="urn:microsoft-dynamics-nav/xmlports/x52013" minOccurs="1" maxOccurs="1" name="ecom_Catalog_XML" type="q19:Itemsb2c" />
@@ -1315,6 +1404,26 @@
           </sequence>
         </complexType>
       </element>
+      <element name="getcount">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="no" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="created_date" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="created_end" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updated_start" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="updated_end" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="fromIndex" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="toIndex" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getcount_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="getlocation">
         <complexType>
           <sequence>
@@ -1401,6 +1510,20 @@
           </sequence>
         </complexType>
       </element>
+      <element name="isdstock">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="no" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="isdstock_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="isused">
         <complexType>
           <sequence>
@@ -1429,7 +1552,6 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
             <element xmlns:q54="urn:microsoft-dynamics-nav/xmlports/x52025" minOccurs="1" maxOccurs="1" name="ecom_Cart" type="q54:scart" />
-            <element xmlns:q55="urn:microsoft-dynamics-nav/xmlports/x52024" minOccurs="1" maxOccurs="1" name="ecom_Order_XML" type="q55:Ordertemp" />
           </sequence>
         </complexType>
       </element>
@@ -1522,6 +1644,12 @@
   <message name="GetOrder2_Result">
     <part name="parameters" element="tns:GetOrder2_Result" />
   </message>
+  <message name="GetOrder3">
+    <part name="parameters" element="tns:GetOrder3" />
+  </message>
+  <message name="GetOrder3_Result">
+    <part name="parameters" element="tns:GetOrder3_Result" />
+  </message>
   <message name="GetOrderreturn">
     <part name="parameters" element="tns:GetOrderreturn" />
   </message>
@@ -1533,6 +1661,24 @@
   </message>
   <message name="GetZENQtyOnSalesOrder_Result">
     <part name="parameters" element="tns:GetZENQtyOnSalesOrder_Result" />
+  </message>
+  <message name="GetZENQtyOnSalesOrderall">
+    <part name="parameters" element="tns:GetZENQtyOnSalesOrderall" />
+  </message>
+  <message name="GetZENQtyOnSalesOrderall_Result">
+    <part name="parameters" element="tns:GetZENQtyOnSalesOrderall_Result" />
+  </message>
+  <message name="GetZENQtyOnTransferOrder">
+    <part name="parameters" element="tns:GetZENQtyOnTransferOrder" />
+  </message>
+  <message name="GetZENQtyOnTransferOrder_Result">
+    <part name="parameters" element="tns:GetZENQtyOnTransferOrder_Result" />
+  </message>
+  <message name="ImportVariantPictureFromURL">
+    <part name="parameters" element="tns:ImportVariantPictureFromURL" />
+  </message>
+  <message name="ImportVariantPictureFromURL_Result">
+    <part name="parameters" element="tns:ImportVariantPictureFromURL_Result" />
   </message>
   <message name="ModifyHeader">
     <part name="parameters" element="tns:ModifyHeader" />
@@ -1642,11 +1788,11 @@
   <message name="getItem_Result">
     <part name="parameters" element="tns:getItem_Result" />
   </message>
-  <message name="getItemb2c">
-    <part name="parameters" element="tns:getItemb2c" />
+  <message name="getItemb2c2">
+    <part name="parameters" element="tns:getItemb2c2" />
   </message>
-  <message name="getItemb2c_Result">
-    <part name="parameters" element="tns:getItemb2c_Result" />
+  <message name="getItemb2c2_Result">
+    <part name="parameters" element="tns:getItemb2c2_Result" />
   </message>
   <message name="getLocationesp">
     <part name="parameters" element="tns:getLocationesp" />
@@ -1708,6 +1854,12 @@
   <message name="getcontact_Result">
     <part name="parameters" element="tns:getcontact_Result" />
   </message>
+  <message name="getcount">
+    <part name="parameters" element="tns:getcount" />
+  </message>
+  <message name="getcount_Result">
+    <part name="parameters" element="tns:getcount_Result" />
+  </message>
   <message name="getlocation">
     <part name="parameters" element="tns:getlocation" />
   </message>
@@ -1737,6 +1889,12 @@
   </message>
   <message name="gettierstable_Result">
     <part name="parameters" element="tns:gettierstable_Result" />
+  </message>
+  <message name="isdstock">
+    <part name="parameters" element="tns:isdstock" />
+  </message>
+  <message name="isdstock_Result">
+    <part name="parameters" element="tns:isdstock_Result" />
   </message>
   <message name="isused">
     <part name="parameters" element="tns:isused" />
@@ -1805,6 +1963,10 @@
       <input name="GetOrder2" message="tns:GetOrder2" />
       <output name="GetOrder2_Result" message="tns:GetOrder2_Result" />
     </operation>
+    <operation name="GetOrder3">
+      <input name="GetOrder3" message="tns:GetOrder3" />
+      <output name="GetOrder3_Result" message="tns:GetOrder3_Result" />
+    </operation>
     <operation name="GetOrderreturn">
       <input name="GetOrderreturn" message="tns:GetOrderreturn" />
       <output name="GetOrderreturn_Result" message="tns:GetOrderreturn_Result" />
@@ -1812,6 +1974,18 @@
     <operation name="GetZENQtyOnSalesOrder">
       <input name="GetZENQtyOnSalesOrder" message="tns:GetZENQtyOnSalesOrder" />
       <output name="GetZENQtyOnSalesOrder_Result" message="tns:GetZENQtyOnSalesOrder_Result" />
+    </operation>
+    <operation name="GetZENQtyOnSalesOrderall">
+      <input name="GetZENQtyOnSalesOrderall" message="tns:GetZENQtyOnSalesOrderall" />
+      <output name="GetZENQtyOnSalesOrderall_Result" message="tns:GetZENQtyOnSalesOrderall_Result" />
+    </operation>
+    <operation name="GetZENQtyOnTransferOrder">
+      <input name="GetZENQtyOnTransferOrder" message="tns:GetZENQtyOnTransferOrder" />
+      <output name="GetZENQtyOnTransferOrder_Result" message="tns:GetZENQtyOnTransferOrder_Result" />
+    </operation>
+    <operation name="ImportVariantPictureFromURL">
+      <input name="ImportVariantPictureFromURL" message="tns:ImportVariantPictureFromURL" />
+      <output name="ImportVariantPictureFromURL_Result" message="tns:ImportVariantPictureFromURL_Result" />
     </operation>
     <operation name="ModifyHeader">
       <input name="ModifyHeader" message="tns:ModifyHeader" />
@@ -1885,9 +2059,9 @@
       <input name="getItem" message="tns:getItem" />
       <output name="getItem_Result" message="tns:getItem_Result" />
     </operation>
-    <operation name="getItemb2c">
-      <input name="getItemb2c" message="tns:getItemb2c" />
-      <output name="getItemb2c_Result" message="tns:getItemb2c_Result" />
+    <operation name="getItemb2c2">
+      <input name="getItemb2c2" message="tns:getItemb2c2" />
+      <output name="getItemb2c2_Result" message="tns:getItemb2c2_Result" />
     </operation>
     <operation name="getLocationesp">
       <input name="getLocationesp" message="tns:getLocationesp" />
@@ -1929,6 +2103,10 @@
       <input name="getcontact" message="tns:getcontact" />
       <output name="getcontact_Result" message="tns:getcontact_Result" />
     </operation>
+    <operation name="getcount">
+      <input name="getcount" message="tns:getcount" />
+      <output name="getcount_Result" message="tns:getcount_Result" />
+    </operation>
     <operation name="getlocation">
       <input name="getlocation" message="tns:getlocation" />
       <output name="getlocation_Result" message="tns:getlocation_Result" />
@@ -1948,6 +2126,10 @@
     <operation name="gettierstable">
       <input name="gettierstable" message="tns:gettierstable" />
       <output name="gettierstable_Result" message="tns:gettierstable_Result" />
+    </operation>
+    <operation name="isdstock">
+      <input name="isdstock" message="tns:isdstock" />
+      <output name="isdstock_Result" message="tns:isdstock_Result" />
     </operation>
     <operation name="isused">
       <input name="isused" message="tns:isused" />
@@ -2072,6 +2254,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="GetOrder3">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:GetOrder3" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetOrder3">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetOrder3_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="GetOrderreturn">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:GetOrderreturn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetOrderreturn">
@@ -2087,6 +2278,33 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetZENQtyOnSalesOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetZENQtyOnSalesOrderall">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:GetZENQtyOnSalesOrderall" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetZENQtyOnSalesOrderall">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetZENQtyOnSalesOrderall_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetZENQtyOnTransferOrder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:GetZENQtyOnTransferOrder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetZENQtyOnTransferOrder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetZENQtyOnTransferOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ImportVariantPictureFromURL">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:ImportVariantPictureFromURL" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ImportVariantPictureFromURL">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ImportVariantPictureFromURL_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -2252,12 +2470,12 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="getItemb2c">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getItemb2c" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="getItemb2c">
+    <operation name="getItemb2c2">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getItemb2c2" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getItemb2c2">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
-      <output name="getItemb2c_Result">
+      <output name="getItemb2c2_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -2351,6 +2569,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="getcount">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getcount" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="getcount">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="getcount_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="getlocation">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:getlocation" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="getlocation">
@@ -2396,6 +2623,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="isdstock">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:isdstock" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="isdstock">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="isdstock_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="isused">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/API:isused" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="isused">
@@ -2426,7 +2662,7 @@
   </binding>
   <service name="API">
     <port name="API_Port" binding="tns:API_Binding">
-      <address location="https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/ZEDD_uat/WS/ZEDD/Codeunit/API?=wsdl&amp;tenant=msweua5825t40930674&amp;aid=FIN" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/ZEDD/Codeunit/API?=wsdl&amp;tenant=msweua5825t34430268&amp;aid=FIN" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

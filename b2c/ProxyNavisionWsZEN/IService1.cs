@@ -36,7 +36,7 @@ namespace ProxyNavisionWsZEN
         [WebGet(UriTemplate = "getListCategorie?IdCompany={IdCompany}", ResponseFormat = WebMessageFormat.Json)]
         WS_categoryResult getListCategorie(string IdCompany);
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "AddImage/")]
-        WS_ImageResult AddImage(string ItemNo, string ImageUrl);
+        WS_ImageResult AddImage(string ItemNo, string ImageUrl, List<string> Company);
         [WebGet(UriTemplate = "loyalty/transactions?idcard={idcard}&IdCompany={IdCompany}",ResponseFormat = WebMessageFormat.Json)]
         List<WS_TransRequest> Gettransaction(string idcard,  string IdCompany);
         [WebGet(UriTemplate = "purchase/history?codeErp={codeErp}&IdCompany={IdCompany}",ResponseFormat = WebMessageFormat.Json)]
@@ -49,6 +49,10 @@ namespace ProxyNavisionWsZEN
         List<items> getitem(string reference, string IdCompany, string created_start, string created_end,string updated_start,string updated_end);
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "stock/GetStock/")]
         List<WS_stockResult> GetStock(WS_StockrRequest request);
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "stock/GetStock2/")]
+        List<WS_stockResult> GetStock2(WS_StockrRequest request);
+
         [WebInvoke(Method = "PATCH", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "ModifyOrder/")]
         string ModifyOrder(WS_OrderRequest request);
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "Addcardpoint/")]
@@ -67,6 +71,8 @@ namespace ProxyNavisionWsZEN
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "SimulateCart/")]
         WS_CartResult SimuateCart(Cart cart,  List<Cart_list> cart_list);
 
+        [WebGet(UriTemplate = "Product2/GetProduct?updated_start={updated_start}&IdCompany={IdCompany}&updated_end={updated_end}&created_start={created_start}&created_end={created_end}&reference={reference}", ResponseFormat = WebMessageFormat.Json)]
+        List<items> getitem2(string reference, string IdCompany, string created_start, string created_end, string updated_start, string updated_end);
 
     }
 }

@@ -36,6 +36,8 @@ namespace ProxyNavisionWsZEN
    
         [DataMember(Order = 3)]
         public string DiscountPercentage { get; set; }
+        [DataMember(Order = 4)]
+        public string Amountprediscount { get; set; }
 
     }
 }

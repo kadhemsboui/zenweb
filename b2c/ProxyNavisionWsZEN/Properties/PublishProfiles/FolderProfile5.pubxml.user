@@ -4,7 +4,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\KSBOUI\Desktop\APIZENB2C</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\KSBOUI\Desktop\APIZENB2CDEV</_PublishTargetUrl>
+    <History>True|2025-12-09T23:08:07.8932807Z;True|2025-12-08T23:24:34.0843995+01:00;True|2025-12-08T17:52:04.7657480+01:00;</History>
+    <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -137,13 +139,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/13/2012 13:19:34</publishTime>
     </File>
     <File Include="bin/ProxyNavisionWsZEN.dll">
-      <publishTime>12/01/2025 14:03:11</publishTime>
+      <publishTime>12/10/2025 00:07:47</publishTime>
     </File>
     <File Include="bin/ProxyNavisionWsZEN.pdb">
-      <publishTime>12/01/2025 14:03:11</publishTime>
+      <publishTime>12/10/2025 00:07:47</publishTime>
     </File>
     <File Include="bin/ProxyNavisionWsZEN.XmlSerializers.dll">
-      <publishTime>12/01/2025 14:03:18</publishTime>
+      <publishTime>12/10/2025 00:08:04</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
       <publishTime>10/04/2024 12:49:34</publishTime>
@@ -200,76 +202,76 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/09/2025 10:44:23</publishTime>
     </File>
     <File Include="Web References/API/Attribute.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Card.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Category.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Categoryparent.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Company.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Contact.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Coupon.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Customer.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Inventories.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Inventoriesb2c.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Items.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Itemsb2c.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Location.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Order.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Parent.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Psheaders.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Sales.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/scart.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Season.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/sheaders.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/transaction.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/TransferLine.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web References/API/Vendor.datasource">
-      <publishTime>12/01/2025 12:49:26</publishTime>
+      <publishTime>12/09/2025 02:38:02</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/01/2025 14:03:20</publishTime>
+      <publishTime>12/10/2025 00:08:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

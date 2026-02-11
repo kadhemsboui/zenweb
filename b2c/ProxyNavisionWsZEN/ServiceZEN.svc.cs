@@ -18,6 +18,8 @@ using System.ServiceModel;
 using System.Data;
 using System.Configuration;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Security.Policy;
 
 namespace ProxyNavisionWsZEN
 {
@@ -62,7 +64,7 @@ namespace ProxyNavisionWsZEN
               
                 OrderXmlPort.Orders = lines.ToArray();
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + cart.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + cart.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
                 WS_orderResult.Message = mobile_Web_Services.simulatecart(ref scart, OrderXmlPort, cart.CustomerCodeErp, cart.Location);
                 Decimal discountt = 0;
@@ -75,7 +77,8 @@ namespace ProxyNavisionWsZEN
                         {
                             Barcode = c.barcode,
                             Amount = c.amount,
-                            DiscountPercentage=c.AmountP
+                            Amountprediscount=c.prediscount,
+                            DiscountPercentage =c.AmountP
                         });
                     }
                 }
@@ -148,7 +151,7 @@ namespace ProxyNavisionWsZEN
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
                 ProxyNavisionWsZEN.API.Psheaders ItemsXML = new ProxyNavisionWsZEN.API.Psheaders();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string references = "";
@@ -310,7 +313,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Season season = new Season();
@@ -461,7 +464,7 @@ namespace ProxyNavisionWsZEN
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/"
                                           + request.IdCompany + "/Codeunit/API";
 
                 mobile_Web_Services.UpdateCoupon(request.codeCoupon, request.isActive, request.isUsed);
@@ -526,7 +529,7 @@ namespace ProxyNavisionWsZEN
                
 
                     ProxyNavisionWsZEN.API.Coupon navCoupon = new ProxyNavisionWsZEN.API.Coupon();
-                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"
+                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/"
                                               + IdCompany + "/Codeunit/API";
                     mobile_Web_Services.get_coupon(ref navCoupon, CustomerCodeErp, CodeCoupon, phoneNumber);
                     if (navCoupon.Coupons != null)
@@ -727,7 +730,7 @@ namespace ProxyNavisionWsZEN
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
-                mobile_Web_Services.Url = $"https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/{request.IdCompany}/Codeunit/API";
+                mobile_Web_Services.Url = $"https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/{request.IdCompany}/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 // === 6. Call create_coupon SOAP Method ===
@@ -841,7 +844,7 @@ namespace ProxyNavisionWsZEN
 
 
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string stores = "";
@@ -913,7 +916,7 @@ namespace ProxyNavisionWsZEN
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
                 ProxyNavisionWsZEN.API.sheaders ItemsXML = new ProxyNavisionWsZEN.API.sheaders();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string references = "";
@@ -1038,7 +1041,7 @@ namespace ProxyNavisionWsZEN
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
 
                 ProxyNavisionWsZEN.API.sheaders ItemsXML = new ProxyNavisionWsZEN.API.sheaders();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string references = "";
@@ -1159,7 +1162,7 @@ namespace ProxyNavisionWsZEN
                     Orderrequest.Motif = "";
                 }
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + Orderrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string stores = "";
@@ -1167,7 +1170,7 @@ namespace ProxyNavisionWsZEN
                 mobile_Web_Services.updatorder(Orderrequest.refCmd, Orderrequest.reglement, Orderrequest.idStatus, Orderrequest.Motif);
                 //string company = mobile_Web_Services.getCompanyesp();
                 
-                //mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + company + "/Codeunit/API";
+                //mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + company + "/Codeunit/API";
                 //mobile_Web_Services.updatorder(Orderrequest.refCmd, Orderrequest.reglement, Orderrequest.idStatus, Orderrequest.Motif);
 
                 return "Success";
@@ -1250,7 +1253,7 @@ namespace ProxyNavisionWsZEN
                 ProxyNavisionWsZEN.API.Inventoriesb2c ItemsXML = new ProxyNavisionWsZEN.API.Inventoriesb2c();
              
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 string stores = "";
@@ -1284,6 +1287,136 @@ namespace ProxyNavisionWsZEN
                 return jsonResponse["Message"].ToString();
             }
         }
+       
+        public List<WS_stockResult> GetStock2(WS_StockrRequest Stockrequest)
+        {
+            try
+            {
+                JObject jsonResponse = new JObject();
+
+                List<WS_stockResult> ItemResult = new List<WS_stockResult>();
+
+
+                var request = OperationContext.Current.RequestContext.RequestMessage;
+                var httpRequest = (HttpRequestMessageProperty)request.Properties[HttpRequestMessageProperty.Name];
+
+                if (Stockrequest.IdCompany == null)
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
+
+                    jsonResponse["Message"] = "Veuillez spécifier l'IdCompany.";
+                    WS_stockResult items = new WS_stockResult();
+
+                    items.Message = jsonResponse["Message"].ToString();
+                    ItemResult.Add(items);
+                    return ItemResult;
+
+                }
+
+                if (((Stockrequest.updatedstart == "") && (Stockrequest.updatedend != "")) || ((Stockrequest.updatedstart != "") && (Stockrequest.updatedend == "")))
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
+
+                    jsonResponse["Message"] = "Vous devez spécifier à la fois created_end et created_start.";
+                    WS_stockResult items = new WS_stockResult();
+
+                    items.Message = jsonResponse["Message"].ToString();
+                    ItemResult.Add(items);
+                    return ItemResult;
+                }
+
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                string token = GetAccessToken();
+                AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
+
+
+                ProxyNavisionWsZEN.API.Inventories ItemsXML = new ProxyNavisionWsZEN.API.Inventories();
+
+
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + Stockrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Timeout = 1000000000;
+
+                foreach (var store in Stockrequest.Stores)
+                {
+
+
+
+
+                    foreach (var barreCode in Stockrequest.barreCodes)
+                    {
+                        mobile_Web_Services.getStock(ref ItemsXML,  barreCode, store,"");
+
+
+                        for (int i = 0; i < ItemsXML.Inventory.Count(); i++)
+                        {
+                            if (ItemsXML.Inventory.ElementAt(i).stock_disponible.FirstOrDefault() != "")
+                            {
+
+                                ProxyNavisionWsZEN.WS_stockResult items = new ProxyNavisionWsZEN.WS_stockResult();
+
+                                ProxyNavisionWsZEN.Variants Variants = new ProxyNavisionWsZEN.Variants();
+                                items.barreCode = barreCode;
+
+                                items.Store = store;
+                                items.stockAvailable = ItemsXML.Inventory.ElementAt(i).stock_disponible.FirstOrDefault();
+
+                                items.Stock_awaiting_delivery = ItemsXML.Inventory.ElementAt(i).Stock_en_attente_de_livraison.FirstOrDefault();
+
+                                items.Received_stock = ItemsXML.Inventory.ElementAt(i).Stock_receptionné.FirstOrDefault();
+
+                                items.Stock_on_purchase_order = ItemsXML.Inventory.ElementAt(i).Stock_sur_commande_achat.FirstOrDefault();
+
+
+                                items.Stock_on_sales_order = ItemsXML.Inventory.ElementAt(i).Stock_sur_commande_vente.FirstOrDefault();
+                                items.all_stock_on_purchase_order = ItemsXML.Inventory.ElementAt(i).all_stock_on_purchase_order.FirstOrDefault();
+
+                                items.all_received_stock = ItemsXML.Inventory.ElementAt(i).all_received_stock.FirstOrDefault();
+
+                                items.all_stock_on_sales_order = ItemsXML.Inventory.ElementAt(i).all_stock_on_sales_order.FirstOrDefault();
+
+
+
+                                ItemResult.Add(items);
+
+
+                            }
+                        }
+
+                    }
+                }
+                return ItemResult;
+            }
+            catch (Exception error)
+            {
+                JObject jsonResponse = new JObject();
+                if (error is ArgumentException argumentException)
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
+                    jsonResponse["Message"] = argumentException.Message;
+                }
+                else if (error is SoapException soapException)
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    jsonResponse["Status"] = "400";
+                    jsonResponse["Message"] = soapException.Message;
+                }
+                else
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                    jsonResponse["Status"] = "500";
+                    jsonResponse["Message"] = error.Message;
+                }
+                List<WS_stockResult> ItemResult = new List<WS_stockResult>();
+                WS_stockResult items = new WS_stockResult();
+                items.Message = jsonResponse["Message"].ToString();
+                ItemResult.Add(items);
+                return ItemResult;
+            }
+        }
+
         public List<WS_stockResult> GetStock(WS_StockrRequest Stockrequest)
         {
             try
@@ -1331,7 +1464,7 @@ namespace ProxyNavisionWsZEN
                 ProxyNavisionWsZEN.API.Inventoriesb2c ItemsXML = new ProxyNavisionWsZEN.API.Inventoriesb2c();
 
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + Stockrequest.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + Stockrequest.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 foreach (var store in Stockrequest.Stores)
@@ -1397,365 +1530,359 @@ namespace ProxyNavisionWsZEN
                 return ItemResult;
             }
         }
+        private List<items> FetchBatch(
+    AuthenticatedAPIClient client,
+    string reference,
+    string created_start,
+    string created_end,
+    string updated_start,
+    string updated_end,
+    int from,
+    int to
+)
+        {
+            ProxyNavisionWsZEN.API.Itemsb2c ItemsXML = new ProxyNavisionWsZEN.API.Itemsb2c();
+
+            client.getItemb2c2(ref ItemsXML, reference, created_start, created_end, updated_start, updated_end, from, to);
+
+            List<items> output = new List<items>();
+            string publicp = "";
+            string dstockp = "";
+            foreach (var it in ItemsXML.Itemb2c)
+            {
+                if (string.IsNullOrWhiteSpace(it.No))
+                    continue;
+
+                items x = new items();
+
+                // BASIC FIELDS
+                x.sku = it.No;
+                x.title = it.Description;
+                x.code_saison = it.code_saison;
+                x.Nom_saison = it.saison.FirstOrDefault();
+                x.Groupe = it.famille;
+                x.coupe = it.Coupe;
+                x.Persona = it.Persona;
+                x.DivisionCommerciale = it.DivisionCommerciale;
+                x.CodeGroupe = it.CodeGroupe;
+                x.Ligne = it.Groupe;
+                x.GS1 = it.GS1;
+                x.numerPiece = it.numerPiece.ToString();
+                x.Fournisseur = it.Fournisseur.FirstOrDefault();
+
+                // DATES
+                x.DateReception_PSR = it.DateReception_PSR;
+                x.DateReception_TDS = it.DateReception_TDS;
+                x.Famille = it.section;
+                x.date_injection = it.date_injection;
+                x.created_at = it.created_at;
+                x.updated_at = it.updated_at;
+                publicp = it.prixpublic;
+                dstockp = it.prixdstock;
+
+
+                var acceptedDateTimeFormats0 = new[] { "MM/dd/yy hh:mm tt", "MM/dd/yyyy hh:mm tt" };
+                var acceptedDateTimeFormats1 = new[] { "MM/dd/yy hh:mm tt", "MM/dd/yyyy hh:mm tt" };
+                var acceptedFormats5 = new[] { "MM/dd/yy", "MM/dd/yyyy" };
+                var acceptedFormats = new[] { "MM/dd/yy", "MM/dd/yyyy" };
+
+                if (DateTime.TryParseExact(x.DateReception_PSR, acceptedDateTimeFormats0, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime0))
+                    x.DateReception_PSR = parsedDateTime0.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture);
+
+                if (DateTime.TryParseExact(x.DateReception_TDS, acceptedDateTimeFormats1, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime1))
+                    x.DateReception_TDS = parsedDateTime1.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture);
+
+                if (DateTime.TryParseExact(x.date_injection, acceptedFormats5, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate100))
+                    x.date_injection = parsedDate100.ToString("yyyy-MM-dd");
+
+                if (DateTime.TryParseExact(x.created_at, acceptedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
+                    x.created_at = parsedDate.ToString("yyyy-MM-dd");
+
+                if (DateTime.TryParseExact(x.updated_at, acceptedDateTimeFormats0, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime))
+                    x.updated_at = parsedDateTime.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture);
+
+                // VARIANTS
+                x.declinaisons = new List<ProxyNavisionWsZEN.Variants>();
+                var variantsDict = new Dictionary<string, ProxyNavisionWsZEN.Variants>();
+
+                if (it.Variants != null)
+                {
+                    foreach (var rawVariant in it.Variants)
+                    {
+                        if (!variantsDict.TryGetValue(rawVariant.codeCouleur, out var group))
+                        {
+                            group = new ProxyNavisionWsZEN.Variants
+                            {
+                                codeCouleur = rawVariant.codeCouleur,
+                                Couleur = rawVariant.Couleur.FirstOrDefault()
+                            };
+                            variantsDict[rawVariant.codeCouleur] = group;
+                        }
+
+                        group.variants.Add(new ProxyNavisionWsZEN.VariantDetail
+                        {
+                            code = rawVariant.code,
+                            name = rawVariant.Description,
+                            Taille = rawVariant.Taille.FirstOrDefault(),
+                            code_taille = rawVariant.code_taille,
+                            ean13 = rawVariant.Barcode,
+                            Quantity_in_serie_type = rawVariant.Quantity_in_serie_type.FirstOrDefault(),
+                            Composition0 = rawVariant.Composition0,
+                            Composition1 = rawVariant.Composition1,
+                            Composition2 = rawVariant.Composition2,
+                            Composition3 = rawVariant.Composition3,
+                            NGP = rawVariant.NGP
+                        });
+                    }
+                }
+
+                x.declinaisons = variantsDict.Values.ToList();
+
+                // SALESPRICE
+                x.SalesPrice = new List<ProxyNavisionWsZEN.Prices>();
+                if (it.SalesPrice != null)
+                {
+                    foreach (var sp in it.SalesPrice)
+                    {
+                        var p = new ProxyNavisionWsZEN.Prices();
+
+                        if (!string.IsNullOrWhiteSpace(sp.PriceTTC.FirstOrDefault()))
+                        {
+                            p.CurrencyCode = sp.CurrencyCode.FirstOrDefault();
+                            p.DiscountPrice = sp.DiscountPrice.FirstOrDefault();
+                            p.DiscountPercentage = sp.DiscountPercentage.FirstOrDefault();
+                            p.PriceTTC = sp.PriceTTC.FirstOrDefault();
+                            p.PriceHT = sp.PriceHT.FirstOrDefault();
+                            p.prix_negoce = sp.prix_negoce.FirstOrDefault();
+                            p.prix_public = publicp;
+                            p.prix_dstock = dstockp;
+                        }
+                        else
+                        {
+                            p.CurrencyCode = "TND";
+                            p.DiscountPrice = "0";
+                            p.DiscountPercentage = "0";
+                            p.PriceTTC = "0";
+                            p.PriceHT = "0";
+                            p.prix_public = "0";
+                            p.prix_dstock = "0";
+                        }
+
+                        x.SalesPrice.Add(p);
+                    }
+                }
+
+                output.Add(x);
+            }
+
+            return output;
+        }
+
+
         public List<items> getitem(string reference, string IdCompany, string created_start, string created_end, string updated_start, string updated_end)
         {
             try
             {
-                JObject jsonResponse = new JObject();
-
                 List<items> ItemResult = new List<items>();
 
-
+                // Retrieve query parameters
                 var request = OperationContext.Current.RequestContext.RequestMessage;
-                var httpRequest = (HttpRequestMessageProperty)request.Properties[HttpRequestMessageProperty.Name];
-                var rawUrl = httpRequest.QueryString; // mais QueryString n'existe pas ici
-
-                // => Donc on récupère l'Uri complète
                 var uri = request.Headers.To;
-                var query = uri.Query; // ex: "?phone=123&username=john"
-
-                // Parse manuelle de la query string
+                var query = uri.Query;
                 var queryParams = System.Web.HttpUtility.ParseQueryString(query);
 
                 if (queryParams.Count == 0)
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-
-                    items items = new items();
-
-                    items.Message = "Au moins un paramètre est requis pour la recherche.";
-                    ItemResult.Add(items);
+                    ItemResult.Add(new items { Message = "Au moins un paramètre est requis pour la recherche." });
                     return ItemResult;
-
                 }
-                var validParams = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    "reference" ,"IdCompany","created_start","created_end","updated_start","updated_end"
-                };
 
-                // Vérifie les clés
+                var validParams = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        { "reference", "IdCompany", "created_start", "created_end", "updated_start", "updated_end" };
+
                 foreach (string key in queryParams)
                 {
                     if (!validParams.Contains(key))
                     {
                         WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                        jsonResponse["Status"] = "400";
-
-                        jsonResponse["Message"] = $"Paramètre invalide : '{key}'";
-                        items items = new items();
-
-                        items.Message = jsonResponse["Message"].ToString();
-                        ItemResult.Add(items);
+                        ItemResult.Add(new items { Message = $"Paramètre invalide : '{key}'" });
                         return ItemResult;
                     }
                 }
-                if (IdCompany == null)
+
+                if (string.IsNullOrEmpty(IdCompany))
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "400";
-
-                    jsonResponse["Message"] = "Veuillez spécifier l'IdCompany.";
-                    items items = new items();
-
-                    items.Message = jsonResponse["Message"].ToString();
-                    ItemResult.Add(items);
+                    ItemResult.Add(new items { Message = "Veuillez spécifier l'IdCompany." });
                     return ItemResult;
+                }
 
-                }
-                if(reference==null)
-                {
-                    reference = "";
-                }
-                if (created_start == null)
-                {
-                    created_start = "";
-                }
-                if (created_end == null)
-                {
-                    created_end = "";
-                }
-                if (updated_start == null)
-                {
-                    updated_start = "";
-                }
-                if (updated_end == null)
-                {
-                    updated_end = "";
-                }
-                if (((created_end=="")&&(created_start!=""))|| ((created_end != "") && (created_start == "")))
+                reference = reference ?? "";
+                created_start = created_start ?? "";
+                created_end = created_end ?? "";
+                updated_start = updated_start ?? "";
+                updated_end = updated_end ?? "";
+
+                if ((string.IsNullOrEmpty(created_start) ^ string.IsNullOrEmpty(created_end)))
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "400";
-
-                    jsonResponse["Message"] = "Vous devez spécifier à la fois created_end et created_start.";
-                    items items = new items();
-
-                    items.Message = jsonResponse["Message"].ToString();
-                    ItemResult.Add(items);
+                    ItemResult.Add(new items { Message = "Vous devez spécifier à la fois created_end et created_start." });
                     return ItemResult;
                 }
-                if (((updated_start == "") && (updated_end != "")) || ((updated_start != "") && (updated_end == "")))
+
+                if ((string.IsNullOrEmpty(updated_start) ^ string.IsNullOrEmpty(updated_end)))
                 {
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "400";
-
-                    jsonResponse["Message"] = "Vous devez spécifier à la fois updated_start et updated_end.";
-                    items items = new items();
-
-                    items.Message = jsonResponse["Message"].ToString();
-                    ItemResult.Add(items);
+                    ItemResult.Add(new items { Message = "Vous devez spécifier à la fois updated_start et updated_end." });
                     return ItemResult;
                 }
+
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 string token = GetAccessToken();
-                AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-            
 
-                ProxyNavisionWsZEN.API.Itemsb2c ItemsXML = new ProxyNavisionWsZEN.API.Itemsb2c();
-              
-
-                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
-                mobile_Web_Services.Timeout = 1000000000;
-
-                mobile_Web_Services.getItemb2c(ref ItemsXML, reference, created_start, created_end, updated_start, updated_end);
-
-
-                for (int i = 0; i < ItemsXML.Itemb2c.Count(); i++)
+                // --- Parallel batch fetching ---
+                int batchSize = 10;
+                var client2 = new AuthenticatedAPIClient(token)
                 {
-                    if (ItemsXML.Itemb2c.ElementAt(i).No != "")
+                    Url = $"https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/{IdCompany}/Codeunit/API",
+                    Timeout = 1000000000
+                };
+
+                int max = (int)client2.getcount(reference, created_start, created_end, updated_start, updated_end, 0, 1);
+                var batches = Enumerable.Range(0, (int)Math.Ceiling((double)max / batchSize))
+                                        .Select(i => new { From = i * batchSize + 1, To = Math.Min((i + 1) * batchSize, max) })
+                                        .ToList();
+
+                object lockObj = new object();
+                Parallel.ForEach(batches, new ParallelOptions { MaxDegreeOfParallelism = 5 }, batch =>
+                {
+                    var client = new AuthenticatedAPIClient(token)
                     {
-                        ProxyNavisionWsZEN.items items = new ProxyNavisionWsZEN.items();
-                        items.sku = ItemsXML.Itemb2c.ElementAt(i).No;
-                        items.title = ItemsXML.Itemb2c.ElementAt(i).Description;
-                        items.code_saison = ItemsXML.Itemb2c.ElementAt(i).code_saison;
-                        items.Nom_saison = ItemsXML.Itemb2c.ElementAt(i).saison.FirstOrDefault();
-
-                        //items.division = ItemsXML.Itemb2c.ElementAt(i).division;
-
-                        items.Groupe = ItemsXML.Itemb2c.ElementAt(i).famille;
-                        //items.Style = ItemsXML.Itemb2c.ElementAt(i).sexe;
-                        //items.Famille = ItemsXML.Itemb2c.ElementAt(i).sexe;
-                        items.coupe = ItemsXML.Itemb2c.ElementAt(i).Coupe;
-                        items.Persona = ItemsXML.Itemb2c.ElementAt(i).Persona;
-                        items.DivisionCommerciale = ItemsXML.Itemb2c.ElementAt(i).DivisionCommerciale;
-                        items.CodeGroupe = ItemsXML.Itemb2c.ElementAt(i).CodeGroupe;
-                        items.Ligne = ItemsXML.Itemb2c.ElementAt(i).Groupe;
-                        items.GS1 = ItemsXML.Itemb2c.ElementAt(i).GS1;
-
-                        items.numerPiece = ItemsXML.Itemb2c.ElementAt(i).numerPiece.ToString() ;
-
-                        //items.definition = ItemsXML.Itemb2c.ElementAt(i).definition;
-                        //items.Poids = ItemsXML.Itemb2c.ElementAt(i).Poids;
-                        //items.CodeMarque = ItemsXML.Itemb2c.ElementAt(i).code_marque;
-                        //items.Sexe = ItemsXML.Itemb2c.ElementAt(i).sexe; ;
-                        //items.SerieType = ItemsXML.Itemb2c.ElementAt(i).serieType.FirstOrDefault();
-                        items.Fournisseur = ItemsXML.Itemb2c.ElementAt(i).Fournisseur.FirstOrDefault();
-                        items.created_at = ItemsXML.Itemb2c.ElementAt(i).created_at;
-                        items.updated_at = ItemsXML.Itemb2c.ElementAt(i).updated_at;
-
-                        items.DateReception_PSR= ItemsXML.Itemb2c.ElementAt(i).DateReception_PSR;
-                        items.DateReception_TDS= ItemsXML.Itemb2c.ElementAt(i).DateReception_TDS;
-                        items.date_injection = ItemsXML.Itemb2c.ElementAt(i).date_injection;
+                        Url = $"https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/{IdCompany}/Codeunit/API",
+                        Timeout = 1000000000
+                    };
 
 
-                        var acceptedDateTimeFormats0 = new[] { "MM/dd/yy hh:mm tt", "MM/dd/yyyy hh:mm tt" };
-                        var acceptedDateTimeFormats1 = new[] { "MM/dd/yy hh:mm tt", "MM/dd/yyyy hh:mm tt" };
+                    var itemsBatch = FetchBatch(client, reference, created_start, created_end, updated_start, updated_end, batch.From, batch.To);
 
+                    lock (lockObj)
+                        ItemResult.AddRange(itemsBatch);
+                });
 
-                        if (DateTime.TryParseExact(items.DateReception_PSR, acceptedDateTimeFormats0, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime0))
-                        {
-                            // Format: yyyy-dd-MM hh:mm tt
-                            items.DateReception_PSR = parsedDateTime0.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture);
-                        }
-                        else
-                        {
-                            items.DateReception_PSR = items.DateReception_PSR; // fallback to original if parsing fails
-                        }
-                        if (DateTime.TryParseExact(items.DateReception_TDS, acceptedDateTimeFormats1, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime1))
-                        {
-                            // Format: yyyy-dd-MM hh:mm tt
-                            items.DateReception_TDS = parsedDateTime1.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture);
-                        }
-                        else
-                        {
-                            items.DateReception_TDS = items.DateReception_TDS; // fallback to original if parsing fails
-                        }
-                        var acceptedFormats5 = new[] { "MM/dd/yy", "MM/dd/yyyy" };
-
-
-                        if (DateTime.TryParseExact(items.date_injection, acceptedFormats5, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate100))
-                        {
-                            items.date_injection = parsedDate100.ToString("yyyy-MM-dd");
-                        }
-                        else
-                        {
-                            items.date_injection = items.date_injection;
-                        }
-                        var acceptedFormats = new[] { "MM/dd/yy", "MM/dd/yyyy" };
-
-
-                        if (DateTime.TryParseExact(items.created_at, acceptedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
-                        {
-                            items.created_at = parsedDate.ToString("yyyy-MM-dd");
-                        }
-                        else
-                        {
-                            items.created_at = items.created_at;
-                        }
-
-                        items.updated_at = ItemsXML.Itemb2c.ElementAt(i).updated_at;
-                        var acceptedDateTimeFormats = new[] { "MM/dd/yy hh:mm tt", "MM/dd/yyyy hh:mm tt" };
-
-                        items.updated_at = ItemsXML.Itemb2c.ElementAt(i).updated_at;
-
-                        if (DateTime.TryParseExact(items.updated_at, acceptedDateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDateTime))
-                        {
-                            // Format: yyyy-dd-MM hh:mm tt
-                            items.updated_at = parsedDateTime.ToString("yyyy-MM-dd hh:mm tt", CultureInfo.InvariantCulture);
-                        }
-                        else
-                        {
-                            items.updated_at = items.updated_at; // fallback to original if parsing fails
-                        }
-
-                        //if (DateTime.TryParseExact(items.updated_at, acceptedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
-                        //{
-                        //    items.updated_at = parsedDate.ToString("yyyy-MM-dd");
-                        //}
-                        //else
-                        //{
-                        //    items.updated_at = items.updated_at;
-                        //}
-                        items.declinaisons = new List<ProxyNavisionWsZEN.Variants>();
-                        items.SalesPrice = new List<ProxyNavisionWsZEN.Prices>();
-
-
-                        var variantsDict = new Dictionary<string, ProxyNavisionWsZEN.Variants>();
-                        if (ItemsXML.Itemb2c.ElementAt(i)?.Variants != null)
-                        {
-
-                            for (int j = 0; j < ItemsXML.Itemb2c.ElementAt(i).Variants.Count(); j++)
-                            {
-                                var rawVariant = ItemsXML.Itemb2c.ElementAt(i).Variants.ElementAt(j);
-
-                                // if this color group doesn't exist yet, create it
-                                if (!variantsDict.TryGetValue(rawVariant.codeCouleur, out var variantsGroup))
-                                {
-                                    variantsGroup = new ProxyNavisionWsZEN.Variants
-                                    {
-                                        codeCouleur = rawVariant.codeCouleur,
-                                        Couleur = rawVariant.Couleur.FirstOrDefault()
-                                    };
-                                    variantsDict[rawVariant.codeCouleur] = variantsGroup;
-                                }
-
-                                // create a detail entry
-                                var detail = new ProxyNavisionWsZEN.VariantDetail
-                                {
-                                    code = rawVariant.code,
-                                    name = rawVariant.Description,
-                                    Taille = rawVariant.Taille.FirstOrDefault(),
-                                    code_taille = rawVariant.code_taille,
-                                    ean13 = rawVariant.Barcode,
-                                    Quantity_in_serie_type = rawVariant.Quantity_in_serie_type.FirstOrDefault(),
-                                    Composition0 = rawVariant.Composition0,
-                                    Composition1 = rawVariant.Composition1,
-                                    Composition2 = rawVariant.Composition2,
-                                    Composition3 = rawVariant.Composition3,
-                                    NGP = rawVariant.NGP
-                                };
-
-                                // add detail under the correct color group
-                                variantsGroup.variants.Add(detail);
-                            }
-                        }
-                        // finally add all grouped variants
-                        items.declinaisons = variantsDict.Values.ToList();
-
-                        if (ItemsXML.Itemb2c.ElementAt(i)?.SalesPrice != null)
-                        {
-                            for (int k = 0; k < ItemsXML.Itemb2c.ElementAt(i).SalesPrice.Count(); k++)
-                            {
-                                ProxyNavisionWsZEN.Prices prices = new ProxyNavisionWsZEN.Prices();
-                                if (ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceTTC.FirstOrDefault() != "")
-                                {
-                                    prices.CurrencyCode = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).CurrencyCode.FirstOrDefault();
-                                    prices.DiscountPrice = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).DiscountPrice.FirstOrDefault();
-                                    prices.DiscountPercentage = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).DiscountPercentage.FirstOrDefault();
-                                    prices.PriceTTC = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceTTC.FirstOrDefault();
-                                    prices.PriceHT = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).PriceHT.FirstOrDefault();
-                                    prices.prix_negoce = ItemsXML.Itemb2c.ElementAt(i).SalesPrice.ElementAt(k).prix_negoce.FirstOrDefault();
-
-                                    items.SalesPrice.Add(prices);
-                                }
-                                else
-                                {
-                                    prices.CurrencyCode = "TND";
-                                    prices.DiscountPrice = "0";
-                                    prices.DiscountPercentage = "0";
-                                    prices.PriceTTC = "0";
-                                    prices.PriceHT = "0";
-
-
-                                    items.SalesPrice.Add(prices);
-                                }
-
-
-                            }
-                        }
-                        else
-
-                        {
-                            ProxyNavisionWsZEN.Prices prices = new ProxyNavisionWsZEN.Prices();
-
-                            prices.CurrencyCode = "TND";
-                            prices.DiscountPrice = "0";
-                            prices.DiscountPercentage = "0";
-                            prices.PriceTTC = "0";
-                            prices.PriceHT = "0";
-
-
-                            items.SalesPrice.Add(prices);
-
-                        }
-                        ItemResult.Add(items);
-
-
-
-                    }
-                }
                 return ItemResult;
             }
             catch (Exception error)
             {
-                JObject jsonResponse = new JObject();
-                if (error is ArgumentException argumentException)
-                {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "400";
-                    jsonResponse["Message"] = argumentException.Message;
-                }
-                else if (error is SoapException soapException)
-                {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
-                    jsonResponse["Status"] = "400";
-                    jsonResponse["Message"] = soapException.Message;
-                }
-                else
-                {
-                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
-                    jsonResponse["Status"] = "500";
-                    jsonResponse["Message"] = error.Message;
-                }
-                List<items> ItemResult = new List<items>();
-                items items = new items();
-                items.Message = jsonResponse["Message"].ToString();
-                ItemResult.Add(items);
-                return ItemResult;
+                WebOperationContext.Current.OutgoingResponse.StatusCode =
+                    error is ArgumentException || error is SoapException ? HttpStatusCode.BadRequest : HttpStatusCode.InternalServerError;
+
+                string status = WebOperationContext.Current.OutgoingResponse.StatusCode == HttpStatusCode.BadRequest ? "400" : "500";
+                string message = error.Message;
+
+                return new List<items> { new items { Message = message } };
             }
         }
 
 
+
+        public List<items> getitem2(string reference, string IdCompany, string created_start, string created_end, string updated_start, string updated_end)
+        {
+            try
+            {
+                List<items> ItemResult = new List<items>();
+
+                // Retrieve query parameters
+                var request = OperationContext.Current.RequestContext.RequestMessage;
+                var uri = request.Headers.To;
+                var query = uri.Query;
+                var queryParams = System.Web.HttpUtility.ParseQueryString(query);
+
+                if (queryParams.Count == 0)
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    ItemResult.Add(new items { Message = "Au moins un paramètre est requis pour la recherche." });
+                    return ItemResult;
+                }
+
+                var validParams = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        { "reference", "IdCompany", "created_start", "created_end", "updated_start", "updated_end" };
+
+                foreach (string key in queryParams)
+                {
+                    if (!validParams.Contains(key))
+                    {
+                        WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                        ItemResult.Add(new items { Message = $"Paramètre invalide : '{key}'" });
+                        return ItemResult;
+                    }
+                }
+
+                if (string.IsNullOrEmpty(IdCompany))
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    ItemResult.Add(new items { Message = "Veuillez spécifier l'IdCompany." });
+                    return ItemResult;
+                }
+
+                reference = reference ?? "";
+                created_start = created_start ?? "";
+                created_end = created_end ?? "";
+                updated_start = updated_start ?? "";
+                updated_end = updated_end ?? "";
+
+                if ((string.IsNullOrEmpty(created_start) ^ string.IsNullOrEmpty(created_end)))
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    ItemResult.Add(new items { Message = "Vous devez spécifier à la fois created_end et created_start." });
+                    return ItemResult;
+                }
+
+                if ((string.IsNullOrEmpty(updated_start) ^ string.IsNullOrEmpty(updated_end)))
+                {
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
+                    ItemResult.Add(new items { Message = "Vous devez spécifier à la fois updated_start et updated_end." });
+                    return ItemResult;
+                }
+
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                string token = GetAccessToken();
+
+                // --- Parallel batch fetching ---
+                int batchSize =10;
+                int max = 100; // Adjust or determine dynamically
+                var batches = Enumerable.Range(0, (int)Math.Ceiling((double)max / batchSize))
+                                        .Select(i => new { From = i * batchSize + 1, To = Math.Min((i + 1) * batchSize, max) })
+                                        .ToList();
+
+                object lockObj = new object();
+                Parallel.ForEach(batches, new ParallelOptions { MaxDegreeOfParallelism = 5 }, batch =>
+                {
+                    var client = new AuthenticatedAPIClient(token)
+                    {
+                        Url = $"https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/{IdCompany}/Codeunit/API",
+                        Timeout = 1000000000
+                    };
+
+                    var itemsBatch = FetchBatch(client, reference, created_start, created_end, updated_start, updated_end, batch.From, batch.To);
+
+                    lock (lockObj)
+                        ItemResult.AddRange(itemsBatch);
+                });
+
+                return ItemResult;
+            }
+            catch (Exception error)
+            {
+                WebOperationContext.Current.OutgoingResponse.StatusCode =
+                    error is ArgumentException || error is SoapException ? HttpStatusCode.BadRequest : HttpStatusCode.InternalServerError;
+
+                string status = WebOperationContext.Current.OutgoingResponse.StatusCode == HttpStatusCode.BadRequest ? "400" : "500";
+                string message = error.Message;
+
+                return new List<items> { new items { Message = message } };
+            }
+        }
         public WS_CompanyResult GetCompany()
         {
             try
@@ -1765,7 +1892,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/ZEDD/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/ZEDD/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Company navCompany = new Company();
@@ -1820,8 +1947,9 @@ namespace ProxyNavisionWsZEN
                 WS_CustomerResult Customer =new WS_CustomerResult();
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"+ request.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/"+ request.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
+
 
                 Customer.codeErp = mobile_Web_Services.AddOrModifyCustomer("", request.firstName+" "+request.lastName, request.email, request.phone, request.birthday, request.gender,false);
                 Customer.status = "Success";
@@ -1934,7 +2062,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"+IdCompany+"/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/"+IdCompany+"/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Contact navContact = new Contact();
@@ -2076,7 +2204,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Card navCard = new Card();
@@ -2207,7 +2335,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 transaction navCard = new transaction();
@@ -2341,7 +2469,7 @@ namespace ProxyNavisionWsZEN
 
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Sales navCard = new Sales();
@@ -2420,7 +2548,7 @@ namespace ProxyNavisionWsZEN
                 WS_CustomerResult Customer = new WS_CustomerResult();
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + request.IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + request.IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 Customer.codeErp = mobile_Web_Services.AddOrModifyCustomer(request.codeErp,request.firstName+" "+request.lastName, request.email, request.phone, request.birthday, request.gender, true);
@@ -2621,7 +2749,7 @@ namespace ProxyNavisionWsZEN
                     lines.Add(lineXmlPort);
                 }
                 OrderXmlPort.Orders = lines.ToArray();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"+ CmdHead.IdCompany+"/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/"+ CmdHead.IdCompany+"/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 if ((CmdHead.commandType != "order")&&(CmdHead.commandType != "orderReturn"))
@@ -2651,18 +2779,21 @@ namespace ProxyNavisionWsZEN
 
                     //mobile_Web_Services.AddOrModifyOrderB2C(CmdHead.TiersColisNo, CmdHead.CustomerCodeErp, CmdHead.OrderNo, CmdHead.Currency, CmdHead.Currency_Ratio, DeliveryAddress.Address, false, CmdHead.IdPaymentMethod, CmdHead.Date, DeliveryAddress.City, DeliveryAddress.CountryId, DeliveryAddress.FirstName, DeliveryAddress.LastName, DeliveryAddress.PhoneNumber, ref OrderXmlPort, CmdHead.DeliveryType, CmdHead.idStore, CmdHead.Remise_Coupon);
                     WS_orderResult.Message = mobile_Web_Services.AddOrModifyOrderB2C(CmdHead.TiersColisNo, CmdHead.CustomerCodeErp, CmdHead.OrderNo, CmdHead.Currency, CmdHead.Currency_Ratio, DeliveryAddress.Address, false, CmdHead.IdPaymentMethod, CmdHead.Date, DeliveryAddress.City, DeliveryAddress.CountryId, DeliveryAddress.FirstName, DeliveryAddress.LastName, DeliveryAddress.PhoneNumber, ref OrderXmlPort, CmdHead.DeliveryType, CmdHead.idStore, CmdHead.Remise_Coupon);
-
-                    string company = mobile_Web_Services.getCompanyesp();
-                    string location = mobile_Web_Services.getLocationesp();
-                    string customer = mobile_Web_Services.getCustomeresp();
-                    foreach (var order in OrderXmlPort.Orders)
+                    if(mobile_Web_Services.isdstock(CmdHead.OrderNo)==false)
                     {
-                        order.location = location;
-                        order.Unit_Price = "0";
+                        string company = mobile_Web_Services.getCompanyesp();
+                        string location = mobile_Web_Services.getLocationesp();
+                        string customer = mobile_Web_Services.getCustomeresp();
+                        foreach (var order in OrderXmlPort.Orders)
+                        {
+                            order.location = location;
+                            order.Unit_Price = "0";
+                            order.Discount = "0";
+                        }
+                        CmdHead.Remise_Coupon = "0";
+                        mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + company + "/Codeunit/API";
+                        mobile_Web_Services.AddOrModifyOrder(CmdHead.TiersColisNo, customer, CmdHead.OrderNo, CmdHead.Currency, CmdHead.Currency_Ratio, DeliveryAddress.Address, CmdHead.IdCompany, false, ref OrderXmlPort, "");
                     }
-                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + company + "/Codeunit/API";
-                    mobile_Web_Services.AddOrModifyOrder(CmdHead.TiersColisNo, customer, CmdHead.OrderNo, CmdHead.Currency, CmdHead.Currency_Ratio, DeliveryAddress.Address, CmdHead.IdCompany, false, ref OrderXmlPort, "");
-
                 }
                 else
                 {
@@ -2699,7 +2830,7 @@ namespace ProxyNavisionWsZEN
                 return WS_orderResult;
             }
         }
-        public WS_ImageResult AddImage(string ItemNo, string ImageUrl)
+        public WS_ImageResult AddImage(string ItemNo, string ImageUrl, List<string> Company)
         {
             try
             {
@@ -2709,13 +2840,17 @@ namespace ProxyNavisionWsZEN
                 string token = GetAccessToken();
                 AuthenticatedAPIClient mobile_Web_Services = new AuthenticatedAPIClient(token);
                 WS_ImageResult WS_imageResult = new WS_ImageResult();
+                
+                foreach (string company in Company)
+                {
 
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/ESP/Codeunit/API";
+                    mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + company + "/Codeunit/API";
 
-                mobile_Web_Services.Timeout = 1000000000;
+                    mobile_Web_Services.Timeout = 1000000000;
 
-                mobile_Web_Services.AddImage(ItemNo, ImageUrl);
-               
+                    mobile_Web_Services.AddImage(ItemNo, ImageUrl);
+                }
+
                 WS_imageResult.Message = "Success";
                 return WS_imageResult;
             }
@@ -2760,7 +2895,7 @@ namespace ProxyNavisionWsZEN
                 WS_LocationResult LocationResult = new WS_LocationResult();
                 List<WS_Location> Locations = new List<WS_Location>();
               
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/" + IdCompany + "/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/" + IdCompany + "/Codeunit/API";
                 mobile_Web_Services.Timeout = 1000000000;
 
                 mobile_Web_Services.getlocation(ref navLocation);
@@ -2819,7 +2954,7 @@ namespace ProxyNavisionWsZEN
                 WS_categoryResult WS_categoryResult = new WS_categoryResult();
 
                 Category navCategory = new Category();
-                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN/WS/"+ IdCompany+"/Codeunit/API";
+                mobile_Web_Services.Url = "https://api.businesscentral.dynamics.com/v2.0/e18fb4b5-9142-4516-a5f8-8de91c4e5681/GROUPZEN_0602/WS/"+ IdCompany+"/Codeunit/API";
 
                 mobile_Web_Services.getCategory(ref navCategory);
                 List<getListCategorie> items = new List<getListCategorie>();

@@ -14,12 +14,12 @@
 #pragma warning disable 1591
 
 namespace ProxyNavisionWsZEN.API {
-    using System;
-    using System.Web.Services;
     using System.Diagnostics;
-    using System.Web.Services.Protocols;
+    using System;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Web.Services.Protocols;
+    using System.Web.Services;
     
     
     /// <remarks/>
@@ -53,9 +53,17 @@ namespace ProxyNavisionWsZEN.API {
         
         private System.Threading.SendOrPostCallback GetOrder2OperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetOrder3OperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetOrderreturnOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetZENQtyOnSalesOrderOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetZENQtyOnSalesOrderallOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetZENQtyOnTransferOrderOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ImportVariantPictureFromURLOperationCompleted;
         
         private System.Threading.SendOrPostCallback ModifyHeaderOperationCompleted;
         
@@ -93,7 +101,7 @@ namespace ProxyNavisionWsZEN.API {
         
         private System.Threading.SendOrPostCallback getItemOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getItemb2cOperationCompleted;
+        private System.Threading.SendOrPostCallback getItemb2c2OperationCompleted;
         
         private System.Threading.SendOrPostCallback getLocationespOperationCompleted;
         
@@ -115,6 +123,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private System.Threading.SendOrPostCallback getcontactOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getcountOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getlocationOperationCompleted;
         
         private System.Threading.SendOrPostCallback getorderOperationCompleted;
@@ -124,6 +134,8 @@ namespace ProxyNavisionWsZEN.API {
         private System.Threading.SendOrPostCallback getransactionOperationCompleted;
         
         private System.Threading.SendOrPostCallback gettierstableOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback isdstockOperationCompleted;
         
         private System.Threading.SendOrPostCallback isusedOperationCompleted;
         
@@ -206,10 +218,22 @@ namespace ProxyNavisionWsZEN.API {
         public event GetOrder2CompletedEventHandler GetOrder2Completed;
         
         /// <remarks/>
+        public event GetOrder3CompletedEventHandler GetOrder3Completed;
+        
+        /// <remarks/>
         public event GetOrderreturnCompletedEventHandler GetOrderreturnCompleted;
         
         /// <remarks/>
         public event GetZENQtyOnSalesOrderCompletedEventHandler GetZENQtyOnSalesOrderCompleted;
+        
+        /// <remarks/>
+        public event GetZENQtyOnSalesOrderallCompletedEventHandler GetZENQtyOnSalesOrderallCompleted;
+        
+        /// <remarks/>
+        public event GetZENQtyOnTransferOrderCompletedEventHandler GetZENQtyOnTransferOrderCompleted;
+        
+        /// <remarks/>
+        public event ImportVariantPictureFromURLCompletedEventHandler ImportVariantPictureFromURLCompleted;
         
         /// <remarks/>
         public event ModifyHeaderCompletedEventHandler ModifyHeaderCompleted;
@@ -266,7 +290,7 @@ namespace ProxyNavisionWsZEN.API {
         public event getItemCompletedEventHandler getItemCompleted;
         
         /// <remarks/>
-        public event getItemb2cCompletedEventHandler getItemb2cCompleted;
+        public event getItemb2c2CompletedEventHandler getItemb2c2Completed;
         
         /// <remarks/>
         public event getLocationespCompletedEventHandler getLocationespCompleted;
@@ -299,6 +323,9 @@ namespace ProxyNavisionWsZEN.API {
         public event getcontactCompletedEventHandler getcontactCompleted;
         
         /// <remarks/>
+        public event getcountCompletedEventHandler getcountCompleted;
+        
+        /// <remarks/>
         public event getlocationCompletedEventHandler getlocationCompleted;
         
         /// <remarks/>
@@ -312,6 +339,9 @@ namespace ProxyNavisionWsZEN.API {
         
         /// <remarks/>
         public event gettierstableCompletedEventHandler gettierstableCompleted;
+        
+        /// <remarks/>
+        public event isdstockCompletedEventHandler isdstockCompleted;
         
         /// <remarks/>
         public event isusedCompletedEventHandler isusedCompleted;
@@ -721,8 +751,8 @@ namespace ProxyNavisionWsZEN.API {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:AddOrModifyOrderLine", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="AddOrModifyOrderLine_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void AddOrModifyOrderLine(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, int lineno, decimal discount, string company) {
-            this.Invoke("AddOrModifyOrderLine", new object[] {
+        public void AddOrModifyOrderLine(string itemNo, string barcode, string variantNo, decimal quantity, string orderNo, string id, decimal unitprice, string location, bool modify, ref int lineno, decimal discount, string company) {
+            object[] results = this.Invoke("AddOrModifyOrderLine", new object[] {
                         itemNo,
                         barcode,
                         variantNo,
@@ -735,6 +765,7 @@ namespace ProxyNavisionWsZEN.API {
                         lineno,
                         discount,
                         company});
+            lineno = ((int)(results[0]));
         }
         
         /// <remarks/>
@@ -765,7 +796,7 @@ namespace ProxyNavisionWsZEN.API {
         private void OnAddOrModifyOrderLineOperationCompleted(object arg) {
             if ((this.AddOrModifyOrderLineCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AddOrModifyOrderLineCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.AddOrModifyOrderLineCompleted(this, new AddOrModifyOrderLineCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1096,6 +1127,40 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:GetOrder3", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="GetOrder3_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string GetOrder3(string orderNo, string location, string companySource) {
+            object[] results = this.Invoke("GetOrder3", new object[] {
+                        orderNo,
+                        location,
+                        companySource});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetOrder3Async(string orderNo, string location, string companySource) {
+            this.GetOrder3Async(orderNo, location, companySource, null);
+        }
+        
+        /// <remarks/>
+        public void GetOrder3Async(string orderNo, string location, string companySource, object userState) {
+            if ((this.GetOrder3OperationCompleted == null)) {
+                this.GetOrder3OperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetOrder3OperationCompleted);
+            }
+            this.InvokeAsync("GetOrder3", new object[] {
+                        orderNo,
+                        location,
+                        companySource}, this.GetOrder3OperationCompleted, userState);
+        }
+        
+        private void OnGetOrder3OperationCompleted(object arg) {
+            if ((this.GetOrder3Completed != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetOrder3Completed(this, new GetOrder3CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:GetOrderreturn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="GetOrderreturn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public bool GetOrderreturn(string orderNo, string location) {
@@ -1168,6 +1233,118 @@ namespace ProxyNavisionWsZEN.API {
             if ((this.GetZENQtyOnSalesOrderCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetZENQtyOnSalesOrderCompleted(this, new GetZENQtyOnSalesOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:GetZENQtyOnSalesOrderall", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="GetZENQtyOnSalesOrderall_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public decimal GetZENQtyOnSalesOrderall(string itemNoTxt, string globalDim1FilterTxt, string globalDim2FilterTxt, string locationFilterTxt, string variantFilterTxt, string dateFilterTxt, string uOMFilterTxt, string dropShipmentFilterTxt) {
+            object[] results = this.Invoke("GetZENQtyOnSalesOrderall", new object[] {
+                        itemNoTxt,
+                        globalDim1FilterTxt,
+                        globalDim2FilterTxt,
+                        locationFilterTxt,
+                        variantFilterTxt,
+                        dateFilterTxt,
+                        uOMFilterTxt,
+                        dropShipmentFilterTxt});
+            return ((decimal)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetZENQtyOnSalesOrderallAsync(string itemNoTxt, string globalDim1FilterTxt, string globalDim2FilterTxt, string locationFilterTxt, string variantFilterTxt, string dateFilterTxt, string uOMFilterTxt, string dropShipmentFilterTxt) {
+            this.GetZENQtyOnSalesOrderallAsync(itemNoTxt, globalDim1FilterTxt, globalDim2FilterTxt, locationFilterTxt, variantFilterTxt, dateFilterTxt, uOMFilterTxt, dropShipmentFilterTxt, null);
+        }
+        
+        /// <remarks/>
+        public void GetZENQtyOnSalesOrderallAsync(string itemNoTxt, string globalDim1FilterTxt, string globalDim2FilterTxt, string locationFilterTxt, string variantFilterTxt, string dateFilterTxt, string uOMFilterTxt, string dropShipmentFilterTxt, object userState) {
+            if ((this.GetZENQtyOnSalesOrderallOperationCompleted == null)) {
+                this.GetZENQtyOnSalesOrderallOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetZENQtyOnSalesOrderallOperationCompleted);
+            }
+            this.InvokeAsync("GetZENQtyOnSalesOrderall", new object[] {
+                        itemNoTxt,
+                        globalDim1FilterTxt,
+                        globalDim2FilterTxt,
+                        locationFilterTxt,
+                        variantFilterTxt,
+                        dateFilterTxt,
+                        uOMFilterTxt,
+                        dropShipmentFilterTxt}, this.GetZENQtyOnSalesOrderallOperationCompleted, userState);
+        }
+        
+        private void OnGetZENQtyOnSalesOrderallOperationCompleted(object arg) {
+            if ((this.GetZENQtyOnSalesOrderallCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetZENQtyOnSalesOrderallCompleted(this, new GetZENQtyOnSalesOrderallCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:GetZENQtyOnTransferOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="GetZENQtyOnTransferOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public decimal GetZENQtyOnTransferOrder(string itemNoTxt, string locationFilterTxt, string variantFilterTxt) {
+            object[] results = this.Invoke("GetZENQtyOnTransferOrder", new object[] {
+                        itemNoTxt,
+                        locationFilterTxt,
+                        variantFilterTxt});
+            return ((decimal)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetZENQtyOnTransferOrderAsync(string itemNoTxt, string locationFilterTxt, string variantFilterTxt) {
+            this.GetZENQtyOnTransferOrderAsync(itemNoTxt, locationFilterTxt, variantFilterTxt, null);
+        }
+        
+        /// <remarks/>
+        public void GetZENQtyOnTransferOrderAsync(string itemNoTxt, string locationFilterTxt, string variantFilterTxt, object userState) {
+            if ((this.GetZENQtyOnTransferOrderOperationCompleted == null)) {
+                this.GetZENQtyOnTransferOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetZENQtyOnTransferOrderOperationCompleted);
+            }
+            this.InvokeAsync("GetZENQtyOnTransferOrder", new object[] {
+                        itemNoTxt,
+                        locationFilterTxt,
+                        variantFilterTxt}, this.GetZENQtyOnTransferOrderOperationCompleted, userState);
+        }
+        
+        private void OnGetZENQtyOnTransferOrderOperationCompleted(object arg) {
+            if ((this.GetZENQtyOnTransferOrderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetZENQtyOnTransferOrderCompleted(this, new GetZENQtyOnTransferOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:ImportVariantPictureFromURL", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="ImportVariantPictureFromURL_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ImportVariantPictureFromURL(string barcode, string pPictureURL, string pItemno, string variantcode) {
+            this.Invoke("ImportVariantPictureFromURL", new object[] {
+                        barcode,
+                        pPictureURL,
+                        pItemno,
+                        variantcode});
+        }
+        
+        /// <remarks/>
+        public void ImportVariantPictureFromURLAsync(string barcode, string pPictureURL, string pItemno, string variantcode) {
+            this.ImportVariantPictureFromURLAsync(barcode, pPictureURL, pItemno, variantcode, null);
+        }
+        
+        /// <remarks/>
+        public void ImportVariantPictureFromURLAsync(string barcode, string pPictureURL, string pItemno, string variantcode, object userState) {
+            if ((this.ImportVariantPictureFromURLOperationCompleted == null)) {
+                this.ImportVariantPictureFromURLOperationCompleted = new System.Threading.SendOrPostCallback(this.OnImportVariantPictureFromURLOperationCompleted);
+            }
+            this.InvokeAsync("ImportVariantPictureFromURL", new object[] {
+                        barcode,
+                        pPictureURL,
+                        pItemno,
+                        variantcode}, this.ImportVariantPictureFromURLOperationCompleted, userState);
+        }
+        
+        private void OnImportVariantPictureFromURLOperationCompleted(object arg) {
+            if ((this.ImportVariantPictureFromURLCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ImportVariantPictureFromURLCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1665,7 +1842,7 @@ namespace ProxyNavisionWsZEN.API {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:create_coupon", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="create_coupon_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string create_coupon(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport) {
+        public string create_coupon(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport, string price_Group) {
             object[] results = this.Invoke("create_coupon", new object[] {
                         codecoupon,
                         description,
@@ -1675,17 +1852,18 @@ namespace ProxyNavisionWsZEN.API {
                         activate,
                         validity,
                         isUsed,
-                        linexmlport});
+                        linexmlport,
+                        price_Group});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void create_couponAsync(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport) {
-            this.create_couponAsync(codecoupon, description, membre, montant, type, activate, validity, isUsed, linexmlport, null);
+        public void create_couponAsync(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport, string price_Group) {
+            this.create_couponAsync(codecoupon, description, membre, montant, type, activate, validity, isUsed, linexmlport, price_Group, null);
         }
         
         /// <remarks/>
-        public void create_couponAsync(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport, object userState) {
+        public void create_couponAsync(string codecoupon, string description, string membre, decimal montant, string type, string activate, string validity, string isUsed, Couponlines linexmlport, string price_Group, object userState) {
             if ((this.create_couponOperationCompleted == null)) {
                 this.create_couponOperationCompleted = new System.Threading.SendOrPostCallback(this.Oncreate_couponOperationCompleted);
             }
@@ -1698,7 +1876,8 @@ namespace ProxyNavisionWsZEN.API {
                         activate,
                         validity,
                         isUsed,
-                        linexmlport}, this.create_couponOperationCompleted, userState);
+                        linexmlport,
+                        price_Group}, this.create_couponOperationCompleted, userState);
         }
         
         private void Oncreate_couponOperationCompleted(object arg) {
@@ -1899,41 +2078,45 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:getItemb2c", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="getItemb2c_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void getItemb2c(ref Itemsb2c ecom_Catalog_XML, string no, string created_date, string created_end, string updated_start, string updated_end) {
-            object[] results = this.Invoke("getItemb2c", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:getItemb2c2", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="getItemb2c2_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void getItemb2c2(ref Itemsb2c ecom_Catalog_XML, string no, string created_date, string created_end, string updated_start, string updated_end, int fromIndex, int toIndex) {
+            object[] results = this.Invoke("getItemb2c2", new object[] {
                         ecom_Catalog_XML,
                         no,
                         created_date,
                         created_end,
                         updated_start,
-                        updated_end});
+                        updated_end,
+                        fromIndex,
+                        toIndex});
             ecom_Catalog_XML = ((Itemsb2c)(results[0]));
         }
         
         /// <remarks/>
-        public void getItemb2cAsync(Itemsb2c ecom_Catalog_XML, string no, string created_date, string created_end, string updated_start, string updated_end) {
-            this.getItemb2cAsync(ecom_Catalog_XML, no, created_date, created_end, updated_start, updated_end, null);
+        public void getItemb2c2Async(Itemsb2c ecom_Catalog_XML, string no, string created_date, string created_end, string updated_start, string updated_end, int fromIndex, int toIndex) {
+            this.getItemb2c2Async(ecom_Catalog_XML, no, created_date, created_end, updated_start, updated_end, fromIndex, toIndex, null);
         }
         
         /// <remarks/>
-        public void getItemb2cAsync(Itemsb2c ecom_Catalog_XML, string no, string created_date, string created_end, string updated_start, string updated_end, object userState) {
-            if ((this.getItemb2cOperationCompleted == null)) {
-                this.getItemb2cOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetItemb2cOperationCompleted);
+        public void getItemb2c2Async(Itemsb2c ecom_Catalog_XML, string no, string created_date, string created_end, string updated_start, string updated_end, int fromIndex, int toIndex, object userState) {
+            if ((this.getItemb2c2OperationCompleted == null)) {
+                this.getItemb2c2OperationCompleted = new System.Threading.SendOrPostCallback(this.OngetItemb2c2OperationCompleted);
             }
-            this.InvokeAsync("getItemb2c", new object[] {
+            this.InvokeAsync("getItemb2c2", new object[] {
                         ecom_Catalog_XML,
                         no,
                         created_date,
                         created_end,
                         updated_start,
-                        updated_end}, this.getItemb2cOperationCompleted, userState);
+                        updated_end,
+                        fromIndex,
+                        toIndex}, this.getItemb2c2OperationCompleted, userState);
         }
         
-        private void OngetItemb2cOperationCompleted(object arg) {
-            if ((this.getItemb2cCompleted != null)) {
+        private void OngetItemb2c2OperationCompleted(object arg) {
+            if ((this.getItemb2c2Completed != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getItemb2cCompleted(this, new getItemb2cCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getItemb2c2Completed(this, new getItemb2c2CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2259,6 +2442,48 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:getcount", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="getcount_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public decimal getcount(string no, string created_date, string created_end, string updated_start, string updated_end, int fromIndex, int toIndex) {
+            object[] results = this.Invoke("getcount", new object[] {
+                        no,
+                        created_date,
+                        created_end,
+                        updated_start,
+                        updated_end,
+                        fromIndex,
+                        toIndex});
+            return ((decimal)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getcountAsync(string no, string created_date, string created_end, string updated_start, string updated_end, int fromIndex, int toIndex) {
+            this.getcountAsync(no, created_date, created_end, updated_start, updated_end, fromIndex, toIndex, null);
+        }
+        
+        /// <remarks/>
+        public void getcountAsync(string no, string created_date, string created_end, string updated_start, string updated_end, int fromIndex, int toIndex, object userState) {
+            if ((this.getcountOperationCompleted == null)) {
+                this.getcountOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetcountOperationCompleted);
+            }
+            this.InvokeAsync("getcount", new object[] {
+                        no,
+                        created_date,
+                        created_end,
+                        updated_start,
+                        updated_end,
+                        fromIndex,
+                        toIndex}, this.getcountOperationCompleted, userState);
+        }
+        
+        private void OngetcountOperationCompleted(object arg) {
+            if ((this.getcountCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getcountCompleted(this, new getcountCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:getlocation", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="getlocation_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void getlocation(ref Location locationxmlport) {
             object[] results = this.Invoke("getlocation", new object[] {
@@ -2434,6 +2659,36 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:isdstock", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="isdstock_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool isdstock(string no) {
+            object[] results = this.Invoke("isdstock", new object[] {
+                        no});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void isdstockAsync(string no) {
+            this.isdstockAsync(no, null);
+        }
+        
+        /// <remarks/>
+        public void isdstockAsync(string no, object userState) {
+            if ((this.isdstockOperationCompleted == null)) {
+                this.isdstockOperationCompleted = new System.Threading.SendOrPostCallback(this.OnisdstockOperationCompleted);
+            }
+            this.InvokeAsync("isdstock", new object[] {
+                        no}, this.isdstockOperationCompleted, userState);
+        }
+        
+        private void OnisdstockOperationCompleted(object arg) {
+            if ((this.isdstockCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.isdstockCompleted(this, new isdstockCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:isused", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="isused_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void isused(string codeCoupon, [System.Xml.Serialization.XmlElementAttribute("isused")] bool isused1) {
             this.Invoke("isused", new object[] {
@@ -2466,14 +2721,13 @@ namespace ProxyNavisionWsZEN.API {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/API:simulatecart", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/API", ResponseElementName="simulatecart_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/API", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string simulatecart(ref scart ecom_Cart, ref Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
+        public string simulatecart(ref scart ecom_Cart, Ordertemp ecom_Order_XML, string customerCodeErp, string location) {
             object[] results = this.Invoke("simulatecart", new object[] {
                         ecom_Cart,
                         ecom_Order_XML,
                         customerCodeErp,
                         location});
             ecom_Cart = ((scart)(results[1]));
-            ecom_Order_XML = ((Ordertemp)(results[2]));
             return ((string)(results[0]));
         }
         
@@ -2776,6 +3030,10 @@ namespace ProxyNavisionWsZEN.API {
         
         private string amountField;
         
+        private string amountPField;
+        
+        private string discountamountField;
+        
         /// <remarks/>
         public string barcode {
             get {
@@ -2803,6 +3061,26 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.amountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string AmountP {
+            get {
+                return this.amountPField;
+            }
+            set {
+                this.amountPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string discountamount {
+            get {
+                return this.discountamountField;
+            }
+            set {
+                this.discountamountField = value;
             }
         }
     }
@@ -3772,6 +4050,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private string customerCodeErpField;
         
+        private string price_GroupField;
+        
         private string[] isActiveField;
         
         private string[] isusedField;
@@ -3837,6 +4117,16 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.customerCodeErpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Price_Group {
+            get {
+                return this.price_GroupField;
+            }
+            set {
+                this.price_GroupField = value;
             }
         }
         
@@ -4020,6 +4310,12 @@ namespace ProxyNavisionWsZEN.API {
         
         private string[] stock_sur_commande_achatField;
         
+        private string[] all_stock_on_purchase_orderField;
+        
+        private string[] all_received_stockField;
+        
+        private string[] all_stock_on_sales_orderField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("stock_disponible")]
         public string[] stock_disponible {
@@ -4072,6 +4368,39 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.stock_sur_commande_achatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("all_stock_on_purchase_order")]
+        public string[] all_stock_on_purchase_order {
+            get {
+                return this.all_stock_on_purchase_orderField;
+            }
+            set {
+                this.all_stock_on_purchase_orderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("all_received_stock")]
+        public string[] all_received_stock {
+            get {
+                return this.all_received_stockField;
+            }
+            set {
+                this.all_received_stockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("all_stock_on_sales_order")]
+        public string[] all_stock_on_sales_order {
+            get {
+                return this.all_stock_on_sales_orderField;
+            }
+            set {
+                this.all_stock_on_sales_orderField = value;
             }
         }
     }
@@ -4600,6 +4929,10 @@ namespace ProxyNavisionWsZEN.API {
         
         private string[] prix_negoceField;
         
+        private string pdebutField;
+        
+        private string pFinField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("CurrencyCode")]
         public string[] CurrencyCode {
@@ -4685,6 +5018,26 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.prix_negoceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Pdebut {
+            get {
+                return this.pdebutField;
+            }
+            set {
+                this.pdebutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PFin {
+            get {
+                return this.pFinField;
+            }
+            set {
+                this.pFinField = value;
             }
         }
     }
@@ -4887,6 +5240,8 @@ namespace ProxyNavisionWsZEN.API {
         
         private string familleField;
         
+        private string sectionField;
+        
         private string definitionField;
         
         private string created_atField;
@@ -4904,6 +5259,10 @@ namespace ProxyNavisionWsZEN.API {
         private string dateReception_TDSField;
         
         private string personaField;
+        
+        private string prixdstockField;
+        
+        private string prixpublicField;
         
         private Variants1[] variantsField;
         
@@ -5026,6 +5385,16 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        public string section {
+            get {
+                return this.sectionField;
+            }
+            set {
+                this.sectionField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string definition {
             get {
                 return this.definitionField;
@@ -5117,6 +5486,26 @@ namespace ProxyNavisionWsZEN.API {
         }
         
         /// <remarks/>
+        public string prixdstock {
+            get {
+                return this.prixdstockField;
+            }
+            set {
+                this.prixdstockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string prixpublic {
+            get {
+                return this.prixpublicField;
+            }
+            set {
+                this.prixpublicField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Variants")]
         public Variants1[] Variants {
             get {
@@ -5197,6 +5586,10 @@ namespace ProxyNavisionWsZEN.API {
         private string[] discountPercentageField;
         
         private string[] validRetailPriceField;
+        
+        private string pdebutField;
+        
+        private string pFinField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("CurrencyCode")]
@@ -5285,6 +5678,26 @@ namespace ProxyNavisionWsZEN.API {
                 this.validRetailPriceField = value;
             }
         }
+        
+        /// <remarks/>
+        public string Pdebut {
+            get {
+                return this.pdebutField;
+            }
+            set {
+                this.pdebutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PFin {
+            get {
+                return this.pFinField;
+            }
+            set {
+                this.pFinField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -5310,6 +5723,12 @@ namespace ProxyNavisionWsZEN.API {
         private string[] stock_receptionnéField;
         
         private string[] stock_sur_commande_achatField;
+        
+        private string[] all_stock_on_purchase_orderField;
+        
+        private string[] all_received_stockField;
+        
+        private string[] all_stock_on_sales_orderField;
         
         /// <remarks/>
         public string Barcode {
@@ -5395,6 +5814,39 @@ namespace ProxyNavisionWsZEN.API {
             }
             set {
                 this.stock_sur_commande_achatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("all_stock_on_purchase_order")]
+        public string[] all_stock_on_purchase_order {
+            get {
+                return this.all_stock_on_purchase_orderField;
+            }
+            set {
+                this.all_stock_on_purchase_orderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("all_received_stock")]
+        public string[] all_received_stock {
+            get {
+                return this.all_received_stockField;
+            }
+            set {
+                this.all_received_stockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("all_stock_on_sales_order")]
+        public string[] all_stock_on_sales_order {
+            get {
+                return this.all_stock_on_sales_orderField;
+            }
+            set {
+                this.all_stock_on_sales_orderField = value;
             }
         }
     }
@@ -6327,7 +6779,29 @@ namespace ProxyNavisionWsZEN.API {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
-    public delegate void AddOrModifyOrderLineCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void AddOrModifyOrderLineCompletedEventHandler(object sender, AddOrModifyOrderLineCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AddOrModifyOrderLineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AddOrModifyOrderLineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int lineno {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
@@ -6425,6 +6899,32 @@ namespace ProxyNavisionWsZEN.API {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetOrder3CompletedEventHandler(object sender, GetOrder3CompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetOrder3CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetOrder3CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void GetOrderreturnCompletedEventHandler(object sender, GetOrderreturnCompletedEventArgs e);
     
     /// <remarks/>
@@ -6474,6 +6974,62 @@ namespace ProxyNavisionWsZEN.API {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetZENQtyOnSalesOrderallCompletedEventHandler(object sender, GetZENQtyOnSalesOrderallCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetZENQtyOnSalesOrderallCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetZENQtyOnSalesOrderallCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void GetZENQtyOnTransferOrderCompletedEventHandler(object sender, GetZENQtyOnTransferOrderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetZENQtyOnTransferOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetZENQtyOnTransferOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void ImportVariantPictureFromURLCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
@@ -6859,17 +7415,17 @@ namespace ProxyNavisionWsZEN.API {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
-    public delegate void getItemb2cCompletedEventHandler(object sender, getItemb2cCompletedEventArgs e);
+    public delegate void getItemb2c2CompletedEventHandler(object sender, getItemb2c2CompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getItemb2cCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getItemb2c2CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getItemb2cCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getItemb2c2CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -7145,6 +7701,32 @@ namespace ProxyNavisionWsZEN.API {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void getcountCompletedEventHandler(object sender, getcountCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getcountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getcountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public decimal Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((decimal)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void getlocationCompletedEventHandler(object sender, getlocationCompletedEventArgs e);
     
     /// <remarks/>
@@ -7291,6 +7873,32 @@ namespace ProxyNavisionWsZEN.API {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    public delegate void isdstockCompletedEventHandler(object sender, isdstockCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class isdstockCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal isdstockCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9037.0")]
     public delegate void isusedCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
@@ -7323,14 +7931,6 @@ namespace ProxyNavisionWsZEN.API {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((scart)(this.results[1]));
-            }
-        }
-        
-        /// <remarks/>
-        public Ordertemp ecom_Order_XML {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Ordertemp)(this.results[2]));
             }
         }
     }
